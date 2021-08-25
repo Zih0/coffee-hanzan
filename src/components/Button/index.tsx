@@ -10,6 +10,8 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const StyledButton = styled.button<IButtonProps>`
   border: 1px solid transparent;
   padding: 0.75rem 1.3rem;
+  display: flex;
+  justify-content: center;
   border-radius: 5px;
   color: #fff;
   font-size: ${(props) =>
