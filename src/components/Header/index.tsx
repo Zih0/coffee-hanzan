@@ -69,9 +69,11 @@ function Header() {
           </>
         )}
       </div>
-      <ModalPortal>
-        <LoginModal />
-      </ModalPortal>
+      {!currentUser && (
+        <ModalPortal>
+          <LoginModal />
+        </ModalPortal>
+      )}
     </Container>
   );
 }
