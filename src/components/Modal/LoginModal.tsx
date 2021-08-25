@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { authService } from '../../fbase';
+import AuthSNS from '../Auth/AuthSNS';
 import Button from '../Button';
 
 import Input from '../Input';
 
-const Container = styled.form`
-  width: 568px;
-  height: 614px;
-  padding: 32px;
+const Container = styled.div`
+  width: 25rem;
+  height: 30rem;
+  padding: 3rem;
   background-color: #fff;
   z-index: 11;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
 
-  .input-wrapper {
-    position: relative;
-    margin-bottom: 16px;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .auth-header {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .auth-error {
+    color: tomato;
+    text-align: center;
+    font-size: 12px;
   }
 `;
 
 function LoginModal() {
   const [email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -38,14 +55,17 @@ function LoginModal() {
 
   const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
-    } catch (err) {}
+      await authService.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
-    <Container onSubmit={onSubmitSignUp}>
-      <div className="input-wrapper">
+    <Container>
+      <Form onSubmit={onSubmitSignUp}>
+        <h2 className="auth-header">로그인</h2>
         <Input
           type="email"
           name="email"
@@ -54,9 +74,6 @@ function LoginModal() {
           onChange={onChangeEmail}
           value={email}
         />
-      </div>
-
-      <div className="input-wrapper">
         <Input
           type="password"
           name="password"
@@ -65,13 +82,13 @@ function LoginModal() {
           onChange={onChangePassword}
           value={password}
         />
-      </div>
 
-      <div className="sign-up-submit-button-wrapper">
         <Button size="sm" type="submit">
           이메일로 로그인
         </Button>
-      </div>
+        {error && <span className="auth-error">{error}</span>}
+      </Form>
+      <AuthSNS direction="column" />
     </Container>
   );
 }

@@ -48,6 +48,12 @@ const Form = styled.form`
       background-color: #f2d200;
     }
   }
+
+  .auth-error {
+    color: tomato;
+    text-align: center;
+    font-size: 12px;
+  }
 `;
 
 function AuthForm() {
@@ -101,7 +107,7 @@ function AuthForm() {
           value="회원가입"
           className="auth-input auth-submit"
         />
-        {error && <span className="authError">{error}</span>}
+        {error && <span className="auth-error">{error}</span>}
       </Form>
       <span className="auth-login">
         계정이 이미 있으신가요? <span className="highlight">로그인</span>
