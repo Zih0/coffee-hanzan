@@ -12,6 +12,7 @@ const StyledButton = styled.button<IButtonProps>`
   padding: 0.75rem 1.3rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 5px;
   color: #fff;
   font-size: ${(props) =>

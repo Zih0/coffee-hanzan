@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
 import useModal from '../../hooks/useModal';
+import { Mobile, PC } from '../../styles/MediaQuery';
 import Button from '../Button';
 import LoginModal from '../Modal/LoginModal';
 
@@ -24,6 +25,14 @@ const Container = styled.div`
     svg {
       font-size: 2rem;
     }
+
+    @media ${(props) => props.theme.mobile} {
+      font-size: 1rem;
+
+      svg {
+        font-size: 1.5rem;
+      }
+    }
   }
 
   .header-auth {
@@ -38,6 +47,13 @@ const Container = styled.div`
       cursor: pointer;
       &:hover {
         border-bottom: 1px solid #000;
+      }
+    }
+
+    @media ${(props) => props.theme.mobile} {
+      gap: 1rem;
+      .header-login {
+        font-size: 0.8rem;
       }
     }
   }
@@ -63,9 +79,16 @@ function Header() {
             <p className="header-login" onClick={openModal}>
               로그인
             </p>
-            <Link to="signup">
-              <Button size="md">회원가입</Button>
-            </Link>
+            <PC>
+              <Link to="signup">
+                <Button size="md">회원가입</Button>
+              </Link>
+            </PC>
+            <Mobile>
+              <Link to="signup">
+                <Button size="sm">회원가입</Button>
+              </Link>
+            </Mobile>
           </>
         )}
       </div>

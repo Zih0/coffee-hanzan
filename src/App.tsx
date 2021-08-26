@@ -1,15 +1,19 @@
-import GlobalStyles from './components/GlobalStyles';
+import GlobalStyles from './styles/GlobalStyles';
 import AppRouter from './components/Router';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <AuthProvider>
-        <AppRouter />
-        <div id="root-modal"> </div>
-      </AuthProvider>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <AppRouter />
+          <div id="root-modal"> </div>
+        </AuthProvider>
+      </ThemeProvider>
     </>
   );
 }
