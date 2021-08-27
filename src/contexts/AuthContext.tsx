@@ -6,7 +6,9 @@ interface IAuthProvider {
 }
 
 const defaultState = {
-  currentUser: {},
+  currentUser: {
+    uid: '',
+  },
 };
 
 export const AuthContext = React.createContext(defaultState);

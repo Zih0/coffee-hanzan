@@ -1,8 +1,8 @@
+import { useContext } from 'react';
+import styled from 'styled-components';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
 import useModal from '../../hooks/useModal';
 import { Mobile, PC } from '../../styles/MediaQuery';
@@ -43,7 +43,7 @@ const Container = styled.div`
     .header-login {
       font-size: 1.2rem;
       transition: all 0.3s;
-      border-bottom: transparent;
+      border-bottom: 1px solid transparent;
       cursor: pointer;
       &:hover {
         border-bottom: 1px solid #000;
@@ -79,16 +79,15 @@ function Header() {
             <p className="header-login" onClick={openModal}>
               로그인
             </p>
-            <PC>
-              <Link to="signup">
+
+            <Link to="signup">
+              <PC>
                 <Button size="md">회원가입</Button>
-              </Link>
-            </PC>
-            <Mobile>
-              <Link to="signup">
+              </PC>
+              <Mobile>
                 <Button size="sm">회원가입</Button>
-              </Link>
-            </Mobile>
+              </Mobile>
+            </Link>
           </>
         )}
       </div>

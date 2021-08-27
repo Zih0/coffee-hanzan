@@ -12,6 +12,8 @@ const Container = styled.div`
   top: 0;
   left: 0;
 
+  transition: all 0.5s;
+
   .modal-background {
     position: absolute;
     width: 100%;

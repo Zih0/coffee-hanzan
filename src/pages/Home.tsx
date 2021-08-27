@@ -76,10 +76,11 @@ function Home() {
           <h1>onecoffee.xyz/</h1>
           <input type="text" placeholder="yourname" />
         </div>
-
-        <Button background={themeContext.primaryColor} color="black">
-          <Link to="/signup">시작하기</Link>
-        </Button>
+        <Link to="/signup">
+          <Button background={themeContext.primaryColor} color="black">
+            시작하기
+          </Button>
+        </Link>
       </div>
     </Container>
   );
