@@ -1,5 +1,5 @@
 import GlobalStyles from './styles/GlobalStyles';
-import AppRouter from './components/Router';
+import AppRouter from './Router';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
