@@ -118,7 +118,7 @@ function AuthForm() {
           {error && <span className="auth-error">{error}</span>}
         </Form>
         <span className="auth-login">
-          계정이 이미 있으신가요?{' '}
+          계정이 이미 있으신가요?
           <span className="highlight" onClick={openModal}>
             로그인
           </span>

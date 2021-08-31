@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { ThemeContext } from 'styled-components';
 import Button from '../components/Button';
+import { Mobile, PC } from '../styles/MediaQuery';
 
-const Container = styled.div`
+const Container = styled.main`
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
@@ -11,9 +12,14 @@ const Container = styled.div`
   gap: 3rem;
   .home-text {
     width: 70%;
-    line-height: 3rem;
-    font-size: 1.1rem;
-    font-weight: 400;
+    line-height: 5rem;
+    font-size: 3rem;
+    font-weight: 300;
+
+    @media ${(props) => props.theme.mobile} {
+      font-size: 1.5rem;
+      line-height: 3rem;
+    }
   }
 
   .home-start {
@@ -64,12 +70,11 @@ function Home() {
   return (
     <Container>
       <div className="home-text">
-        커피한잔은 미국 Buy me a Coffee를 따라한 프로젝트입니다.
+        Paypal, Stripe
         <br />
-        Paypal, Stripe는 한국 사용자가 후원 하고, 받는데 불편함이 있어 이를
-        해결하고자 만들게 되었습니다.
+        한국에서 사용하기 불편하잖아요
         <br />
-        커피한잔을 이용해 후원을 받아보세요.
+        커피한잔을 이용해 후원을 받아보세요
       </div>
       <div className="home-start">
         <div className="home-start-text">
@@ -77,9 +82,25 @@ function Home() {
           <input type="text" placeholder="yourname" />
         </div>
         <Link to="/signup">
-          <Button background={themeContext.primaryColor} color="black">
-            시작하기
-          </Button>
+          <PC>
+            <Button
+              background={themeContext.primaryColor}
+              color="black"
+              height={5}
+            >
+              시작하기
+            </Button>
+          </PC>
+          <Mobile>
+            <Button
+              background={themeContext.primaryColor}
+              color="black"
+              height={3}
+              width={17}
+            >
+              시작하기
+            </Button>
+          </Mobile>
         </Link>
       </div>
     </Container>

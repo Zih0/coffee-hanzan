@@ -9,7 +9,7 @@ import { Mobile, PC } from '../../styles/MediaQuery';
 import Button from '../Button';
 import LoginModal from '../Modal/LoginModal';
 
-const Container = styled.div`
+const Container = styled.header`
   height: 2rem;
   margin: 2rem 3rem;
   font-size: 1.5rem;

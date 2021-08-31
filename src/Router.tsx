@@ -11,6 +11,8 @@ import Header from './components/Header';
 import { AuthContext } from './contexts/AuthContext';
 import Setting from './pages/Setting';
 import Payment from './pages/Payment';
+import Feed from './pages/Feed';
+import Footer from './components/Footer/inedx';
 
 function AppRouter() {
   const { currentUser } = useContext(AuthContext);
@@ -26,13 +28,14 @@ function AppRouter() {
           </>
         ) : (
           <>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Feed} />
             <Route exact path="/setting" component={Setting} />
             <Route path="/set-payment" component={Payment} />
             {/* <Redirect from="*" to="/" /> */}
           </>
         )}
       </Switch>
+      <Footer />
     </Router>
   );
 }

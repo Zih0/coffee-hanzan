@@ -16,5 +16,16 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
         font-size: 14px;
     }
+
+    #root {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+        'header'
+        'main'
+        'footer';
+    }  
 `;
 export default GlobalStyles;
