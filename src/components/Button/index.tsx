@@ -5,10 +5,14 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   background?: string;
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
+  width?: number;
+  height?: number;
 }
 
 const StyledButton = styled.button<IButtonProps>`
   min-width: 6rem;
+  width: ${(props) => `${props.width}rem`};
+  height: ${(props) => `${props.height}rem`};
   border: 1px solid transparent;
   padding: 0.75rem 1.3rem;
   display: flex;
