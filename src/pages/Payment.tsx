@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 function Payment() {
-  return <Container></Container>;
+  return <Container>TODO: 토스 페이링크 연동</Container>;
 }
 
 export default Payment;

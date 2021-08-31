@@ -3,7 +3,6 @@ import AuthForm from '../components/Auth/AuthForm';
 import AuthSNS from '../components/Auth/AuthSNS';
 
 const Container = styled.div`
-  margin-top: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -6,8 +6,7 @@ import useModal from '../../hooks/useModal';
 import Input from '../Input';
 import LoginModal from '../Modal/LoginModal';
 
-const Container = styled.div`
-  height: 100%;
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -27,7 +26,6 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
-  height: 50%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
