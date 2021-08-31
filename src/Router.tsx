@@ -31,7 +31,7 @@ function AppRouter() {
             <Route exact path="/" component={Feed} />
             <Route exact path="/setting" component={Setting} />
             <Route path="/set-payment" component={Payment} />
-            {/* <Redirect from="*" to="/" /> */}
+            <Redirect from="*" to="/" />
           </>
         )}
       </Switch>

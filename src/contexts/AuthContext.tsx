@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { authService } from '../fbase';
+import { authService, dbService } from '../fbase';
 
 interface IAuthProvider {
   children: React.ReactNode;
@@ -9,22 +9,27 @@ const defaultState = {
   currentUser: {
     uid: '',
   },
+  hasNickname: false,
 };
 
 export const AuthContext = React.createContext(defaultState);
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const [init, setInit] = useState(false);
   const [currentUser, setCurrentUser] = useState<any | null>(null);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hasNickname, setHasNickname] = useState(false);
 
   useEffect(() => {
-    authService.onAuthStateChanged((user) => {
+    authService.onAuthStateChanged(async (user) => {
       if (user) {
         setCurrentUser(user);
-        // setIsLoggedIn(true);
-      } else {
-        // setIsLoggedIn(false);
-        setCurrentUser(null);
+        const User = await dbService
+          .collection('user')
+          .where('creatorId', '==', user.uid)
+          .get();
+        if (User.docs.length !== 0) {
+          setHasNickname(true);
+          console.log(User);
+        }
       }
       setInit(true);
     });
@@ -36,6 +41,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         <AuthContext.Provider
           value={{
             currentUser,
+            hasNickname,
           }}
         >
           {children}
