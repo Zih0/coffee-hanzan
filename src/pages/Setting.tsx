@@ -1,11 +1,11 @@
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import Button from '../components/Button';
-import { AuthContext } from '../contexts/AuthContext';
-import { dbService } from '../fbase';
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import Button from "../components/Button";
+import { AuthContext } from "../contexts/AuthContext";
+import { dbService } from "../fbase";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -69,32 +69,46 @@ const Container = styled.div`
 `;
 
 function Setting() {
-  const [error, setError] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [error, setError] = useState("");
+  const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const history = useHistory();
 
   const getExUser = async (uid: string) => {
     const exUser = await dbService
-      .collection('user')
-      .where('creatorId', '==', uid)
+      .collection("user")
+      .where("creatorId", "==", uid)
       .get();
     return exUser;
   };
 
   const getExNickname = async (nickname: string) => {
     const exNickname = await dbService
-      .collection('user')
-      .where('nickname', '==', nickname)
+      .collection("user")
+      .where("nickname", "==", nickname)
       .get();
     return exNickname;
+  };
+
+  const isValidEmpty = (nickname: string) => {
+    return nickname.trim() === "";
+  };
+
+  const isValidLength = (nickname: string) => {
+    return nickname.trim().length >= 4;
+  };
+
+  const isValidEn = (nickname: string) => {
+    const regEngNum = /^[a-zA-Z0-9]+$/;
+
+    return regEngNum.test(nickname.trim());
   };
 
   useEffect(() => {
     getExUser(currentUser.uid)
       .then((exUser) => {
-        if (exUser.docs.length !== 0) history.push('/');
+        if (exUser.docs.length !== 0) history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -102,13 +116,19 @@ function Setting() {
   }, []);
 
   const onApplyClick = async () => {
-    if (nickname.trim() === '') {
-      setError(() => '닉네임을 입력해주세요.');
+    const trimmedNickname = nickname.trim();
+
+    if (isValidEmpty(trimmedNickname)) {
+      setError(() => "닉네임을 입력해주세요.");
       return;
-    } else if (nickname.trim().length < 4) {
-      setError(() => '닉네임은 최소 4글자 이상 입력해주세요.');
+    } else if (!isValidLength(trimmedNickname)) {
+      setError(() => "닉네임은 최소 4글자 이상 입력해주세요.");
+      return;
+    } else if (!isValidEn(trimmedNickname)) {
+      setError(() => "영문과 숫자로만 닉네임을 적어주세요");
       return;
     }
+
     setLoading(true);
     const userObj = {
       nickname,
@@ -119,24 +139,24 @@ function Setting() {
     try {
       const exNickname = await getExNickname(nickname);
       if (exNickname.docs.length !== 0) {
-        setError(() => '이미 사용중인 닉네임입니다.');
+        setError(() => "이미 사용중인 닉네임입니다.");
         setLoading(false);
         return;
       }
 
       const exUser = await getExUser(currentUser.uid);
       if (exUser.docs.length !== 0) {
-        setError(() => '이미 닉네임을 등록하였습니다.');
+        setError(() => "이미 닉네임을 등록하였습니다.");
         setLoading(false);
         return;
       }
 
-      await dbService.collection('user').add(userObj);
+      await dbService.collection("user").add(userObj);
       setLoading(false);
-      history.push('/set-payment');
-    } catch (error) {
+      history.push("/set-payment");
+    } catch (error: any) {
       console.log(error);
-      setError(() => error);
+      setError(() => error.toString());
     }
   };
 
@@ -144,9 +164,10 @@ function Setting() {
     const {
       target: { value },
     } = event;
-    setError('');
+    setError("");
     setNickname(value);
   };
+
   return (
     <Container>
       <h2 className="setting-header">닉네임 설정</h2>
@@ -157,9 +178,10 @@ function Setting() {
           {error && <span className="nickname-error">{error}</span>}
         </div>
         <Button onClick={onApplyClick}>
-          {!loading ? '등록' : <FontAwesomeIcon icon={faSpinner} spin={true} />}
+          {!loading ? "등록" : <FontAwesomeIcon icon={faSpinner} spin={true} />}
         </Button>
       </div>
+      <span>닉네임은 영문과 숫자로 4글자 이상 작성해주세요 ✍🏻</span>
     </Container>
   );
 }
