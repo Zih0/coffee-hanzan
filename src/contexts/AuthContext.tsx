@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { authService, dbService } from '../fbase';
+import React, { useEffect, useState } from "react";
+import { authService, dbService } from "../fbase";
 
 interface IAuthProvider {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface IAuthProvider {
 
 const defaultState = {
   currentUser: {
-    uid: '',
+    uid: "",
   },
   hasNickname: false,
 };
@@ -23,12 +23,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       if (user) {
         setCurrentUser(user);
         const User = await dbService
-          .collection('user')
-          .where('creatorId', '==', user.uid)
+          .collection("user")
+          .where("creatorId", "==", user.uid)
           .get();
         if (User.docs.length !== 0) {
           setHasNickname(true);
-          console.log(User);
         }
       }
       setInit(true);
