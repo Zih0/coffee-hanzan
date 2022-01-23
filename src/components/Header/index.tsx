@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import styled from 'styled-components';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
-import useModal from '../../hooks/useModal';
-import { Mobile, PC } from '../../styles/MediaQuery';
-import Button from '../Button';
-import LoginModal from '../Modal/LoginModal';
+import { useContext } from "react";
+import styled from "styled-components";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import useModal from "../../hooks/useModal";
+import { Mobile, PC } from "../../styles/MediaQuery";
+import Button from "../Button";
+import LoginModal from "../Modal/LoginModal";
 
 const Container = styled.header`
   height: 2rem;
@@ -73,7 +73,9 @@ function Header() {
       </Link>
       <div className="header-auth">
         {currentUser ? (
-          <div>mypage</div>
+          <Link to="profile">
+            <div>mypage</div>
+          </Link>
         ) : (
           <>
             <p className="header-login" onClick={openModal}>
