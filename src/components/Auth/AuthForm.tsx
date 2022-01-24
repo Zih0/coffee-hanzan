@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { authService } from '../../fbase';
-import useModal from '../../hooks/useModal';
-import Input from '../Input';
-import LoginModal from '../Modal/LoginModal';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { authService } from "../../fbase";
+import useModal from "../../hooks/useModal";
+import Input from "../Input";
+import LoginModal from "../Modal/LoginModal";
 
 const Container = styled.main`
   display: flex;
@@ -40,7 +40,6 @@ const Form = styled.form`
     background-color: ${(props) => props.theme.primaryColor};
     color: #000;
     border: none;
-    border-radius: 2rem;
     text-align: center;
     font-size: 1rem;
     font-weight: 300;
@@ -59,9 +58,9 @@ const Form = styled.form`
 `;
 
 function AuthForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
   const { openModal, ModalPortal } = useModal();
 
@@ -69,9 +68,9 @@ function AuthForm() {
     const {
       target: { name, value },
     } = event;
-    if (name === 'email') {
+    if (name === "email") {
       setEmail(value);
-    } else if (name === 'password') {
+    } else if (name === "password") {
       setPassword(value);
     }
   };
@@ -80,8 +79,8 @@ function AuthForm() {
     e.preventDefault();
     try {
       await authService.createUserWithEmailAndPassword(email, password);
-      history.push('/setting');
-    } catch (error) {
+      history.push("/setting");
+    } catch (error: any) {
       setError(error.message);
     }
   };
