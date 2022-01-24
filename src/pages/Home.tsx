@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import styled, { ThemeContext } from 'styled-components';
-import Button from '../components/Button';
-import { Mobile, PC } from '../styles/MediaQuery';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Button from "../components/Button";
+import { Mobile, PC } from "../styles/MediaQuery";
 
 const Container = styled.main`
   margin-top: 5rem;
@@ -66,7 +65,6 @@ const Container = styled.main`
 `;
 
 function Home() {
-  const themeContext = useContext(ThemeContext);
   return (
     <Container>
       <div className="home-text">
@@ -83,21 +81,10 @@ function Home() {
         </div>
         <Link to="/signup">
           <PC>
-            <Button
-              background={themeContext.primaryColor}
-              color="black"
-              height={5}
-            >
-              시작하기
-            </Button>
+            <Button height={5}>시작하기</Button>
           </PC>
           <Mobile>
-            <Button
-              background={themeContext.primaryColor}
-              color="black"
-              height={3}
-              width={17}
-            >
+            <Button height={3} width={17}>
               시작하기
             </Button>
           </Mobile>
