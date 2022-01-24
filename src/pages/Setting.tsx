@@ -130,6 +130,7 @@ function Setting() {
     }
 
     setLoading(true);
+
     const userObj = {
       nickname,
       createdAt: Date.now(),
@@ -139,14 +140,14 @@ function Setting() {
     try {
       const exNickname = await getExNickname(nickname);
       if (exNickname.docs.length !== 0) {
-        setError(() => "이미 사용중인 닉네임입니다.");
+        setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
         return;
       }
 
       const exUser = await getExUser(currentUser.uid);
       if (exUser.docs.length !== 0) {
-        setError(() => "이미 닉네임을 등록하였습니다.");
+        setError("이미 닉네임을 등록하였습니다.");
         setLoading(false);
         return;
       }
@@ -155,8 +156,7 @@ function Setting() {
       setLoading(false);
       history.push("/set-payment");
     } catch (error: any) {
-      console.log(error);
-      setError(() => error.toString());
+      setError(error.toString());
     }
   };
 

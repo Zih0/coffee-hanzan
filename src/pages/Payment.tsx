@@ -52,6 +52,7 @@ const Form = styled.form`
 
 const StyledSelect = styled(Select)`
   width: 100%;
+  padding: 1rem;
 `;
 
 const StyledInput = styled(Input)`
@@ -111,21 +112,19 @@ function Payment() {
     }
     setLoading(true);
 
-    await dbService
+    const snapshot = await dbService
       .collection("user")
       .where("creatorId", "==", currentUser.uid)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          dbService.collection("user").doc(doc.id).update({
-            bank: selectedBank,
-            account,
-          });
-        });
-      });
-    setLoading(false);
+      .get();
 
-    history.push("/");
+    snapshot.forEach((doc) => {
+      dbService.collection("user").doc(doc.id).update({
+        bank: selectedBank,
+        account,
+      });
+    });
+    setLoading(false);
+    history.push("/profile");
   };
 
   const isValidNumber = (account: string) => {

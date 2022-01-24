@@ -10,6 +10,7 @@ const defaultState = {
     uid: "",
   },
   hasNickname: false,
+  hasAccount: false,
 };
 
 export const AuthContext = React.createContext(defaultState);
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const [init, setInit] = useState(false);
   const [currentUser, setCurrentUser] = useState<any | null>(null);
   const [hasNickname, setHasNickname] = useState(false);
+  const [hasAccount, setHasAccount] = useState(false);
 
   useEffect(() => {
     authService.onAuthStateChanged(async (user) => {
@@ -28,6 +30,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
           .get();
         if (User.docs.length !== 0) {
           setHasNickname(true);
+          User.docs.forEach((doc) => {
+            if (doc.data().account) {
+              setHasAccount(true);
+            }
+          });
         }
       }
       setInit(true);
@@ -41,12 +48,13 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
           value={{
             currentUser,
             hasNickname,
+            hasAccount,
           }}
         >
           {children}
         </AuthContext.Provider>
       ) : (
-        <div></div>
+        <div>Loading...</div>
       )}
     </>
   );
