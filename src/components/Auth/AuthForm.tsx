@@ -37,17 +37,13 @@ const Form = styled.form`
 
   .auth-submit {
     padding: 1rem 0;
-    background-color: ${(props) => props.theme.primaryColor};
-    color: #000;
+    background-color: #000;
+    color: #fff;
     border: none;
     text-align: center;
     font-size: 1rem;
     font-weight: 300;
     cursor: pointer;
-
-    &:hover {
-      background-color: ${(props) => props.theme.hoverColor};
-    }
   }
 
   .auth-error {

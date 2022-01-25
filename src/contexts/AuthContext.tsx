@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   useEffect(() => {
     authService.onAuthStateChanged(async (user) => {
       if (user) {
+        setInit(false);
         setCurrentUser(user);
         const User = await dbService
           .collection("user")
