@@ -72,7 +72,7 @@ function Home() {
         <br />
         한국에서 사용하기 불편하잖아요
         <br />
-        커피한잔을 이용해 후원을 받아보세요
+        원커피로 후원을 받아보세요
       </div>
       <div className="home-start">
         <div className="home-start-text">
