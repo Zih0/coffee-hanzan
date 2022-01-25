@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { DefaultProfile } from "../assets/images";
+import { ImgDefaultProfile } from "../assets/images";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
@@ -67,7 +67,7 @@ const Container = styled.div`
 `;
 
 function Profile() {
-  const [profileImg, setProfileImg] = useState(DefaultProfile);
+  const [profileImg, setProfileImg] = useState(ImgDefaultProfile);
 
   useEffect(() => {}, []);
 
