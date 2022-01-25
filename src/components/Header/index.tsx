@@ -8,6 +8,7 @@ import useModal from "../../hooks/useModal";
 import { Mobile, PC } from "../../styles/MediaQuery";
 import Button from "../Button";
 import LoginModal from "../Modal/LoginModal";
+import { IconLogo } from "../../assets/icons";
 
 const Container = styled.header`
   height: 2rem;
@@ -17,20 +18,21 @@ const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   font-weight: 300;
+
   .header-logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
     svg {
-      font-size: 2rem;
+      width: 2rem;
     }
 
     @media ${(props) => props.theme.mobile} {
       font-size: 1rem;
 
       svg {
-        font-size: 1.5rem;
+        width: 1.5rem;
       }
     }
   }
@@ -67,8 +69,8 @@ function Header() {
     <Container>
       <Link to="/">
         <div className="header-logo">
-          <FontAwesomeIcon icon={faCoffee} />
-          <p>커피한잔</p>
+          <IconLogo />
+          <p>One coffee</p>
         </div>
       </Link>
       <div className="header-auth">

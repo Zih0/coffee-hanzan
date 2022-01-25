@@ -1,1 +1,1 @@
-export { default as DefaultProfile } from "./default-profile.png";
+export { default as ImgDefaultProfile } from "./default-profile.png";
