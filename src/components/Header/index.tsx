@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import useModal from "../../hooks/useModal";
@@ -22,17 +20,16 @@ const Container = styled.header`
   .header-logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-
     svg {
-      width: 2rem;
+      height: 3rem;
+      width: auto;
     }
 
     @media ${(props) => props.theme.mobile} {
       font-size: 1rem;
 
       svg {
-        width: 1.5rem;
+        height: 1.5rem;
       }
     }
   }
@@ -70,7 +67,6 @@ function Header() {
       <Link to="/">
         <div className="header-logo">
           <IconLogo />
-          <p>One coffee</p>
         </div>
       </Link>
       <div className="header-auth">
