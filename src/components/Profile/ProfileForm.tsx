@@ -26,6 +26,10 @@ const Container = styled.form`
   }
 `;
 
+const StyledInput = styled(Input)`
+  padding: 1rem;
+`;
+
 function ProfileForm() {
   const { user } = useContext(AuthContext);
   const [nickname, setNickname] = useState(user.nickname);
@@ -58,7 +62,7 @@ function ProfileForm() {
     <Container>
       <div className="profile-input-wrapper">
         <p className="profile-form-label">닉네임</p>
-        <Input
+        <StyledInput
           className="profile-form-input"
           placeholder="닉네임을 입력해주세요."
           value={nickname}
@@ -81,7 +85,7 @@ function ProfileForm() {
       </div>
       <div className="profile-input-wrapper">
         <p className="profile-form-label">계좌번호</p>
-        <Input
+        <StyledInput
           className="profile-form-input"
           placeholder="계좌번호를 입력해주세요"
           value={account}

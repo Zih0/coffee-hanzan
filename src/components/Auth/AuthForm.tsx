@@ -8,6 +8,9 @@ import LoginModal from "../Modal/LoginModal";
 
 const Container = styled.main`
   display: flex;
+  width: 100%;
+  max-width: 960px;
+  align-items: center;
   flex-direction: column;
   gap: 1rem;
   font-weight: 300;
@@ -29,10 +32,12 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
+  width: 400px;
+  padding: 2rem;
   .auth-header {
     font-size: 2rem;
     font-weight: 800;
+    text-align: center;
   }
 
   .auth-submit {

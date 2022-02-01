@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 const Container = styled.header`
   height: 2rem;
-  padding: 2rem 3rem;
+  padding: 3rem;
   font-size: 1.5rem;
   display: flex;
   justify-content: space-between;

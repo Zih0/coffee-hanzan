@@ -3,7 +3,7 @@ import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
     ${reset};
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+    @import url('http://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
 
     a {
         text-decoration: none;
@@ -11,12 +11,11 @@ const GlobalStyles = createGlobalStyle`
     }
     * {
         box-sizing: border-box;
+        font-family: 'SUIT', sans-serif;
     }
     body {
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 14px;
-
-
+        font-family: 'SUIT', sans-serif;
         @media ${({ theme }) => theme.size.mobile} {
             font-size: 12px;
         }
@@ -32,13 +31,6 @@ const GlobalStyles = createGlobalStyle`
         }
       }
 
-    header {
-        width: 100vw;
-    }
-
-    main {
-        margin-top: 5rem;
-        width: 100%;
-    }
+    
 `;
 export default GlobalStyles;
