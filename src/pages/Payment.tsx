@@ -1,13 +1,14 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Select from "../components/Select";
-import { AuthContext } from "../contexts/AuthContext";
-import { dbService } from "../fbase";
+import { useAuth } from "../contexts/AuthContext";
+import { API } from "../firebase/api";
+import { dbService } from "../firebase/fbase";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -79,7 +80,7 @@ function Payment() {
   const [account, setAccount] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  const auth = useAuth();
   const history = useHistory();
 
   const onInputBank = (e: React.FormEvent<HTMLSelectElement>) => {
@@ -112,17 +113,7 @@ function Payment() {
     }
     setLoading(true);
 
-    const snapshot = await dbService
-      .collection("user")
-      .where("creatorId", "==", currentUser.uid)
-      .get();
-
-    snapshot.forEach((doc) => {
-      dbService.collection("user").doc(doc.id).update({
-        bank: selectedBank,
-        account,
-      });
-    });
+    API.setAccountData(auth?.uid, selectedBank, parseInt(account, 10));
     setLoading(false);
     history.push("/profile");
   };

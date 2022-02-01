@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import useModal from "../../hooks/useModal";
 import { Mobile, PC } from "../../styles/MediaQuery";
 import Button from "../Button";
@@ -10,7 +9,7 @@ import { IconLogo } from "../../assets/icons";
 
 const Container = styled.header`
   height: 2rem;
-  margin: 2rem 3rem;
+  padding: 2rem 3rem;
   font-size: 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -59,7 +58,7 @@ const Container = styled.header`
 `;
 
 function Header() {
-  const { currentUser } = useContext(AuthContext);
+  const auth = useAuth();
   const { openModal, ModalPortal } = useModal();
 
   return (
@@ -70,7 +69,7 @@ function Header() {
         </div>
       </Link>
       <div className="header-auth">
-        {currentUser ? (
+        {auth ? (
           <Link to="profile">
             <div>mypage</div>
           </Link>
@@ -91,7 +90,7 @@ function Header() {
           </>
         )}
       </div>
-      {!currentUser && (
+      {!auth && (
         <ModalPortal>
           <LoginModal />
         </ModalPortal>

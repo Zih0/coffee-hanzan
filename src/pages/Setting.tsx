@@ -1,11 +1,11 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
-import { AuthContext } from "../contexts/AuthContext";
-import { dbService } from "../fbase";
+import { useAuth } from "../contexts/AuthContext";
+import { API } from "../firebase/api";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -75,24 +75,8 @@ function Setting() {
   const [error, setError] = useState("");
   const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+  const auth = useAuth();
   const history = useHistory();
-
-  const getExUser = async (uid: string) => {
-    const exUser = await dbService
-      .collection("user")
-      .where("creatorId", "==", uid)
-      .get();
-    return exUser;
-  };
-
-  const getExNickname = async (nickname: string) => {
-    const exNickname = await dbService
-      .collection("user")
-      .where("nickname", "==", nickname)
-      .get();
-    return exNickname;
-  };
 
   const isValidEmpty = (nickname: string) => {
     return nickname.trim() === "";
@@ -109,9 +93,9 @@ function Setting() {
   };
 
   useEffect(() => {
-    getExUser(currentUser.uid)
+    API.getUserData(auth?.uid)
       .then((exUser) => {
-        if (exUser.docs.length !== 0) history.push("/");
+        if (exUser.length !== 0) history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -134,28 +118,27 @@ function Setting() {
 
     setLoading(true);
 
-    const userObj = {
-      nickname,
-      createdAt: Date.now(),
-      creatorId: currentUser.uid,
-    };
-
     try {
-      const exNickname = await getExNickname(nickname);
-      if (exNickname.docs.length !== 0) {
+      const validation = await API.checkDuplicateNickName(nickname);
+      if (validation) {
         setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
         return;
       }
 
-      const exUser = await getExUser(currentUser.uid);
-      if (exUser.docs.length !== 0) {
+      // 사실상 거치지 않음
+      const exUser = await API.getUserData(auth?.uid);
+      if (exUser.length !== 0) {
         setError("이미 닉네임을 등록하였습니다.");
         setLoading(false);
         return;
       }
 
-      await dbService.collection("user").add(userObj);
+      await API.setUserData({
+        nickname,
+        createdAt: Date.now(),
+        creatorId: auth?.uid,
+      });
       setLoading(false);
       history.push("/set-payment");
     } catch (error: any) {

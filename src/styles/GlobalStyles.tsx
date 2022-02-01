@@ -38,6 +38,7 @@ const GlobalStyles = createGlobalStyle`
 
     main {
         margin-top: 5rem;
+        width: 100%;
     }
 `;
 export default GlobalStyles;

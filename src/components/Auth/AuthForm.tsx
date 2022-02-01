@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { authService } from "../../fbase";
+import { authService } from "../../firebase/fbase";
 import useModal from "../../hooks/useModal";
 import Input from "../Input";
 import LoginModal from "../Modal/LoginModal";

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -8,19 +7,19 @@ import {
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Header from "./components/Header";
-import { AuthContext } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/AuthContext";
 import Setting from "./pages/Setting";
 import Payment from "./pages/Payment";
 import Feed from "./pages/Feed";
 import Profile from "./pages/Profile";
 
 function AppRouter() {
-  const { currentUser } = useContext(AuthContext);
+  const auth = useAuth();
   return (
     <Router>
       <Header />
       <Switch>
-        {!currentUser ? (
+        {!auth ? (
           <>
             <Route exact path="/" component={Home} />
             <Route exact path="/signup" component={SignUp} />

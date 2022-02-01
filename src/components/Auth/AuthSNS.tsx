@@ -1,7 +1,7 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { authService, Providers } from "../../fbase";
+import { authService, Providers } from "../../firebase/fbase";
 import Button from "../Button";
 
 interface IAuthSNSProps {

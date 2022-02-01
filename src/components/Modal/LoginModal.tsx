@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { authService } from '../../fbase';
-import AuthSNS from '../Auth/AuthSNS';
-import Button from '../Button';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { authService } from "../../firebase/fbase";
+import AuthSNS from "../Auth/AuthSNS";
+import Button from "../Button";
 
-import Input from '../Input';
+import Input from "../Input";
 
 const Container = styled.div`
   width: 25rem;
@@ -35,9 +35,9 @@ const Form = styled.form`
 `;
 
 function LoginModal() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {

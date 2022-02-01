@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
+import { API } from "../firebase/api";
 
 const Container = styled.main`
   display: flex;
@@ -9,18 +10,15 @@ const Container = styled.main`
 `;
 
 function Feed() {
-  const { hasNickname, hasAccount } = useContext(AuthContext);
+  const auth = useAuth();
   const history = useHistory();
 
-  useEffect(() => {
-    if (!hasNickname) {
-      history.push("/setting");
-    }
-
-    if (!hasAccount) {
-      history.push("/set-payment");
-    }
+  useLayoutEffect(() => {
+    API.getUserData(auth?.uid).then((user) => {
+      if (!user.length) history.push("/setting");
+    });
   }, []);
+
   return <Container>Feed</Container>;
 }
 
