@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
+import NicknameInput from "../components/Input/NicknameInput";
 import { useAuth } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
 
@@ -23,28 +24,6 @@ const Container = styled.div`
     gap: 1rem;
     position: relative;
 
-    .set-nickname-text {
-      display: flex;
-      align-items: center;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      border: 2px solid ${({ theme }) => theme.color.gray};
-      flex-wrap: wrap;
-
-      h1 {
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-      input {
-        width: 10rem;
-        border: none;
-        height: 2rem;
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-      }
-    }
-
     .nickname-error {
       position: absolute;
       bottom: -1.5rem;
@@ -54,19 +33,6 @@ const Container = styled.div`
 
     @media ${({ theme }) => theme.size.mobile} {
       flex-direction: column;
-
-      .set-nickname-text {
-        h1 {
-          font-size: 1rem;
-        }
-
-        input {
-          width: 5rem;
-          font-size: 1rem;
-          height: 1rem;
-          margin-bottom: 0.25rem;
-        }
-      }
     }
   }
 `;
@@ -93,7 +59,7 @@ function Setting() {
   };
 
   useEffect(() => {
-    API.getUserData(auth?.uid)
+    API.getUserDocument(auth?.uid)
       .then((exUser) => {
         if (exUser.length !== 0) history.push("/");
       })
@@ -127,7 +93,7 @@ function Setting() {
       }
 
       // 사실상 거치지 않음
-      const exUser = await API.getUserData(auth?.uid);
+      const exUser = await API.getUserDocument(auth?.uid);
       if (exUser.length !== 0) {
         setError("이미 닉네임을 등록하였습니다.");
         setLoading(false);
@@ -158,11 +124,9 @@ function Setting() {
     <Container>
       <h2 className="setting-header">닉네임 설정</h2>
       <div className="set-nickname">
-        <div className="set-nickname-text">
-          <h1>coffee-hanzan.com/</h1>
-          <input type="text" placeholder="yourname" onChange={onChange} />
-          {error && <span className="nickname-error">{error}</span>}
-        </div>
+        <NicknameInput onChange={onChange} />
+
+        {error && <span className="nickname-error">{error}</span>}
         <Button onClick={onApplyClick}>
           {!loading ? "등록" : <FontAwesomeIcon icon={faSpinner} spin={true} />}
         </Button>

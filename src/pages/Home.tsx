@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
+import NicknameInput from "../components/Input/NicknameInput";
 import { Mobile, PC } from "../styles/MediaQuery";
 
 const Container = styled.main`
@@ -24,26 +25,6 @@ const Container = styled.main`
   .home-start {
     display: flex;
     gap: 1rem;
-
-    .home-start-text {
-      display: flex;
-      align-items: center;
-      padding: 1rem 2rem;
-      border-radius: 4px;
-      border: 2px solid ${({ theme }) => theme.color.gray};
-      flex-wrap: wrap;
-      h1 {
-        font-size: 2rem;
-        font-weight: 900;
-      }
-      input {
-        width: 10rem;
-        border: none;
-        height: 2rem;
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-      }
-    }
 
     @media ${({ theme }) => theme.size.mobile} {
       flex-direction: column;
@@ -74,10 +55,7 @@ function Home() {
         커피한잔으로 후원을 받아보세요
       </div>
       <div className="home-start">
-        <div className="home-start-text">
-          <h1>coffee-hanzan.com/</h1>
-          <input type="text" placeholder="yourname" />
-        </div>
+        <NicknameInput />
         <Link to="/signup">
           <PC>
             <Button height={5}>시작하기</Button>
