@@ -70,7 +70,7 @@ function LoginModal() {
           type="email"
           name="email"
           id="email"
-          placeholder="이메일 주소"
+          placeholder="Email"
           onChange={onChangeEmail}
           value={email}
         />
@@ -78,7 +78,7 @@ function LoginModal() {
           type="password"
           name="password"
           id="password"
-          placeholder="비밀번호"
+          placeholder="Password"
           onChange={onChangePassword}
           value={password}
         />
