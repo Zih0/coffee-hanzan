@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { ImgDefaultProfile } from "../assets/images";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import ProfileForm from "../components/Profile/ProfileForm";
 
 const Container = styled.div`
   display: flex;
@@ -14,8 +15,12 @@ const Container = styled.div`
 
   .wrapper {
     max-width: 960px;
-
-    margin: 2rem 3rem;
+    width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
   }
 
   .cover-image {
@@ -49,6 +54,14 @@ const Container = styled.div`
     );
   }
 
+  .profile-image-label {
+    cursor: pointer;
+  }
+
+  .profile-image-input {
+    display: none;
+  }
+
   .add-pic-camera {
     position: absolute;
     top: 36%;
@@ -71,7 +84,12 @@ const Container = styled.div`
 function Profile() {
   const [profileImg, setProfileImg] = useState(ImgDefaultProfile);
 
-  useEffect(() => {}, []);
+  const onChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+      setProfileImg(URL.createObjectURL(file));
+    }
+  };
 
   return (
     <Container>
@@ -79,11 +97,20 @@ function Profile() {
       <div className="profile-image-container">
         <div className="profile-image-wrapper">
           <img src={profileImg} alt="" className="profile-image" />
-          <FontAwesomeIcon className="add-pic-camera" icon={faCamera} />
+          <label className="profile-image-label" htmlFor="image-uploader">
+            <FontAwesomeIcon className="add-pic-camera" icon={faCamera} />
+          </label>
+          <input
+            id="image-uploader"
+            className="profile-image-input"
+            type="file"
+            accept="image/jpg,impge/png,image/jpeg"
+            onChange={onChangeImg}
+          />
         </div>
       </div>
       <div className="wrapper">
-        <Link to="set-payment">계좌 설정</Link>
+        <ProfileForm />
       </div>
     </Container>
   );
