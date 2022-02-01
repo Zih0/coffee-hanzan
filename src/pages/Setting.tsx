@@ -1,11 +1,11 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
 import NicknameInput from "../components/Input/NicknameInput";
-import { useAuth } from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
 
 const Container = styled.div`
@@ -41,7 +41,7 @@ function Setting() {
   const [error, setError] = useState("");
   const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(false);
-  const auth = useAuth();
+  const { auth } = useContext(AuthContext);
   const history = useHistory();
 
   const isValidEmpty = (nickname: string) => {

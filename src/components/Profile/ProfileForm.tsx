@@ -1,8 +1,7 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
-import { AuthContext, useAuth } from "../../contexts/AuthContext";
-import { API } from "../../firebase/api";
+import { AuthContext } from "../../contexts/AuthContext";
 import { bankList } from "../../utils/constants";
 import Input from "../Input";
 import Select from "../Select";

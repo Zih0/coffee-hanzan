@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext, useAuth } from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
 
 const Container = styled.main`
@@ -10,7 +10,7 @@ const Container = styled.main`
 `;
 
 function Feed() {
-  const auth = useAuth();
+  const { auth } = useContext(AuthContext);
   const { setUser } = useContext(AuthContext);
   const history = useHistory();
 

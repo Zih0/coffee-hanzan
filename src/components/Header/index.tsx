@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import useModal from "../../hooks/useModal";
 import { Mobile, PC } from "../../styles/MediaQuery";
 import Button from "../Button";
 import LoginModal from "../Modal/LoginModal";
 import { IconLogo } from "../../assets/icons";
+import { useContext } from "react";
 
 const Container = styled.header`
   height: 2rem;
@@ -58,7 +59,7 @@ const Container = styled.header`
 `;
 
 function Header() {
-  const auth = useAuth();
+  const { auth } = useContext(AuthContext);
   const { openModal, ModalPortal } = useModal();
 
   return (

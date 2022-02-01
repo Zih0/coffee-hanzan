@@ -7,14 +7,15 @@ import {
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Header from "./components/Header";
-import { useAuth } from "./contexts/AuthContext";
+import { AuthContext } from "./contexts/AuthContext";
 import Setting from "./pages/Setting";
 import Payment from "./pages/Payment";
 import Feed from "./pages/Feed";
 import Profile from "./pages/Profile";
+import { useContext } from "react";
 
 function AppRouter() {
-  const auth = useAuth();
+  const { auth } = useContext(AuthContext);
   return (
     <Router>
       <Header />

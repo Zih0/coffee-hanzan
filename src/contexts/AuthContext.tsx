@@ -53,13 +53,4 @@ const AuthProvider = ({ children }: IAuthProvider) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("this hook must be used within AuthProvider");
-  }
-
-  return context.auth;
-}
-
-export { AuthProvider, useAuth };
+export { AuthProvider };
