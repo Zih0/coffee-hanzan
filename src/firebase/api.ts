@@ -6,12 +6,21 @@ interface IUserObj {
   creatorId: string | undefined;
 }
 
-const getUserData = async (uid: string | undefined) => {
+const getUserDocument = async (uid: string | undefined) => {
   const exUser = await dbService
     .collection("users")
     .where("creatorId", "==", uid)
     .get();
   return exUser.docs;
+};
+
+const getUserData = async (uid: string | undefined) => {
+  const docs = await getUserDocument(uid);
+  let user: any;
+  docs.forEach((doc) => {
+    user = doc.data();
+  });
+  return user;
 };
 
 const setUserData = async (userObj: IUserObj) => {
@@ -32,7 +41,7 @@ const setAccountData = async (
   bank: string,
   account: number
 ) => {
-  const snapshot = await getUserData(uid);
+  const snapshot = await getUserDocument(uid);
 
   snapshot.forEach((doc) => {
     dbService.collection("users").doc(doc.id).update({
@@ -43,6 +52,7 @@ const setAccountData = async (
 };
 
 export const API = {
+  getUserDocument,
   getUserData,
   setUserData,
   checkDuplicateNickName,
