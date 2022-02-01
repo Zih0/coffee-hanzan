@@ -1,14 +1,15 @@
-const size = {
-  mobile: "768px",
-  tablet: "1023px",
-  pc: "1024px",
+import { DefaultTheme } from "styled-components";
+const color = {
+  gray: "#a9a9a9",
+  white: "#ffffff",
+  black: "#000000",
 };
 
-export const theme = {
-  primaryColor: "#fedd03",
-  hoverColor: "#f2d200",
-  grayColor: "#f7f7f7",
-  mobile: `(max-width: ${size.mobile})`,
-  tablet: `(max-width: ${size.tablet})`,
-  pc: `(min-width: ${size.pc})`,
+const size = {
+  mobile: "(max-width: 768px)",
+};
+
+export const theme: DefaultTheme = {
+  color,
+  size,
 };

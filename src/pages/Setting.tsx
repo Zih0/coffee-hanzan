@@ -22,22 +22,24 @@ const Container = styled.div`
     display: flex;
     gap: 1rem;
     position: relative;
+
     .set-nickname-text {
       display: flex;
       align-items: center;
       padding: 1rem 2rem;
-      border-radius: 5px;
-      background-color: ${(props) => props.theme.grayColor};
+      border-radius: 8px;
+      border: 2px solid ${({ theme }) => theme.color.gray};
       flex-wrap: wrap;
+
       h1 {
         font-size: 2rem;
         font-weight: 900;
       }
+
       input {
         width: 10rem;
         border: none;
         height: 2rem;
-        background-color: ${(props) => props.theme.grayColor};
         font-size: 2rem;
         margin-bottom: 0.5rem;
       }
@@ -50,13 +52,14 @@ const Container = styled.div`
       color: tomato;
     }
 
-    @media ${(props) => props.theme.mobile} {
+    @media ${({ theme }) => theme.size.mobile} {
       flex-direction: column;
 
       .set-nickname-text {
         h1 {
           font-size: 1rem;
         }
+
         input {
           width: 5rem;
           font-size: 1rem;
@@ -173,7 +176,7 @@ function Setting() {
       <h2 className="setting-header">닉네임 설정</h2>
       <div className="set-nickname">
         <div className="set-nickname-text">
-          <h1>onecoffee.xyz/</h1>
+          <h1>coffee-hanzan.com/</h1>
           <input type="text" placeholder="yourname" onChange={onChange} />
           {error && <span className="nickname-error">{error}</span>}
         </div>

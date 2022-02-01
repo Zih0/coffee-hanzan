@@ -10,16 +10,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 960px;
+  align-items: center;
 
   .wrapper {
+    max-width: 960px;
+
     margin: 2rem 3rem;
   }
 
   .cover-image {
-    width: 100%;
+    width: 100vw;
     height: 10rem;
-    background-color: ${(props) => props.theme.grayColor};
+    background-color: ${({ theme }) => theme.color.gray};
   }
 
   .profile-image-container {

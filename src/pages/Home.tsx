@@ -15,7 +15,7 @@ const Container = styled.main`
     font-size: 3rem;
     font-weight: 300;
 
-    @media ${(props) => props.theme.mobile} {
+    @media ${({ theme }) => theme.size.mobile} {
       font-size: 1.5rem;
       line-height: 3rem;
     }
@@ -29,8 +29,8 @@ const Container = styled.main`
       display: flex;
       align-items: center;
       padding: 1rem 2rem;
-      border-radius: 5px;
-      background-color: ${(props) => props.theme.grayColor};
+      border-radius: 4px;
+      border: 2px solid ${({ theme }) => theme.color.gray};
       flex-wrap: wrap;
       h1 {
         font-size: 2rem;
@@ -40,13 +40,12 @@ const Container = styled.main`
         width: 10rem;
         border: none;
         height: 2rem;
-        background-color: ${(props) => props.theme.grayColor};
         font-size: 2rem;
         margin-bottom: 0.5rem;
       }
     }
 
-    @media ${(props) => props.theme.mobile} {
+    @media ${({ theme }) => theme.size.mobile} {
       flex-direction: column;
 
       .home-start-text {
@@ -72,11 +71,11 @@ function Home() {
         <br />
         한국에서 사용하기 불편하잖아요
         <br />
-        원커피로 후원을 받아보세요
+        커피한잔으로 후원을 받아보세요
       </div>
       <div className="home-start">
         <div className="home-start-text">
-          <h1>onecoffee.xyz/</h1>
+          <h1>coffee-hanzan.com/</h1>
           <input type="text" placeholder="yourname" />
         </div>
         <Link to="/signup">
@@ -84,7 +83,7 @@ function Home() {
             <Button height={5}>시작하기</Button>
           </PC>
           <Mobile>
-            <Button height={3} width={17}>
+            <Button height={3} width={19}>
               시작하기
             </Button>
           </Mobile>
