@@ -9,6 +9,7 @@ import Select from "../components/Select";
 import { useAuth } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
 import { dbService } from "../firebase/fbase";
+import { bankList } from "../utils/constants";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -64,16 +65,6 @@ const StyledInput = styled(Input)`
 const StyledButton = styled(Button)`
   width: 100%;
 `;
-
-const bankList = [
-  "NH농협",
-  "KB국민",
-  "카카오뱅크",
-  "신한",
-  "우리",
-  "IBK기업",
-  "하나",
-];
 
 function Payment() {
   const [selectedBank, setSelectedBank] = useState("NH농협");
