@@ -57,7 +57,7 @@ function LoginModal() {
     event.preventDefault();
     try {
       await authService.signInWithEmailAndPassword(email, password);
-    } catch (error) {
+    } catch (error: any) {
       setError(error.message);
     }
   };
