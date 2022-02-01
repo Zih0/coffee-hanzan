@@ -12,7 +12,6 @@ import { AuthContext } from "./contexts/AuthContext";
 import Setting from "./pages/Setting";
 import Payment from "./pages/Payment";
 import Feed from "./pages/Feed";
-import Footer from "./components/Footer/inedx";
 import Profile from "./pages/Profile";
 
 function AppRouter() {
@@ -37,7 +36,6 @@ function AppRouter() {
           </>
         )}
       </Switch>
-      <Footer />
     </Router>
   );
 }
