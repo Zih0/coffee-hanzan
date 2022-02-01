@@ -25,7 +25,7 @@ const Container = styled.header`
       width: auto;
     }
 
-    @media ${(props) => props.theme.mobile} {
+    @media ${({ theme }) => theme.size.mobile} {
       font-size: 1rem;
 
       svg {
@@ -49,7 +49,7 @@ const Container = styled.header`
       }
     }
 
-    @media ${(props) => props.theme.mobile} {
+    @media ${({ theme }) => theme.size.mobile} {
       gap: 1rem;
       .header-login {
         font-size: 0.8rem;
