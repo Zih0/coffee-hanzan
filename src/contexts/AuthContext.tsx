@@ -14,7 +14,7 @@ interface IUser {
   createdAt: number;
   nickname?: string;
   bank?: string;
-  account?: number;
+  account?: string;
 }
 interface IAuthProvider {
   children: React.ReactNode;

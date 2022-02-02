@@ -9,6 +9,7 @@ import Select from "../components/Select";
 import { AuthContext } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
 import { bankList } from "../utils/constants";
+import { isValidAccountLength, isValidNumber } from "../utils/validation";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -103,19 +104,9 @@ function Payment() {
     }
     setLoading(true);
 
-    API.setAccountData(auth?.uid, selectedBank, parseInt(account, 10));
+    API.setAccountData(auth?.uid, selectedBank, account);
     setLoading(false);
     history.push("/profile");
-  };
-
-  const isValidNumber = (account: string) => {
-    const regNum = /^[0-9]+$/;
-
-    return regNum.test(account.trim());
-  };
-
-  const isValidAccountLength = (account: string) => {
-    return account.trim().length > 10;
   };
 
   return (

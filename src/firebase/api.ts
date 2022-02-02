@@ -43,7 +43,7 @@ const checkDuplicateNickName = async (
 const setAccountData = async (
   uid: string | undefined,
   bank: string,
-  account: number
+  account: string
 ) => {
   const docRef = await getUserDocument(uid);
 
