@@ -50,6 +50,11 @@ const Container = styled.div`
     left: 36%;
     width: 2.5rem;
     height: 2.5rem;
+    transition: 0.3s transform;
+
+    &:hover {
+      transform: scale(1.1);
+    }
 
     path {
       fill: #ffffff;
