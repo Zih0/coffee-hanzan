@@ -31,12 +31,8 @@ const StyledButton = styled.button<IButtonProps>`
   }
 `;
 
-function Button({ size, color, background, children, ...props }: IButtonProps) {
-  return (
-    <StyledButton background={background} color={color} size={size} {...props}>
-      {children}
-    </StyledButton>
-  );
+function Button({ children, ...props }: IButtonProps) {
+  return <StyledButton {...props}>{children}</StyledButton>;
 }
 
 export default Button;
