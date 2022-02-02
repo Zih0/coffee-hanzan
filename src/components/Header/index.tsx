@@ -9,13 +9,18 @@ import { IconLogo } from "../../assets/icons";
 import { useContext } from "react";
 
 const Container = styled.header`
-  height: 2rem;
-  padding: 3rem;
-  font-size: 1.5rem;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 300;
+  justify-content: center;
+
+  .header-wrapper {
+    width: 92%;
+    padding: 3rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   .header-logo {
     display: flex;
@@ -27,10 +32,6 @@ const Container = styled.header`
 
     @media ${({ theme }) => theme.size.mobile} {
       font-size: 1rem;
-
-      svg {
-        height: 1.5rem;
-      }
     }
   }
 
@@ -63,40 +64,44 @@ function Header() {
   const { openModal, ModalPortal } = useModal();
 
   return (
-    <Container>
-      <Link to="/">
-        <div className="header-logo">
-          <IconLogo />
-        </div>
-      </Link>
-      <div className="header-auth">
-        {auth ? (
-          <Link to="profile">
-            <div>mypage</div>
+    <>
+      <Container>
+        <div className="header-wrapper">
+          <Link to="/">
+            <div className="header-logo">
+              <IconLogo />
+            </div>
           </Link>
-        ) : (
-          <>
-            <p className="header-login" onClick={openModal}>
-              로그인
-            </p>
+          <div className="header-auth">
+            {auth ? (
+              <Link to="profile">
+                <div>mypage</div>
+              </Link>
+            ) : (
+              <>
+                <p className="header-login" onClick={openModal}>
+                  로그인
+                </p>
 
-            <Link to="signup">
-              <PC>
-                <Button size="md">회원가입</Button>
-              </PC>
-              <Mobile>
-                <Button size="sm">회원가입</Button>
-              </Mobile>
-            </Link>
-          </>
-        )}
-      </div>
+                <Link to="signup">
+                  <PC>
+                    <Button size="md">회원가입</Button>
+                  </PC>
+                  <Mobile>
+                    <Button size="sm">회원가입</Button>
+                  </Mobile>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </Container>
       {!auth && (
         <ModalPortal>
           <LoginModal />
         </ModalPortal>
       )}
-    </Container>
+    </>
   );
 }
 
