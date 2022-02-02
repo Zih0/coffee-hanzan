@@ -45,12 +45,25 @@ const setAccountData = async (
   bank: string,
   account: number
 ) => {
-  const snapshot = await getUserDocument(uid);
+  const docRef = await getUserDocument(uid);
 
-  snapshot.forEach((doc) => {
+  docRef.forEach((doc) => {
     dbService.collection("users").doc(doc.id).update({
       bank,
       account,
+    });
+  });
+};
+
+const updateUserNickname = async (
+  uid: string | undefined,
+  nickname: string
+) => {
+  const docRef = await getUserDocument(uid);
+
+  docRef.forEach((doc) => {
+    dbService.collection("users").doc(doc.id).update({
+      nickname,
     });
   });
 };
@@ -61,4 +74,5 @@ export const API = {
   setUserData,
   checkDuplicateNickName,
   setAccountData,
+  updateUserNickname,
 };
