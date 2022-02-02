@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import NicknameInput from "../components/Input/NicknameInput";
 import { AuthContext } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
+import { isValidEmpty, isValidEn, isValidLength } from "../utils/validation";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -44,20 +45,6 @@ function Setting() {
   const { auth } = useContext(AuthContext);
   const history = useHistory();
 
-  const isValidEmpty = (nickname: string) => {
-    return nickname.trim() === "";
-  };
-
-  const isValidLength = (nickname: string) => {
-    return nickname.trim().length >= 4;
-  };
-
-  const isValidEn = (nickname: string) => {
-    const regEngNum = /^[a-zA-Z0-9]+$/;
-
-    return regEngNum.test(nickname.trim());
-  };
-
   useEffect(() => {
     API.getUserDocument(auth?.uid)
       .then((exUser) => {
@@ -72,21 +59,21 @@ function Setting() {
     const trimmedNickname = nickname.trim();
 
     if (isValidEmpty(trimmedNickname)) {
-      setError(() => "닉네임을 입력해주세요.");
+      setError("닉네임을 입력해주세요.");
       return;
     } else if (!isValidLength(trimmedNickname)) {
-      setError(() => "닉네임은 최소 4글자 이상 입력해주세요.");
+      setError("닉네임은 최소 4글자 이상 입력해주세요.");
       return;
     } else if (!isValidEn(trimmedNickname)) {
-      setError(() => "영문과 숫자로만 닉네임을 적어주세요");
+      setError("영문과 숫자로만 닉네임을 적어주세요");
       return;
     }
 
     setLoading(true);
 
     try {
-      const validation = await API.checkDuplicateNickName(nickname);
-      if (validation) {
+      const validation = await API.checkDuplicateNickName(auth?.uid, nickname);
+      if (!validation) {
         setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
         return;
@@ -124,8 +111,7 @@ function Setting() {
     <Container>
       <h2 className="setting-header">닉네임 설정</h2>
       <div className="set-nickname">
-        <NicknameInput onChange={onChange} />
-
+        <NicknameInput value={nickname} onChange={onChange} />
         {error && <span className="nickname-error">{error}</span>}
         <Button onClick={onApplyClick}>
           {!loading ? "등록" : <FontAwesomeIcon icon={faSpinner} spin={true} />}

@@ -27,9 +27,13 @@ const setUserData = async (userObj: IUserObj) => {
   await dbService.collection("users").add(userObj);
 };
 
-const checkDuplicateNickName = async (nickname: string) => {
+const checkDuplicateNickName = async (
+  uid: string | undefined,
+  nickname: string
+) => {
   const exNickname = await dbService
     .collection("users")
+    .where("creatorId", "!=", uid)
     .where("nickname", "==", nickname)
     .get();
   if (exNickname.docs.length !== 0) return false;
