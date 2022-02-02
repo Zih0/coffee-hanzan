@@ -10,13 +10,12 @@ const Container = styled.main`
 `;
 
 function Feed() {
-  const { auth } = useContext(AuthContext);
-  const { setUser } = useContext(AuthContext);
+  const { auth, setUser } = useContext(AuthContext);
   const history = useHistory();
 
   useEffect(() => {
     API.getUserData(auth?.uid).then((user) => {
-      if (!user.nickname) history.push("/setting");
+      if (!user?.nickname) history.push("/setting");
       else setUser(user);
     });
   }, []);
