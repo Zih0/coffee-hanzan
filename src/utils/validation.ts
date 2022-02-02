@@ -11,3 +11,13 @@ export const isValidEn = (nickname: string) => {
 
   return regEngNum.test(nickname.trim());
 };
+
+export const isValidNumber = (account: string) => {
+  const regNum = /^[0-9]+$/;
+
+  return regNum.test(account.trim());
+};
+
+export const isValidAccountLength = (account: string) => {
+  return account.trim().length > 10;
+};
