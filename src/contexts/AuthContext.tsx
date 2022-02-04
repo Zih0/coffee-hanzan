@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { authService } from "../firebase/fbase";
+import { API } from "../firebase/api";
 
 interface IAuth {
   user: IUser;
@@ -13,6 +14,7 @@ interface IUser {
   nickname?: string;
   bank?: string;
   account?: string;
+  photoUrl?: string;
 }
 interface IAuthProvider {
   children: React.ReactNode;
@@ -43,9 +45,12 @@ const AuthProvider = ({ children }: IAuthProvider) => {
   );
 
   const checkLogin = () => {
-    authService.onAuthStateChanged((auth) => {
+    authService.onAuthStateChanged(async (auth) => {
       if (auth) {
-        setUser({ creatorId: auth.uid });
+        const fbUser = await API.getUserData(auth.uid);
+        if (fbUser) setUser(fbUser);
+        else setUser({ creatorId: auth.uid });
+
         setIsLoggedIn(true);
       }
       setInit(true);
