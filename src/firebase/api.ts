@@ -1,4 +1,4 @@
-import { dbService } from "./fbase";
+import { dbService, storageService } from "./fbase";
 
 interface IUserObj {
   nickname: string;
@@ -32,7 +32,7 @@ const checkDuplicateNickName = async (
   nickname: string
 ) => {
   nickname = nickname.toLowerCase();
-  
+
   const exNickname = await dbService
     .collection("users")
     .where("creatorId", "!=", uid)
@@ -72,6 +72,24 @@ const updateUserNickname = async (
   });
 };
 
+const uploadUserPhoto = async (file: File) => {
+  const image = storageService
+      .ref()
+      .child(`/avatars/${file.name}_${Date.now()}`);
+  await image.put(file);
+  return await image.getDownloadURL();
+}
+
+const setUserPhoto = async (uid: string, photoUrl: string) => {
+  const docRef = await getUserDocument(uid);
+
+  docRef.forEach((doc) => {
+    dbService.collection("users").doc(doc.id).update({
+      photoUrl,
+    });
+  });
+}
+
 export const API = {
   getUserDocument,
   getUserData,
@@ -79,4 +97,6 @@ export const API = {
   checkDuplicateNickName,
   setAccountData,
   updateUserNickname,
+  uploadUserPhoto,
+  setUserPhoto
 };

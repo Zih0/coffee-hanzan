@@ -1,8 +1,10 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { ImgDefaultProfile } from "../../assets/images";
+import { API } from "../../firebase/api";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Container = styled.div`
   .cover-image {
@@ -28,6 +30,7 @@ const Container = styled.div`
   .profile-image {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     border-radius: 50%;
     background: linear-gradient(
       0deg,
@@ -69,13 +72,22 @@ const Container = styled.div`
 `;
 
 function TopSection() {
-  const [profileImg, setProfileImg] = useState(ImgDefaultProfile);
+  const { user } = useContext(AuthContext);
+  const [profileImg, setProfileImg] = useState(user.photoUrl ?? ImgDefaultProfile);
 
-  const onChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null) {
       const file = e.target.files[0];
+
       setProfileImg(URL.createObjectURL(file));
+      await changeAvatar(file);
     }
+  };
+
+  const changeAvatar = async (file: File) => {
+    const imageUrl = await API.uploadUserPhoto(file);
+    await API.setUserPhoto(user.creatorId, imageUrl);
+    alert("프로필 사진이 변경되었습니다.");
   };
 
   return (
