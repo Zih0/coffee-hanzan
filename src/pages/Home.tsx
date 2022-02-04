@@ -18,7 +18,7 @@ const Container = styled.main`
     font-weight: 300;
 
     @media ${({ theme }) => theme.size.mobile} {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 3rem;
     }
   }

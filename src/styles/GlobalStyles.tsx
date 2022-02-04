@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
         appearance: none;
         
         &:focus {
-          outline: none;
+          outline: 1px solid ${({theme})=> theme.color.black};
         }
       }
 
