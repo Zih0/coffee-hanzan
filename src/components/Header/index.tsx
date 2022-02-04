@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useIsLoggedIn} from "../../contexts/AuthContext";
 import useModal from "../../hooks/useModal";
 import { Mobile, PC } from "../../styles/MediaQuery";
 import Button from "../Button";
 import LoginModal from "../Modal/LoginModal";
 import { IconLogo } from "../../assets/icons";
-import { useContext } from "react";
 
 const Container = styled.header`
   width: 100%;
@@ -60,7 +59,7 @@ const Container = styled.header`
 `;
 
 function Header() {
-  const { auth } = useContext(AuthContext);
+  const isLoggedIn = useIsLoggedIn();
   const { openModal, ModalPortal } = useModal();
 
   return (
@@ -73,7 +72,7 @@ function Header() {
             </div>
           </Link>
           <div className="header-auth">
-            {auth ? (
+            {isLoggedIn ? (
               <Link to="profile">
                 <div>mypage</div>
               </Link>
@@ -96,7 +95,7 @@ function Header() {
           </div>
         </div>
       </Container>
-      {!auth && (
+      {!isLoggedIn && (
         <ModalPortal>
           <LoginModal />
         </ModalPortal>

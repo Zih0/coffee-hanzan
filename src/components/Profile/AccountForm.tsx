@@ -56,7 +56,7 @@ const StyledButton = styled(Button)`
 `;
 
 function AccountForm() {
-  const { user, auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [bank, setBank] = useState(user.bank ?? "");
   const [account, setAccount] = useState(user.account ?? "");
   const [loading, setLoading] = useState(false);
@@ -92,7 +92,7 @@ function AccountForm() {
     }
     setLoading(true);
 
-    await API.setAccountData(auth?.uid, bank, account);
+    await API.setAccountData(user.creatorId, bank, account);
     setLoading(false);
 
     // TODO: 성공 토스트 추가

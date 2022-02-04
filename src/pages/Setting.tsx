@@ -42,11 +42,11 @@ function Setting() {
   const [error, setError] = useState("");
   const [nickname, setNickname] = useState("");
   const [loading, setLoading] = useState(false);
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const history = useHistory();
 
   useEffect(() => {
-    API.getUserDocument(auth?.uid)
+    API.getUserDocument(user.creatorId)
       .then((exUser) => {
         if (exUser.length !== 0) history.push("/");
       })
@@ -72,7 +72,7 @@ function Setting() {
     setLoading(true);
 
     try {
-      const validation = await API.checkDuplicateNickName(auth?.uid, nickname);
+      const validation = await API.checkDuplicateNickName(user.creatorId, nickname);
       if (!validation) {
         setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
@@ -80,7 +80,7 @@ function Setting() {
       }
 
       // 사실상 거치지 않음
-      const exUser = await API.getUserDocument(auth?.uid);
+      const exUser = await API.getUserDocument(user.creatorId);
       if (exUser.length !== 0) {
         setError("이미 닉네임을 등록하였습니다.");
         setLoading(false);
@@ -90,7 +90,7 @@ function Setting() {
       await API.setUserData({
         nickname,
         createdAt: Date.now(),
-        creatorId: auth?.uid,
+        creatorId: user.creatorId,
       });
       setLoading(false);
       history.push("/set-payment");

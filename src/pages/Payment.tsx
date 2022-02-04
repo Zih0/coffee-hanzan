@@ -71,7 +71,7 @@ function Payment() {
   const [account, setAccount] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const history = useHistory();
 
   const onInputBank = (e: React.FormEvent<HTMLSelectElement>) => {
@@ -104,7 +104,7 @@ function Payment() {
     }
     setLoading(true);
 
-    API.setAccountData(auth?.uid, selectedBank, account);
+    API.setAccountData(user.creatorId, selectedBank, account);
     setLoading(false);
     history.push("/profile");
   };

@@ -1,17 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
-import firebase from "firebase/app";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { authService } from "../firebase/fbase";
 
-type User = firebase.User | null;
 interface IAuth {
-  auth: User | undefined;
   user: IUser;
   setUser: React.Dispatch<React.SetStateAction<IUser>>;
+  isLoggedIn: boolean;
 }
 
 interface IUser {
   creatorId: string;
-  createdAt: number;
+  createdAt?: number;
   nickname?: string;
   bank?: string;
   account?: string;
@@ -20,37 +18,54 @@ interface IAuthProvider {
   children: React.ReactNode;
 }
 export const AuthContext = React.createContext<IAuth>({
-  auth: undefined,
   user: {
     creatorId: "",
-    createdAt: 0,
   },
   setUser: () => {},
+  isLoggedIn: false,
 });
 
 const AuthProvider = ({ children }: IAuthProvider) => {
-  // firebase auth data
-  const [auth, setAuth] = useState<User>(null);
-  // firestore user data
   const [user, setUser] = useState<IUser>({
     creatorId: "",
     createdAt: 0,
   });
+  const [init, setInit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const value = useMemo(
     () => ({
-      auth,
       user,
       setUser,
+      isLoggedIn,
     }),
-    [auth, user, setUser]
+    [user, setUser, isLoggedIn]
   );
 
+  const checkLogin = () => {
+    authService.onAuthStateChanged((auth) => {
+      if (auth) {
+        setUser({ creatorId: auth.uid });
+        setIsLoggedIn(true);
+      }
+      setInit(true);
+    });
+  };
+
   useEffect(() => {
-    authService.onAuthStateChanged(setAuth);
+    checkLogin();
   }, []);
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return init ? (
+    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  ) : (
+    <></>
+  );
 };
 
-export { AuthProvider };
+const useIsLoggedIn = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+  return isLoggedIn;
+};
+
+export { AuthProvider, useIsLoggedIn };

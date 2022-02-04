@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import NicknameInput from "../components/Input/NicknameInput";
 import { Mobile, PC } from "../styles/MediaQuery";
+import {useState} from "react";
 
 const Container = styled.main`
   margin-top: 5rem;
@@ -45,6 +46,11 @@ const Container = styled.main`
 `;
 
 function Home() {
+  const [nickname, setNickname] = useState("");
+  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value}} = e;
+    setNickname(value);
+  }
   return (
     <Container>
       <div className="home-text">
@@ -55,7 +61,7 @@ function Home() {
         커피한잔으로 후원을 받아보세요
       </div>
       <div className="home-start">
-        <NicknameInput />
+        <NicknameInput value={nickname} onChange={onChangeNickname} />
         <Link to="/signup">
           <PC>
             <Button height={5}>시작하기</Button>

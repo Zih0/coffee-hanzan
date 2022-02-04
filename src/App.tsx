@@ -6,15 +6,13 @@ import { theme } from "./styles/theme";
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <AuthProvider>
-          <AppRouter />
-          <div id="root-modal"> </div>
-        </AuthProvider>
+        <AppRouter />
+        <div id="root-modal"> </div>
       </ThemeProvider>
-    </>
+    </AuthProvider>
   );
 }
 

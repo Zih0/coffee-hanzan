@@ -11,13 +11,13 @@ const Container = styled.main`
 `;
 
 function Feed() {
-  const { auth, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const history = useHistory();
 
   useEffect(() => {
-    API.getUserData(auth?.uid).then((user) => {
-      if (!user?.nickname) history.push("/setting");
-      else setUser(user);
+    API.getUserData(user.creatorId).then((fbUser) => {
+      if (!fbUser?.nickname) history.push("/setting");
+      else setUser(fbUser);
     });
   }, []);
 

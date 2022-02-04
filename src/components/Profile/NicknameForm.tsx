@@ -54,7 +54,7 @@ const StyledInput = styled(Input)`
 `;
 
 function NicknameForm() {
-  const { user, auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [nickname, setNickname] = useState(user.nickname ?? "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -87,14 +87,14 @@ function NicknameForm() {
     setLoading(true);
 
     try {
-      const validation = await API.checkDuplicateNickName(auth?.uid, nickname);
+      const validation = await API.checkDuplicateNickName(user.creatorId, nickname);
       if (!validation) {
         setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
         return;
       }
 
-      await API.updateUserNickname(auth?.uid, nickname);
+      await API.updateUserNickname(user.creatorId, nickname);
       setLoading(false);
 
       // TODO: 닉네임 변경 성공 토스트
