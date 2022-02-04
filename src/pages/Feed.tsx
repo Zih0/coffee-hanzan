@@ -7,6 +7,7 @@ import { API } from "../firebase/api";
 const Container = styled.main`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 function Feed() {
@@ -20,7 +21,7 @@ function Feed() {
     });
   }, []);
 
-  return <Container>Feed</Container>;
+  return <Container></Container>;
 }
 
 export default Feed;
