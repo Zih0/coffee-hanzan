@@ -10,5 +10,8 @@ declare module "styled-components" {
     size: {
       mobile: string;
     };
+    animation: {
+      fadein: Keyframes;
+    }
   }
 }

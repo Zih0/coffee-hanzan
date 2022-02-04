@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-
+  animation: 0.5s ${({theme}) => theme.animation.fadein};
   transition: all 0.5s;
 
   .modal-background {
@@ -44,7 +44,7 @@ const useModal = () => {
     useEffect(() => {
       setMounted(true);
       if (document) {
-        const modalDom = document.querySelector('#root-modal');
+        const modalDom = document.querySelector("#root-modal");
         ref.current = modalDom;
       }
     }, []);
@@ -52,11 +52,7 @@ const useModal = () => {
     if (ref.current && mounted && modalOpened) {
       return createPortal(
         <Container>
-          <div
-            className="modal-background"
-            role="presentation"
-            onClick={closeModal}
-          ></div>
+          <div className="modal-background" onClick={closeModal}></div>
           {children}
         </Container>,
         ref.current
