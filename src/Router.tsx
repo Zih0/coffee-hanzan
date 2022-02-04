@@ -1,4 +1,4 @@
-import { useContext, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
