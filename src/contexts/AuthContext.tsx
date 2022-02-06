@@ -15,6 +15,7 @@ interface IUser {
   bank?: string;
   account?: string;
   photoUrl?: string;
+  introduction?: string;
 }
 interface IAuthProvider {
   children: React.ReactNode;

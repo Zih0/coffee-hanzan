@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import AccountForm from "./AccountForm";
+import IntroduceForm from "./IntroduceForm";
 import NicknameForm from "./NicknameForm";
 
 const Container = styled.div`
@@ -14,6 +15,7 @@ function ProfileForm() {
   return (
     <Container>
       <NicknameForm />
+      <IntroduceForm />
       <AccountForm />
     </Container>
   );

@@ -25,11 +25,13 @@ const GlobalStyles = createGlobalStyle`
         -moz-appearance: none;
         appearance: none;
         
-        &:focus {
-          outline: 1px solid ${({theme})=> theme.color.black};
-        }
       }
-
+    
+    input, textarea {
+      &:focus {
+        outline: 1px solid ${({ theme }) => theme.color.black};
+      }
+    }
     
 `;
 export default GlobalStyles;

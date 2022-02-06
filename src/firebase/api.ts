@@ -72,13 +72,23 @@ const updateUserNickname = async (
   });
 };
 
+const updateUserIntroduction = async (uid: string, introduction: string) => {
+  const docRef = await getUserDocument(uid);
+
+  docRef.forEach((doc) => {
+    dbService.collection("users").doc(doc.id).update({
+      introduction,
+    });
+  });
+};
+
 const uploadUserPhoto = async (file: File) => {
   const image = storageService
-      .ref()
-      .child(`/avatars/${file.name}_${Date.now()}`);
+    .ref()
+    .child(`/avatars/${file.name}_${Date.now()}`);
   await image.put(file);
   return await image.getDownloadURL();
-}
+};
 
 const setUserPhoto = async (uid: string, photoUrl: string) => {
   const docRef = await getUserDocument(uid);
@@ -88,7 +98,7 @@ const setUserPhoto = async (uid: string, photoUrl: string) => {
       photoUrl,
     });
   });
-}
+};
 
 export const API = {
   getUserDocument,
@@ -97,6 +107,7 @@ export const API = {
   checkDuplicateNickName,
   setAccountData,
   updateUserNickname,
+  updateUserIntroduction,
   uploadUserPhoto,
-  setUserPhoto
+  setUserPhoto,
 };
