@@ -15,6 +15,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  border-radius: 16px;
 `;
 
 const Form = styled.form`
