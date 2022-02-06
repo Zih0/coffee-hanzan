@@ -8,6 +8,14 @@ interface IAuth {
   isLoggedIn: boolean;
 }
 
+interface ISocial {
+  github?: string;
+  twitter?: string;
+  facebook?: string;
+  instagram?: string;
+  blog: string;
+}
+
 interface IUser {
   creatorId: string;
   createdAt?: number;
@@ -16,6 +24,7 @@ interface IUser {
   account?: string;
   photoUrl?: string;
   introduction?: string;
+  socialData?: ISocial;
 }
 interface IAuthProvider {
   children: React.ReactNode;

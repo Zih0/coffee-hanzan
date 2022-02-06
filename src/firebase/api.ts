@@ -82,6 +82,24 @@ const updateUserIntroduction = async (uid: string, introduction: string) => {
   });
 };
 
+interface ISocial {
+  github?: string;
+  twitter?: string;
+  facebook?: string;
+  instagram?: string;
+  blog?: string;
+}
+
+const updateUserSocialData = async (uid: string, socialObj: ISocial) => {
+  const docRef = await getUserDocument(uid);
+
+  docRef.forEach((doc) => {
+    dbService.collection("users").doc(doc.id).update({
+      socialData: socialObj,
+    });
+  });
+};
+
 const uploadUserPhoto = async (file: File) => {
   const image = storageService
     .ref()
@@ -108,6 +126,7 @@ export const API = {
   setAccountData,
   updateUserNickname,
   updateUserIntroduction,
+  updateUserSocialData,
   uploadUserPhoto,
   setUserPhoto,
 };
