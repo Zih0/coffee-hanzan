@@ -22,7 +22,6 @@ const Form = styled.form`
 
   .profile-input-wrapper {
     display: block;
-    margin-bottom: 2rem;
 
     position: relative;
 
@@ -43,6 +42,10 @@ const Form = styled.form`
 
   .profile-form-input {
     width: 100%;
+  }
+
+  .margin-top-2 {
+    margin-top: 2rem;
   }
 `;
 
@@ -115,7 +118,7 @@ function AccountForm() {
         </Select>
       </div>
       <div className="profile-input-wrapper">
-        <p className="profile-form-label">계좌번호</p>
+        <p className="profile-form-label margin-top-2">계좌번호</p>
         <StyledInput
           className="profile-form-input"
           placeholder="계좌번호를 입력해주세요"

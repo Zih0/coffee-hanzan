@@ -20,7 +20,6 @@ const Form = styled.form`
 
   .profile-input-wrapper {
     display: block;
-    margin-bottom: 2rem;
 
     position: relative;
 
@@ -87,7 +86,10 @@ function NicknameForm() {
     setLoading(true);
 
     try {
-      const validation = await API.checkDuplicateNickName(user.creatorId, nickname);
+      const validation = await API.checkDuplicateNickName(
+        user.creatorId,
+        nickname
+      );
       if (!validation) {
         setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
