@@ -5,12 +5,30 @@ import styled from "styled-components";
 import { ImgDefaultProfile } from "../../assets/images";
 import { API } from "../../firebase/api";
 import { AuthContext } from "../../contexts/AuthContext";
+import Button from "../Button";
 
-const Container = styled.div`
-  .cover-image {
-    width: 100vw;
-    height: 10rem;
-    background-color: ${({ theme }) => theme.color.gray};
+const Container = styled.div<{ cover: string }>`
+  width: 100%;
+  margin: 0 auto;
+
+  .cover-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .cover-image {
+      width: 100%;
+      max-width: 1280px;
+      height: 200px;
+      position: relative;
+      background: ${({ cover }) => cover} center;
+      background-color: ${({ theme }) => theme.color.gray};
+    }
+    .cover-add-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
   }
 
   .profile-image-container {
@@ -71,31 +89,62 @@ const Container = styled.div`
   }
 `;
 
+const StyledButton = styled(Button)`
+  opacity: 0.8;
+`;
+
 function TopSection() {
   const { user } = useContext(AuthContext);
-  const [profileImg, setProfileImg] = useState(user.photoUrl ?? ImgDefaultProfile);
+  console.log(user);
+  const [avatarImage, setAvatarImage] = useState(
+    user.avatarImgUrl ?? ImgDefaultProfile
+  );
+  const [coverImage, setCoverImage] = useState(user.coverImgUrl ?? "");
 
-  const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeAvatarImage = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (e.target.files !== null) {
       const file = e.target.files[0];
 
-      setProfileImg(URL.createObjectURL(file));
+      setAvatarImage(URL.createObjectURL(file));
       await changeAvatar(file);
+      alert("프로필 사진이 변경되었습니다.");
+    }
+  };
+
+  const onChangeCoverImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+      setCoverImage(URL.createObjectURL(file));
     }
   };
 
   const changeAvatar = async (file: File) => {
     const imageUrl = await API.uploadUserPhoto(file);
     await API.setUserPhoto(user.creatorId, imageUrl);
-    alert("프로필 사진이 변경되었습니다.");
   };
 
   return (
-    <Container>
-      <div className="cover-image"></div>
+    <Container cover={coverImage}>
+      <div className="cover-wrapper">
+        <div className="cover-image">
+          <div className="cover-add-button">
+            <StyledButton
+              width={1}
+              size={"sm"}
+              background={"#fff"}
+              color={"black"}
+            >
+              <FontAwesomeIcon icon={faCamera} />
+              Cover
+            </StyledButton>
+          </div>
+        </div>
+      </div>
       <div className="profile-image-container">
         <div className="profile-image-wrapper">
-          <img src={profileImg} alt="" className="profile-image" />
+          <img src={avatarImage} alt="" className="profile-image" />
           <label className="profile-image-label" htmlFor="image-uploader">
             <FontAwesomeIcon className="add-pic-camera" icon={faCamera} />
           </label>
@@ -104,7 +153,7 @@ function TopSection() {
             className="profile-image-input"
             type="file"
             accept="image/jpg,impge/png,image/jpeg"
-            onChange={onChangeImg}
+            onChange={onChangeAvatarImage}
           />
         </div>
       </div>

@@ -22,7 +22,8 @@ interface IUser {
   nickname?: string;
   bank?: string;
   account?: string;
-  photoUrl?: string;
+  avatarImgUrl?: string;
+  coverImgUrl?: string;
   introduction?: string;
   socialData?: ISocial;
 }

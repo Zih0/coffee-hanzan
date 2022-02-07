@@ -108,12 +108,12 @@ const uploadUserPhoto = async (file: File) => {
   return await image.getDownloadURL();
 };
 
-const setUserPhoto = async (uid: string, photoUrl: string) => {
+const setUserPhoto = async (uid: string, avatarImgUrl: string) => {
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
     dbService.collection("users").doc(doc.id).update({
-      photoUrl,
+      avatarImgUrl,
     });
   });
 };
