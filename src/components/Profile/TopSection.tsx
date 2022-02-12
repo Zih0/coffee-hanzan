@@ -6,6 +6,7 @@ import { ImgDefaultProfile } from "../../assets/images";
 import { API } from "../../firebase/api";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../Button";
+import SocialLink from "./SocialLink";
 
 const Container = styled.div<{ cover: string }>`
   width: 100%;
@@ -95,7 +96,6 @@ const StyledButton = styled(Button)`
 
 function TopSection() {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [avatarImage, setAvatarImage] = useState(
     user.avatarImgUrl ?? ImgDefaultProfile
   );
@@ -157,6 +157,7 @@ function TopSection() {
           />
         </div>
       </div>
+      <SocialLink />
     </Container>
   );
 }
