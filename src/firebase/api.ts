@@ -103,7 +103,7 @@ const updateUserSocialData = async (uid: string, socialObj: ISocial) => {
 const uploadUserPhoto = async (file: File) => {
   const image = storageService
     .ref()
-    .child(`/avatars/${file.name}_${Date.now()}`);
+    .child(`/avatars/${Date.now()}.${file.name.split(".")[1]}`);
   await image.put(file);
   return await image.getDownloadURL();
 };
