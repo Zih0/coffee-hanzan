@@ -7,6 +7,9 @@ import { API } from "../../firebase/api";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../Button";
 import SocialLink from "./SocialLink";
+import { compressImage } from "../../utils/imageCompression";
+import useModal from "../../hooks/useModal";
+import ImageUploadModal from "../Modal/ImageUploadModal";
 
 const Container = styled.div<{ cover: string }>`
   width: 100%;
@@ -44,6 +47,7 @@ const Container = styled.div<{ cover: string }>`
     height: 9rem;
     border-radius: 50%;
     position: relative;
+    border: 2px solid ${({ theme }) => theme.color.white};
   }
 
   .profile-image {
@@ -51,6 +55,7 @@ const Container = styled.div<{ cover: string }>`
     height: 100%;
     overflow: hidden;
     border-radius: 50%;
+    object-fit: cover;
     background: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.515024),
@@ -88,10 +93,18 @@ const Container = styled.div<{ cover: string }>`
     font-size: 2rem;
     line-height: 1.3;
   }
+
+  .social-link-wrapper {
+    width: 100%;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const StyledButton = styled(Button)`
   opacity: 0.8;
+  gap: 0.2rem;
 `;
 
 function TopSection() {
@@ -100,6 +113,7 @@ function TopSection() {
     user.avatarImgUrl ?? ImgDefaultProfile
   );
   const [coverImage, setCoverImage] = useState(user.coverImgUrl ?? "");
+  const { openModal, closeModal, ModalPortal } = useModal();
 
   const onChangeAvatarImage = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -108,6 +122,8 @@ function TopSection() {
       const file = e.target.files[0];
 
       setAvatarImage(URL.createObjectURL(file));
+      console.log(file);
+      console.log(URL.createObjectURL(file));
       await changeAvatar(file);
       alert("프로필 사진이 변경되었습니다.");
     }
@@ -121,7 +137,8 @@ function TopSection() {
   };
 
   const changeAvatar = async (file: File) => {
-    const imageUrl = await API.uploadUserPhoto(file);
+    const compressedImage = await compressImage(file);
+    const imageUrl = await API.uploadUserPhoto(compressedImage);
     await API.setUserPhoto(user.creatorId, imageUrl);
   };
 
@@ -135,9 +152,10 @@ function TopSection() {
               size={"sm"}
               background={"#fff"}
               color={"black"}
+              onClick={openModal}
             >
               <FontAwesomeIcon icon={faCamera} />
-              Cover
+              cover
             </StyledButton>
           </div>
         </div>
@@ -152,12 +170,19 @@ function TopSection() {
             id="image-uploader"
             className="profile-image-input"
             type="file"
-            accept="image/jpg,impge/png,image/jpeg"
+            accept="image/*"
             onChange={onChangeAvatarImage}
           />
         </div>
       </div>
-      <SocialLink />
+
+      <div className="social-link-wrapper">
+        <SocialLink />
+      </div>
+
+      <ModalPortal>
+        <ImageUploadModal />
+      </ModalPortal>
     </Container>
   );
 }
