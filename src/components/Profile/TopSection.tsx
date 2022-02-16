@@ -1,13 +1,13 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ImgDefaultProfile } from "../../assets/images";
 import { API } from "../../firebase/api";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../Button";
 import SocialLink from "./SocialLink";
-import { compressImage } from "../../utils/imageCompression";
+import { compressImage } from "../../utils/imageUtil";
 import useModal from "../../hooks/useModal";
 import ImageUploadModal from "../Modal/ImageUploadModal";
 
@@ -25,8 +25,9 @@ const Container = styled.div<{ cover: string }>`
       max-width: 1280px;
       height: 200px;
       position: relative;
-      background: ${({ cover }) => cover} center;
+      background-image: ${({ cover }) => `url(${cover})`};
       background-color: ${({ theme }) => theme.color.gray};
+      background-size: cover;
     }
     .cover-add-button {
       position: absolute;
@@ -122,19 +123,14 @@ function TopSection() {
       const file = e.target.files[0];
 
       setAvatarImage(URL.createObjectURL(file));
-      console.log(file);
-      console.log(URL.createObjectURL(file));
       await changeAvatar(file);
       alert("프로필 사진이 변경되었습니다.");
     }
   };
 
-  const onChangeCoverImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files !== null) {
-      const file = e.target.files[0];
-      setCoverImage(URL.createObjectURL(file));
-    }
-  };
+  useEffect(() => {
+    setCoverImage(user.coverImgUrl ?? "");
+  }, [user.coverImgUrl]);
 
   const changeAvatar = async (file: File) => {
     const compressedImage = await compressImage(file);
@@ -181,7 +177,7 @@ function TopSection() {
       </div>
 
       <ModalPortal>
-        <ImageUploadModal />
+        <ImageUploadModal closeModal={closeModal} />
       </ModalPortal>
     </Container>
   );

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Dropzone from "../Dropzone";
+import ImageCrop from "../ImageCrop";
 
 const Container = styled.div`
   width: 600px;
@@ -13,10 +14,24 @@ const Container = styled.div`
   border-radius: 16px;
 `;
 
-function ImageUploadModal() {
+interface IImageUploadModalProps {
+  closeModal: () => void;
+}
+
+function ImageUploadModal({ closeModal }: IImageUploadModalProps) {
+  const [image, setImage] = useState("");
+
+  const onChangeImage = (uploadedImage: File) => {
+    setImage(URL.createObjectURL(uploadedImage));
+  };
+
   return (
     <Container>
-      <Dropzone />
+      {image ? (
+        <ImageCrop image={image} closeModal={closeModal} />
+      ) : (
+        <Dropzone onChangeImage={onChangeImage} />
+      )}
     </Container>
   );
 }

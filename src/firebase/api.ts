@@ -118,6 +118,22 @@ const setUserPhoto = async (uid: string, avatarImgUrl: string) => {
   });
 };
 
+const uploadUserCover = async (blob: Blob) => {
+  const image = storageService.ref().child(`/covers/${Date.now()}.png`);
+  await image.put(blob);
+  return await image.getDownloadURL();
+};
+
+const setUserCover = async (uid: string, coverImgUrl: string) => {
+  const docRef = await getUserDocument(uid);
+
+  docRef.forEach((doc) => {
+    dbService.collection("users").doc(doc.id).update({
+      coverImgUrl,
+    });
+  });
+};
+
 export const API = {
   getUserDocument,
   getUserData,
@@ -129,4 +145,6 @@ export const API = {
   updateUserSocialData,
   uploadUserPhoto,
   setUserPhoto,
+  uploadUserCover,
+  setUserCover,
 };
