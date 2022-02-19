@@ -119,7 +119,7 @@ const setUserPhoto = async (uid: string, avatarImgUrl: string) => {
 };
 
 const uploadUserCover = async (blob: Blob) => {
-  const image = storageService.ref().child(`/covers/${Date.now()}.png`);
+  const image = storageService.ref().child(`/covers/${Date.now()}.jpeg`);
   await image.put(blob);
   return await image.getDownloadURL();
 };
