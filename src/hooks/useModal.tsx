@@ -11,7 +11,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  animation: 0.5s ${({theme}) => theme.animation.fadein};
+  animation: 0.5s ${({ theme }) => theme.animation.fadein};
   transition: all 0.5s;
 
   .modal-background {
