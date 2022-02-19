@@ -20,8 +20,8 @@ interface IImageCropProps {
 function ImageCrop({ image, closeModal }: IImageCropProps) {
   const { user, setUser } = useContext(AuthContext);
 
-  const canvasRef = useRef<any>(null);
-  const imgRef = useRef<any>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
   const [crop, setCrop] = useState<Crop>({
     aspect: 1280 / 300,
     x: 0,
@@ -39,23 +39,37 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     unit: "px",
   });
 
-  const onChangeCoverImage = () => {
-    canvasRef.current.toBlob(async (blob: Blob) => {
-      const url = await saveImage(blob);
-      const updatedUserData = Object.assign(
-        { ...user },
-        {
-          coverImgUrl: url,
-        }
-      );
-      await API.setUserCover(user.creatorId, url);
-      setUser(updatedUserData);
-      closeModal();
-      alert("커버 사진이 변경되었습니다.");
-    });
+  const uploadCoverImage = async (blob: Blob | null) => {
+    if (!blob) return;
+
+    const url = await saveImage(blob);
+    const updatedUserData = Object.assign(
+      { ...user },
+      {
+        coverImgUrl: url,
+      }
+    );
+    await API.setUserCover(user.creatorId, url);
+    setUser(updatedUserData);
+    closeModal();
+    alert("커버 사진이 변경되었습니다.");
   };
 
-  const saveImage = async (blob: Blob) => {
+  const onChangeCoverImage = () => {
+    createCanvas();
+
+    if (!canvasRef.current) return;
+
+    canvasRef.current.toBlob(
+      (blob: Blob | null) => uploadCoverImage(blob),
+      "image/jpeg",
+      0.95
+    );
+  };
+
+  const saveImage = async (blob: Blob | null) => {
+    if (!blob) return;
+
     const url = await API.uploadUserCover(blob);
     return url;
   };
@@ -64,28 +78,27 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     imgRef.current = img;
   }, []);
 
-  useEffect(() => {
+  const createCanvas = () => {
     if (!completedCrop || !canvasRef.current || !imgRef.current) {
       return;
     }
+    const ctx = canvasRef.current.getContext("2d");
+    if (!ctx) return;
 
-    const image = imgRef.current;
-    const canvas = canvasRef.current;
     const crop = completedCrop;
 
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    const ctx = canvas?.getContext("2d");
+    const scaleX = imgRef.current.naturalWidth / imgRef.current.width;
+    const scaleY = imgRef.current.naturalHeight / imgRef.current.height;
     const pixelRatio = window.devicePixelRatio;
 
-    canvas.width = crop.width * pixelRatio * scaleX;
-    canvas.height = crop?.height * pixelRatio * scaleY;
+    canvasRef.current.width = crop.width * pixelRatio * scaleX;
+    canvasRef.current.height = crop?.height * pixelRatio * scaleY;
 
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     ctx.imageSmoothingQuality = "high";
 
     ctx.drawImage(
-      image,
+      imgRef.current,
       crop.x * scaleX,
       crop.y * scaleY,
       crop.width * scaleX,
@@ -95,7 +108,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
       crop.width * scaleX,
       crop.height * scaleY
     );
-  }, [completedCrop]);
+  };
 
   return (
     <>
