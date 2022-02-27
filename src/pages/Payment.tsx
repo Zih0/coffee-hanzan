@@ -1,6 +1,6 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
@@ -108,6 +108,10 @@ function Payment() {
     setLoading(false);
     history.push("/profile");
   };
+
+  useLayoutEffect(() => {
+    if (user.account) history.push("/");
+  }, []);
 
   return (
     <Container>
