@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { AuthContext } from "../../contexts/AuthContext";
 import { API } from "../../firebase/api";
 import { bankList } from "../../utils/constants";
+import { decrypt, encrypt } from "../../utils/crypto";
 import { isValidAccountLength, isValidNumber } from "../../utils/validation";
 import Button from "../Button";
 import Input from "../Input";
@@ -60,8 +61,8 @@ const StyledButton = styled(Button)`
 
 function AccountForm() {
   const { user } = useContext(AuthContext);
-  const [bank, setBank] = useState(user.bank ?? "");
-  const [account, setAccount] = useState(user.account ?? "");
+  const [bank, setBank] = useState(decrypt(user.bank as string) ?? "");
+  const [account, setAccount] = useState(decrypt(user.account as string) ?? "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -95,7 +96,10 @@ function AccountForm() {
     }
     setLoading(true);
 
-    await API.setAccountData(user.creatorId, bank, account);
+    const encryptedBank = encrypt(bank);
+    const encryptedAccount = encrypt(account);
+
+    await API.setAccountData(user.creatorId, encryptedBank, encryptedAccount);
     setLoading(false);
 
     // TODO: 성공 토스트 추가

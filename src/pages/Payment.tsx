@@ -10,6 +10,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { API } from "../firebase/api";
 import { bankList } from "../utils/constants";
 import { isValidAccountLength, isValidNumber } from "../utils/validation";
+import { encrypt } from "../utils/crypto";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -104,7 +105,10 @@ function Payment() {
     }
     setLoading(true);
 
-    API.setAccountData(user.creatorId, selectedBank, account);
+    const encryptedBank = encrypt(selectedBank);
+    const encryptedAccount = encrypt(account);
+
+    API.setAccountData(user.creatorId, encryptedBank, encryptedAccount);
     setLoading(false);
     history.push("/profile");
   };
