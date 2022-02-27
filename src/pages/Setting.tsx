@@ -1,6 +1,6 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
@@ -45,14 +45,8 @@ function Setting() {
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
-  useEffect(() => {
-    API.getUserDocument(user.creatorId)
-      .then((exUser) => {
-        if (exUser.length !== 0) history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  useLayoutEffect(() => {
+    if (user.nickname) history.push("/");
   }, []);
 
   const onApplyClick = async () => {
@@ -72,7 +66,10 @@ function Setting() {
     setLoading(true);
 
     try {
-      const validation = await API.checkDuplicateNickName(user.creatorId, nickname);
+      const validation = await API.checkDuplicateNickName(
+        user.creatorId,
+        nickname
+      );
       if (!validation) {
         setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
