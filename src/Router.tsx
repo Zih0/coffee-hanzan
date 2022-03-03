@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { useIsLoggedIn } from "./contexts/AuthContext";
 import Header from "./components/Header";
+import BottomSheet from "./components/Modal/BottomSheet";
 const SignUp = lazy(() => import("./pages/SignUp"));
 const Home = lazy(() => import("./pages/Home"));
 const Setting = lazy(() => import("./pages/Setting"));
@@ -24,10 +25,11 @@ function AppRouter() {
         <Switch>
           {isLoggedIn ? (
             <>
-              <Route exact path="/" component={Feed} />
+              <Route path="/" component={Feed} />
               <Route exact path="/setting" component={Setting} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/set-payment" component={Payment} />
+              <Route path="/:nickname" component={Feed} />
             </>
           ) : (
             <>
@@ -37,6 +39,7 @@ function AppRouter() {
             </>
           )}
         </Switch>
+        <BottomSheet />
       </Router>
     </Suspense>
   );

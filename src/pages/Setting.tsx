@@ -1,6 +1,6 @@
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useLayoutEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";

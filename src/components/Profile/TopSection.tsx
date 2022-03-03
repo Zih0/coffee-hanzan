@@ -1,6 +1,6 @@
+import React, { useContext, useEffect, useState } from "react";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ImgDefaultProfile } from "../../assets/images";
 import { API } from "../../firebase/api";

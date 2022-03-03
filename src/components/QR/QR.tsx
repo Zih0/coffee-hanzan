@@ -10,7 +10,9 @@ interface IQR {
 function QR({ bank, account, amount }: IQR) {
   return (
     <QRCode
-      value={`${process.env.REACT_APP_A}${bank}${process.env.REACT_APP_B}${account}${process.env.REACT_APP_C}${amount}`}
+      value={`${import.meta.env.VITE_A}${bank}${
+        import.meta.env.VITE_B
+      }${account}${import.meta.env.VITE_C}${amount}`}
       size={128}
       bgColor={"#ffffff"}
       fgColor={"#000000"}

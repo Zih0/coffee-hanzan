@@ -1,3 +1,4 @@
+import React from "react";
 import GlobalStyles from "./styles/GlobalStyles";
 import AppRouter from "./Router";
 import { AuthProvider } from "./contexts/AuthContext";
