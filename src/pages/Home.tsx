@@ -1,9 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
 import NicknameInput from "../components/Input/NicknameInput";
 import { Mobile, PC } from "../styles/MediaQuery";
-import {useState} from "react";
+import { useState } from "react";
 
 const Container = styled.main`
   margin-top: 5rem;
@@ -48,9 +49,11 @@ const Container = styled.main`
 function Home() {
   const [nickname, setNickname] = useState("");
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value}} = e;
+    const {
+      target: { value },
+    } = e;
     setNickname(value);
-  }
+  };
   return (
     <Container>
       <div className="home-text">

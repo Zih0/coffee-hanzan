@@ -1,6 +1,6 @@
+import React, { useContext, useState } from "react";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../../contexts/AuthContext";
 import { API } from "../../firebase/api";

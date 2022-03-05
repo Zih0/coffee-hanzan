@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import AuthForm from "../components/Auth/AuthForm";
 import AuthSNS from "../components/Auth/AuthSNS";

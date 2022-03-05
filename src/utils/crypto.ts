@@ -5,7 +5,7 @@ export const encrypt = (value: string | object) => {
 
   const encrypted = CryptoJS.AES.encrypt(
     value,
-    process.env.REACT_APP_CRYPTO_KEY + ""
+    import.meta.env.VITE_CRYPTO_KEY + ""
   ).toString();
 
   return encrypted;
@@ -16,7 +16,7 @@ export const decrypt = (encrypted: string) => {
 
   const bytes = CryptoJS.AES.decrypt(
     encrypted,
-    process.env.REACT_APP_CRYPTO_KEY + ""
+    import.meta.env.VITE_CRYPTO_KEY + ""
   );
   const decrypted = bytes.toString(CryptoJS.enc.Utf8);
 

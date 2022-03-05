@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import ProfileForm from "../components/Profile/ProfileForm";
 import TopSection from "../components/Profile/TopSection";
