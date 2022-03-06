@@ -1,3 +1,4 @@
+import { IUser } from "../utils/types";
 import { dbService, storageService } from "./fbase";
 
 interface IUserObj {
@@ -16,7 +17,7 @@ const getUserDocument = async (uid: string | undefined) => {
 
 const getUserData = async (uid: string | undefined) => {
   const docs = await getUserDocument(uid);
-  let user: any;
+  let user;
   docs.forEach((doc) => {
     user = doc.data();
   });
@@ -134,6 +135,23 @@ const setUserCover = async (uid: string, coverImgUrl: string) => {
   });
 };
 
+const getFeedDocument = async (nickname: string) => {
+  const user = await dbService
+    .collection("users")
+    .where("nickname", "==", nickname)
+    .get();
+  return user.docs;
+};
+
+const getFeedData = async (nickname: string) => {
+  const docs = await getFeedDocument(nickname);
+  let user;
+  docs.forEach((doc) => {
+    user = doc.data();
+  });
+  return user;
+};
+
 export const API = {
   getUserDocument,
   getUserData,
@@ -147,4 +165,5 @@ export const API = {
   setUserPhoto,
   uploadUserCover,
   setUserCover,
+  getFeedData,
 };
