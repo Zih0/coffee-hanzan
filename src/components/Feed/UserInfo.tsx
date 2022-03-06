@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
 import { ISocial } from "../../utils/types";
+import SocialIcon from "./SocialIcon";
 
 const Container = styled.div`
     width: 100%;
@@ -62,53 +63,38 @@ function UserInfo({ nickname, introduction, socialData }: IUserInfoProps) {
         <p className="info-introduction">{introduction}</p>
         <div className="info-social">
           {socialData?.github && (
-            <a
+            <SocialIcon
               href={`https://github.com/${socialData?.github}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
+              icon={faGithub}
+            />
           )}
           {socialData?.facebook && (
-            <a
+            <SocialIcon
               href={`https://facebook.com/${socialData?.facebook}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faFacebook} />
-            </a>
+              icon={faFacebook}
+            />
           )}
           {socialData?.twitter && (
-            <a
+            <SocialIcon
               href={`https://twitter.com/${socialData?.twitter}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faTwitter} />
-            </a>
+              icon={faTwitter}
+            />
           )}
           {socialData?.instagram && (
-            <a
+            <SocialIcon
               href={`https://instagram.com/${socialData?.instagram}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faInstagram} />
-            </a>
+              icon={faInstagram}
+            />
           )}
           {socialData?.blog && (
-            <a
+            <SocialIcon
               href={
                 socialData?.blog.includes("http")
                   ? socialData?.blog
                   : `https://${socialData?.blog}`
               }
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faLink} />
-            </a>
+              icon={faLink}
+            />
           )}
         </div>
       </div>
