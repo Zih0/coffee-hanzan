@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Avatar from "../components/Feed/Avatar";
 import Cover from "../components/Feed/Cover";
 import { API } from "../firebase/api";
 import { IUser } from "../utils/types";
@@ -44,6 +45,7 @@ function Feed() {
   return (
     <Container>
       <Cover coverImgUrl={feedData?.coverImgUrl} />
+      <Avatar avatarImgUrl={feedData?.avatarImgUrl} />
     </Container>
   );
 }
