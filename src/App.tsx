@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyles from "./styles/GlobalStyles";
-import AppRouter from "./Router";
+import AppRouter from "./routes/Router";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
