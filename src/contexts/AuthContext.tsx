@@ -13,7 +13,7 @@ interface ISocial {
   twitter?: string;
   facebook?: string;
   instagram?: string;
-  blog: string;
+  blog?: string;
 }
 
 interface IUser {

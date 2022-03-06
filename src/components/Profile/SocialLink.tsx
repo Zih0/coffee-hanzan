@@ -3,7 +3,7 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import useModal from "../../hooks/useModal";
-import Button from "../Button";
+import Button from "../common/Button";
 import SocialLinkModal from "../Modal/SocialLinkModal";
 
 const StyledButton = styled(Button)`

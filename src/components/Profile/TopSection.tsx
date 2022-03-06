@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { ImgDefaultProfile } from "../../assets/images";
 import { API } from "../../firebase/api";
 import { AuthContext } from "../../contexts/AuthContext";
-import Button from "../Button";
+import Button from "../common/Button";
 import SocialLink from "./SocialLink";
 import { compressImage } from "../../utils/imageUtil";
 import useModal from "../../hooks/useModal";

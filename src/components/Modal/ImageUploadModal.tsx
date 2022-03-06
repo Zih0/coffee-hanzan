@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Dropzone from "../Dropzone";
-import ImageCrop from "../ImageCrop";
+import Dropzone from "../common/Dropzone";
+import ImageCrop from "../common/ImageCrop";
 
 const Container = styled.div`
   width: 600px;

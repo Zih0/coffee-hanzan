@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { authService } from "../../firebase/fbase";
 import useModal from "../../hooks/useModal";
-import Input from "../Input";
+import Input from "../common/Input";
 import LoginModal from "../Modal/LoginModal";
 
 const Container = styled.main`

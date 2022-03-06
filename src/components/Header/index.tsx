@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useIsLoggedIn } from "../../contexts/AuthContext";
 import useModal from "../../hooks/useModal";
 import { Mobile, PC } from "../../styles/MediaQuery";
-import Button from "../Button";
+import Button from "../common/Button";
 import LoginModal from "../Modal/LoginModal";
 import { IconLogo } from "../../assets/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

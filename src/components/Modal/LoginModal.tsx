@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { authService } from "../../firebase/fbase";
 import AuthSNS from "../Auth/AuthSNS";
-import Button from "../Button";
+import Button from "../common/Button";
 
-import Input from "../Input";
+import Input from "../common/Input";
 
 const Container = styled.div`
   width: 25rem;

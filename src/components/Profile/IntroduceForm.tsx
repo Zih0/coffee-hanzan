@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { AuthContext } from "../../contexts/AuthContext";
 import { API } from "../../firebase/api";
-import Button from "../Button";
+import Button from "../common/Button";
 
 const Form = styled.form`
   width: 50%;

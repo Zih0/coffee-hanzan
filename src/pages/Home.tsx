@@ -1,10 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../components/Button";
-import NicknameInput from "../components/Input/NicknameInput";
+import Button from "../components/common/Button";
+import NicknameInput from "../components/common/Input/NicknameInput";
 import { Mobile, PC } from "../styles/MediaQuery";
 import { useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Container = styled.main`
   margin-top: 5rem;
@@ -48,12 +49,22 @@ const Container = styled.main`
 
 function Home() {
   const [nickname, setNickname] = useState("");
+  const { user, isLoggedIn } = useContext(AuthContext);
+  const history = useHistory();
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setNickname(value);
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (!user.nickname) history.push("/setting");
+      else history.push(`/${user.nickname}`);
+    }
+  }, [isLoggedIn, history, user.nickname]);
+
   return (
     <Container>
       <div className="home-text">

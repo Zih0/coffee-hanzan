@@ -7,9 +7,9 @@ import { API } from "../../firebase/api";
 import { bankList } from "../../utils/constants";
 import { decrypt, encrypt } from "../../utils/crypto";
 import { isValidAccountLength, isValidNumber } from "../../utils/validation";
-import Button from "../Button";
-import Input from "../Input";
-import Select from "../Select";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import Select from "../common/Select";
 
 const Form = styled.form`
   width: 50%;

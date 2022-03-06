@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Input from "../Input";
-import Button from "../Button";
+import Input from "../common/Input";
+import Button from "../common/Button";
 import { theme } from "../../styles/theme";
 import { AuthContext } from "../../contexts/AuthContext";
 import { API } from "../../firebase/api";

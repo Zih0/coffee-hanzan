@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../../contexts/AuthContext";
-import Input from "../Input";
+import Input from "../common/Input";
 import { isValidEmpty, isValidEn, isValidLength } from "../../utils/validation";
 import { API } from "../../firebase/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import Button from "../Button";
+import Button from "../common/Button";
 
 const Form = styled.form`
   width: 50%;

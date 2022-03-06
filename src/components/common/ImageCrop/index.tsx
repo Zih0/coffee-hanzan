@@ -8,8 +8,8 @@ import React, {
 import ReactCrop, { Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import styled from "styled-components";
-import { AuthContext } from "../../contexts/AuthContext";
-import { API } from "../../firebase/api";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { API } from "../../../firebase/api";
 import Button from "../Button";
 
 interface IImageCropProps {
