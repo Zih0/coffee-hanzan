@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useIsLoggedIn} from "../../contexts/AuthContext";
+import { useIsLoggedIn } from "../../contexts/AuthContext";
 import useModal from "../../hooks/useModal";
 import { Mobile, PC } from "../../styles/MediaQuery";
 import Button from "../Button";
 import LoginModal from "../Modal/LoginModal";
 import { IconLogo } from "../../assets/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.header`
   width: 100%;
@@ -74,7 +76,12 @@ function Header() {
           <div className="header-auth">
             {isLoggedIn ? (
               <Link to="profile">
-                <div>mypage</div>
+                <PC>
+                  <span>mypage</span>
+                </PC>
+                <Mobile>
+                  <FontAwesomeIcon icon={faUser} />
+                </Mobile>
               </Link>
             ) : (
               <>
