@@ -28,7 +28,7 @@ const Container = styled.div`
     
     .info-introduction {
       margin-top: 12px;
-      font-size: 16px;
+      line-height: 1.3;
       white-space: pre-line;
     }
 
