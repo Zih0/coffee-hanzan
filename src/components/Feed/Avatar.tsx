@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { ImgDefaultProfile } from "../../assets/images";
 
 const Container = styled.div`
     width: 100%;
@@ -26,7 +27,6 @@ const Container = styled.div`
       rgba(0, 0, 0, 0.515024),
       rgba(0, 0, 0, 0.515024)
     );
-    
 `;
 
 interface IAvatarProps {
@@ -38,7 +38,11 @@ function Avatar({ avatarImgUrl }: IAvatarProps) {
     <Container>
       <div className="profile-image-container">
         <div className="profile-image-wrapper">
-          <img src={avatarImgUrl} alt="avatar" className="profile-image" />
+          <img
+            src={avatarImgUrl ?? ImgDefaultProfile}
+            alt="avatar"
+            className="profile-image"
+          />
         </div>
       </div>
     </Container>
