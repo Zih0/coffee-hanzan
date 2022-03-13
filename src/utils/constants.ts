@@ -7,3 +7,5 @@ export const bankList = [
   "IBK기업",
   "하나",
 ];
+
+export const COFFEE_PRICE = 3000;

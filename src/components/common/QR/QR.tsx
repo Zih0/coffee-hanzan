@@ -1,5 +1,6 @@
 import QRCode from "qrcode.react";
 import { IconLogoCenter } from "../../../assets/icons";
+import { decrypt } from "../../../utils/crypto";
 
 interface IQR {
   bank: string;
@@ -8,11 +9,14 @@ interface IQR {
 }
 
 function QR({ bank, account, amount }: IQR) {
+  const decryptedBank = decrypt(bank);
+  const decryptedAccount = decrypt(account);
+
   return (
     <QRCode
-      value={`${import.meta.env.VITE_A}${bank}${
+      value={`${import.meta.env.VITE_A}${decryptedBank}${
         import.meta.env.VITE_B
-      }${account}${import.meta.env.VITE_C}${amount}`}
+      }${decryptedAccount}${import.meta.env.VITE_C}${amount}`}
       size={128}
       bgColor={"#ffffff"}
       fgColor={"#000000"}

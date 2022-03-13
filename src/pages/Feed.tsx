@@ -23,7 +23,7 @@ const Container = styled.main`
     gap: 24px;
     justify-content: space-between;
 
-    div {
+    > div {
       flex: 1;
     }
 

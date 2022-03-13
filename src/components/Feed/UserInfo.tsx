@@ -4,9 +4,7 @@ import {
   faInstagram,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEdit, faLink } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { ISocial } from "../../utils/types";
 import SocialIcon from "./SocialIcon";
@@ -49,6 +47,7 @@ const Container = styled.div`
     }
 }
 `;
+
 interface IUserInfoProps {
   nickname: string | undefined;
   introduction: string | undefined;
