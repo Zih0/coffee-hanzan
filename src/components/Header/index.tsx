@@ -16,11 +16,15 @@ const Container = styled.header`
 
   .header-wrapper {
     width: 92%;
-    padding: 3rem;
+    padding: 2rem;
     font-size: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media ${({ theme }) => theme.size.mobile} {
+      padding: 1rem;
+    }
   }
 
   .header-logo {
@@ -33,6 +37,10 @@ const Container = styled.header`
 
     @media ${({ theme }) => theme.size.mobile} {
       font-size: 1rem;
+
+      svg {
+        height: 2rem;
+      }
     }
   }
 
@@ -76,12 +84,7 @@ function Header() {
           <div className="header-auth">
             {isLoggedIn ? (
               <Link to="profile">
-                <PC>
-                  <span>mypage</span>
-                </PC>
-                <Mobile>
-                  <FontAwesomeIcon icon={faUser} />
-                </Mobile>
+                <FontAwesomeIcon icon={faUser} />
               </Link>
             ) : (
               <>

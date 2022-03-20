@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { AuthContext } from '../../contexts/AuthContext';
-import Input from '../common/Input';
-import { isValidEmpty, isValidEn, isValidLength } from '../../utils/validation';
-import { API } from '../../firebase/api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import Button from '../common/Button';
-import { toast } from 'react-toastify';
+import React, { useContext, useState } from "react";
+import styled from "styled-components";
+import { AuthContext } from "../../contexts/AuthContext";
+import Input from "../common/Input";
+import { isValidEmpty, isValidEn, isValidLength } from "../../utils/validation";
+import { API } from "../../firebase/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Button from "../common/Button";
+import { toast } from "react-toastify";
 
 const Form = styled.form`
   width: 50%;
@@ -55,16 +55,16 @@ const StyledInput = styled(Input)`
 
 function NicknameForm() {
   const { user, setUser } = useContext(AuthContext);
-  const [nickname, setNickname] = useState(user.nickname ?? '');
+  const [nickname, setNickname] = useState(user.nickname ?? "");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
 
-    setError('');
+    setError("");
     setNickname(value);
   };
 
@@ -74,13 +74,13 @@ function NicknameForm() {
     const trimmedNickname = nickname.trim();
 
     if (isValidEmpty(trimmedNickname)) {
-      setError('닉네임을 입력해주세요.');
+      setError("닉네임을 입력해주세요.");
       return;
     } else if (!isValidLength(trimmedNickname)) {
-      setError('닉네임은 최소 4글자 이상 입력해주세요.');
+      setError("닉네임은 최소 4글자 이상 입력해주세요.");
       return;
     } else if (!isValidEn(trimmedNickname)) {
-      setError('영문과 숫자로만 닉네임을 적어주세요');
+      setError("영문과 숫자로만 닉네임을 적어주세요");
       return;
     }
 
@@ -92,7 +92,7 @@ function NicknameForm() {
         nickname
       );
       if (!validation) {
-        setError('이미 사용중인 닉네임입니다.');
+        setError("이미 사용중인 닉네임입니다.");
         setLoading(false);
         return;
       }
@@ -102,7 +102,7 @@ function NicknameForm() {
 
       const updatedUserData = Object.assign({ ...user }, { nickname });
       setUser(updatedUserData);
-      toast.success('성공적으로 수정되었습니다.');
+      toast.success("성공적으로 수정되었습니다.");
     } catch (error: any) {
       console.log(error);
       setLoading(false);
@@ -111,24 +111,24 @@ function NicknameForm() {
 
   return (
     <Form onSubmit={onSubmitNickname}>
-      <div className='profile-input-wrapper'>
-        <p className='profile-form-label'>닉네임</p>
-        <div className='profile-nickname-wrapper'>
+      <div className="profile-input-wrapper">
+        <p className="profile-form-label">닉네임</p>
+        <div className="profile-nickname-wrapper">
           <StyledInput
-            className='profile-form-input'
-            placeholder='닉네임을 입력해주세요.'
+            className="profile-form-input"
+            placeholder="닉네임을 입력해주세요."
             value={nickname}
             onChange={onChangeNickname}
           />
-          <Button size='sm'>
+          <Button size="sm">
             {!loading ? (
-              '수정'
+              "수정"
             ) : (
               <FontAwesomeIcon icon={faSpinner} spin={true} />
             )}
           </Button>
         </div>
-        {error && <span className='nickname-error'>{error}</span>}
+        {error && <span className="nickname-error">{error}</span>}
       </div>
     </Form>
   );

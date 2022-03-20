@@ -4,14 +4,14 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import ReactCrop, { Crop } from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
-import { toast } from 'react-toastify';
-import styled from 'styled-components';
-import { AuthContext } from '../../../contexts/AuthContext';
-import { API } from '../../../firebase/api';
-import Button from '../Button';
+} from "react";
+import ReactCrop, { Crop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import { toast } from "react-toastify";
+import styled from "styled-components";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { API } from "../../../firebase/api";
+import Button from "../Button";
 
 interface IImageCropProps {
   image: string;
@@ -29,7 +29,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     y: 0,
     width: 504,
     height: 118,
-    unit: 'px',
+    unit: "px",
   });
   const [completedCrop, setCompletedCrop] = useState<Crop>({
     aspect: 1280 / 300,
@@ -37,7 +37,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     y: 0,
     width: 504,
     height: 118,
-    unit: 'px',
+    unit: "px",
   });
 
   const uploadCoverImage = async (blob: Blob | null) => {
@@ -53,7 +53,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     await API.setUserCover(user.creatorId, url);
     setUser(updatedUserData);
     closeModal();
-    toast.success('커버 사진이 변경되었습니다.');
+    toast.success("커버 사진이 변경되었습니다.");
   };
 
   const onChangeCoverImage = () => {
@@ -63,7 +63,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
 
     canvasRef.current.toBlob(
       (blob: Blob | null) => uploadCoverImage(blob),
-      'image/jpeg',
+      "image/jpeg",
       0.95
     );
   };
@@ -83,7 +83,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     if (!completedCrop || !canvasRef.current || !imgRef.current) {
       return;
     }
-    const ctx = canvasRef.current.getContext('2d');
+    const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
 
     const crop = completedCrop;
@@ -96,7 +96,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     canvasRef.current.height = crop?.height * pixelRatio * scaleY;
 
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = 'high';
+    ctx.imageSmoothingQuality = "high";
 
     ctx.drawImage(
       imgRef.current,

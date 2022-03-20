@@ -12,6 +12,6 @@ declare module "styled-components" {
     };
     animation: {
       fadein: Keyframes;
-    }
+    };
   }
 }

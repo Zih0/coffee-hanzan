@@ -17,11 +17,11 @@ const animation = {
     100% {
       opacity: 1;
     }
-  `
+  `,
 };
 
 export const theme: DefaultTheme = {
   color,
   size,
-  animation
+  animation,
 };

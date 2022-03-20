@@ -10,55 +10,47 @@ import { ISocial } from "../../utils/types";
 import SocialIcon from "./SocialIcon";
 
 const Container = styled.div`
+  width: 100%;
+  padding: 12px;
+
+  .info-wrapper {
     width: 100%;
-    padding: 12px;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 1px 0 4px rgb(0 2 4 / 6%), 0 7px 18px rgb(1 1 1 / 5%);
+  }
 
-    .info-wrapper {
-        width: 100%;
-        border-radius: 14px;
-        padding: 16px;
-        box-shadow: 1px 0 4px rgb(0 2 4 / 6%), 0 7px 18px rgb(1 1 1 / 5%);
-    }
+  .info-introduction {
+    margin-top: 12px;
+    line-height: 1.3;
+    white-space: pre-line;
+  }
 
-    .info-nickname {
-      font-size: 20px;
-      font-weight: 700;
-    }
-    
-    .info-introduction {
-      margin-top: 12px;
-      line-height: 1.3;
-      white-space: pre-line;
-    }
+  .info-social {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
 
-    .info-social {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
+    svg {
+      width: 24px;
+      height: 24px;
 
-      svg {
-        width: 24px;
-        height: 24px;
-
-        &:hover {
-          color: ${({ theme }) => theme.color.gray};
-        }
+      &:hover {
+        color: ${({ theme }) => theme.color.gray};
       }
     }
-}
+  }
 `;
 
 interface IUserInfoProps {
-  nickname: string | undefined;
   introduction: string | undefined;
   socialData: ISocial | undefined;
 }
 
-function UserInfo({ nickname, introduction, socialData }: IUserInfoProps) {
+function UserInfo({ introduction, socialData }: IUserInfoProps) {
   return (
     <Container>
       <div className="info-wrapper">
-        <p className="info-nickname">{nickname}</p>
         <p className="info-introduction">{introduction}</p>
         <div className="info-social">
           {socialData?.github && (

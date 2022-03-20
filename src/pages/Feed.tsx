@@ -5,6 +5,7 @@ import Avatar from "../components/Feed/Avatar";
 import Cover from "../components/Feed/Cover";
 import Support from "../components/Feed/Support";
 import UserInfo from "../components/Feed/UserInfo";
+import Footer from "../components/Footer";
 import { API } from "../firebase/api";
 import { IUser } from "../utils/types";
 
@@ -13,7 +14,7 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 90%;
+  height: 100%;
 
   .main-wrapper {
     width: 100%;
@@ -22,7 +23,7 @@ const Container = styled.main`
     display: flex;
     gap: 24px;
     justify-content: space-between;
-
+    margin-bottom: 100px;
     > div {
       flex: 1;
     }
@@ -67,12 +68,12 @@ function Feed() {
       <Avatar avatarImgUrl={feedData?.avatarImgUrl} />
       <div className="main-wrapper">
         <UserInfo
-          nickname={feedData?.nickname}
           introduction={feedData?.introduction}
           socialData={feedData?.socialData}
         />
         <Support />
       </div>
+      <Footer />
     </Container>
   );
 }

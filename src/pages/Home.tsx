@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/common/Button";
@@ -58,11 +58,10 @@ function Home() {
     setNickname(value);
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      if (!user.nickname) history.push("/setting");
-      else history.push(`/${user.nickname}`);
-    }
+  useLayoutEffect(() => {
+    if (!isLoggedIn) return;
+    if (!user.nickname) history.push("/setting");
+    else history.push(`/${user.nickname}`);
   }, [isLoggedIn, history, user.nickname]);
 
   return (
