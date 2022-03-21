@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { authService } from "../firebase/fbase";
-import { API } from "../firebase/api";
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { authService } from '../firebase/fbase';
+import { API } from '../firebase/api';
 
 interface IAuth {
   user: IUser;
   setUser: React.Dispatch<React.SetStateAction<IUser>>;
   isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface ISocial {
@@ -32,15 +33,16 @@ interface IAuthProvider {
 }
 export const AuthContext = React.createContext<IAuth>({
   user: {
-    creatorId: "",
+    creatorId: '',
   },
   setUser: () => {},
   isLoggedIn: false,
+  setIsLoggedIn: () => {},
 });
 
 const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<IUser>({
-    creatorId: "",
+    creatorId: '',
     createdAt: 0,
   });
   const [init, setInit] = useState(false);
@@ -51,8 +53,9 @@ const AuthProvider = ({ children }: IAuthProvider) => {
       user,
       setUser,
       isLoggedIn,
+      setIsLoggedIn,
     }),
-    [user, setUser, isLoggedIn]
+    [user, setUser, isLoggedIn, setIsLoggedIn]
   );
 
   const checkLogin = () => {

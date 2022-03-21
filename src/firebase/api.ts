@@ -1,5 +1,5 @@
-import { IUser } from "../utils/types";
-import { dbService, storageService } from "./fbase";
+import { IUser } from '../utils/types';
+import { authService, dbService, storageService } from './fbase';
 
 interface IUserObj {
   nickname: string;
@@ -9,8 +9,8 @@ interface IUserObj {
 
 const getUserDocument = async (uid: string | undefined) => {
   const exUser = await dbService
-    .collection("users")
-    .where("creatorId", "==", uid)
+    .collection('users')
+    .where('creatorId', '==', uid)
     .get();
   return exUser.docs;
 };
@@ -25,7 +25,7 @@ const getUserData = async (uid: string | undefined) => {
 };
 
 const setUserData = async (userObj: IUserObj) => {
-  await dbService.collection("users").add(userObj);
+  await dbService.collection('users').add(userObj);
 };
 
 const checkDuplicateNickName = async (
@@ -35,9 +35,9 @@ const checkDuplicateNickName = async (
   nickname = nickname.toLowerCase();
 
   const exNickname = await dbService
-    .collection("users")
-    .where("creatorId", "!=", uid)
-    .where("nickname", "==", nickname)
+    .collection('users')
+    .where('creatorId', '!=', uid)
+    .where('nickname', '==', nickname)
     .get();
   if (exNickname.docs.length !== 0) return false;
   return true;
@@ -51,7 +51,7 @@ const setAccountData = async (
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
-    dbService.collection("users").doc(doc.id).update({
+    dbService.collection('users').doc(doc.id).update({
       bank,
       account,
     });
@@ -67,7 +67,7 @@ const updateUserNickname = async (
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
-    dbService.collection("users").doc(doc.id).update({
+    dbService.collection('users').doc(doc.id).update({
       nickname,
     });
   });
@@ -77,7 +77,7 @@ const updateUserIntroduction = async (uid: string, introduction: string) => {
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
-    dbService.collection("users").doc(doc.id).update({
+    dbService.collection('users').doc(doc.id).update({
       introduction,
     });
   });
@@ -95,7 +95,7 @@ const updateUserSocialData = async (uid: string, socialObj: ISocial) => {
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
-    dbService.collection("users").doc(doc.id).update({
+    dbService.collection('users').doc(doc.id).update({
       socialData: socialObj,
     });
   });
@@ -104,7 +104,7 @@ const updateUserSocialData = async (uid: string, socialObj: ISocial) => {
 const uploadUserPhoto = async (file: File) => {
   const image = storageService
     .ref()
-    .child(`/avatars/${Date.now()}.${file.name.split(".")[1]}`);
+    .child(`/avatars/${Date.now()}.${file.name.split('.')[1]}`);
   await image.put(file);
   return await image.getDownloadURL();
 };
@@ -113,7 +113,7 @@ const setUserPhoto = async (uid: string, avatarImgUrl: string) => {
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
-    dbService.collection("users").doc(doc.id).update({
+    dbService.collection('users').doc(doc.id).update({
       avatarImgUrl,
     });
   });
@@ -129,7 +129,7 @@ const setUserCover = async (uid: string, coverImgUrl: string) => {
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
-    dbService.collection("users").doc(doc.id).update({
+    dbService.collection('users').doc(doc.id).update({
       coverImgUrl,
     });
   });
@@ -137,8 +137,8 @@ const setUserCover = async (uid: string, coverImgUrl: string) => {
 
 const getFeedDocument = async (nickname: string) => {
   const user = await dbService
-    .collection("users")
-    .where("nickname", "==", nickname)
+    .collection('users')
+    .where('nickname', '==', nickname)
     .get();
   return user.docs;
 };
@@ -150,6 +150,10 @@ const getFeedData = async (nickname: string) => {
     user = doc.data();
   });
   return user;
+};
+
+const logout = async () => {
+  return await authService.signOut();
 };
 
 export const API = {
@@ -166,4 +170,5 @@ export const API = {
   uploadUserCover,
   setUserCover,
   getFeedData,
+  logout,
 };

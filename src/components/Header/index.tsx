@@ -1,13 +1,56 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useIsLoggedIn } from "../../contexts/AuthContext";
-import useModal from "../../hooks/useModal";
-import { Mobile, PC } from "../../styles/MediaQuery";
-import Button from "../common/Button";
-import LoginModal from "../Modal/LoginModal";
-import { IconLogo } from "../../assets/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useIsLoggedIn } from '../../contexts/AuthContext';
+import useModal from '../../hooks/useModal';
+import { Mobile, PC } from '../../styles/MediaQuery';
+import Button from '../common/Button';
+import LoginModal from '../Modal/LoginModal';
+import { IconLogo } from '../../assets/icons';
+import Menu from './Menu';
+
+function Header() {
+  const isLoggedIn = useIsLoggedIn();
+  const { openModal, ModalPortal } = useModal();
+
+  return (
+    <>
+      <Container>
+        <div className='header-wrapper'>
+          <Link to='/'>
+            <div className='header-logo'>
+              <IconLogo />
+            </div>
+          </Link>
+          <div className='header-auth'>
+            {isLoggedIn ? (
+              <Menu />
+            ) : (
+              <>
+                <p className='header-login' onClick={openModal}>
+                  로그인
+                </p>
+
+                <Link to='signup'>
+                  <PC>
+                    <Button>회원가입</Button>
+                  </PC>
+                  <Mobile>
+                    <Button>회원가입</Button>
+                  </Mobile>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </Container>
+      {!isLoggedIn && (
+        <ModalPortal>
+          <LoginModal />
+        </ModalPortal>
+      )}
+    </>
+  );
+}
 
 const Container = styled.header`
   width: 100%;
@@ -16,6 +59,7 @@ const Container = styled.header`
 
   .header-wrapper {
     width: 92%;
+    max-width: 1240px;
     padding: 2rem;
     font-size: 1.5rem;
     display: flex;
@@ -50,12 +94,12 @@ const Container = styled.header`
     gap: 2rem;
 
     .header-login {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
       transition: all 0.3s;
       border-bottom: 1px solid transparent;
       cursor: pointer;
       &:hover {
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid ${({ theme }) => theme.color.black};
       }
     }
 
@@ -67,51 +111,5 @@ const Container = styled.header`
     }
   }
 `;
-
-function Header() {
-  const isLoggedIn = useIsLoggedIn();
-  const { openModal, ModalPortal } = useModal();
-
-  return (
-    <>
-      <Container>
-        <div className="header-wrapper">
-          <Link to="/">
-            <div className="header-logo">
-              <IconLogo />
-            </div>
-          </Link>
-          <div className="header-auth">
-            {isLoggedIn ? (
-              <Link to="profile">
-                <FontAwesomeIcon icon={faUser} />
-              </Link>
-            ) : (
-              <>
-                <p className="header-login" onClick={openModal}>
-                  로그인
-                </p>
-
-                <Link to="signup">
-                  <PC>
-                    <Button size="md">회원가입</Button>
-                  </PC>
-                  <Mobile>
-                    <Button size="sm">회원가입</Button>
-                  </Mobile>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </Container>
-      {!isLoggedIn && (
-        <ModalPortal>
-          <LoginModal />
-        </ModalPortal>
-      )}
-    </>
-  );
-}
 
 export default Header;
