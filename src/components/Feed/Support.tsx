@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import styled from "styled-components";
-import { IconLogoToss } from "../../assets/icons";
-import useModal from "../../hooks/useModal";
-import { COFFEE_PRICE } from "../../utils/constants";
-import Button from "../common/Button";
-import SupportModal from "../Modal/SupportModal";
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import { IconLogoToss } from '../../assets/icons';
+import useModal from '../../hooks/useModal';
+import { COFFEE_PRICE } from '../../utils/constants';
+import Button from '../common/Button';
+import SupportModal from '../Modal/SupportModal';
 
 const Container = styled.div`
   width: 100%;
@@ -110,7 +110,7 @@ function Support() {
 
   const onSubmitSupport = () => {
     if (amount === 0) {
-      toast.error("개수를 지정해주세요.");
+      toast.error('개수를 지정해주세요.');
       return;
     }
 
@@ -120,47 +120,47 @@ function Support() {
   return (
     <>
       <Container>
-        <div className="support-wrapper">
-          <p className="support-title">커피 후원하기</p>
-          <div className="support-coffee-wrapper">
-            <div className="circle">☕️</div>
-            <span className="x-icon">x</span>
-            <div className="support-count-wrapper">
+        <div className='support-wrapper'>
+          <p className='support-title'>커피 후원하기</p>
+          <div className='support-coffee-wrapper'>
+            <div className='circle'>☕️</div>
+            <span className='x-icon'>x</span>
+            <div className='support-count-wrapper'>
               <input
-                id="count-1"
-                type="radio"
-                value="1"
-                name="count"
+                id='count-1'
+                type='radio'
+                value='1'
+                name='count'
                 onChange={onChangeAmount}
               />
-              <label className="circle support-count" htmlFor="count-1">
+              <label className='circle support-count' htmlFor='count-1'>
                 1
               </label>
               <input
-                id="count-3"
-                type="radio"
-                value="3"
-                name="count"
+                id='count-3'
+                type='radio'
+                value='3'
+                name='count'
                 onChange={onChangeAmount}
               />
-              <label className="circle support-count" htmlFor="count-3">
+              <label className='circle support-count' htmlFor='count-3'>
                 3
               </label>
               <input
-                id="count-5"
-                type="radio"
-                value="5"
-                name="count"
+                id='count-5'
+                type='radio'
+                value='5'
+                name='count'
                 onChange={onChangeAmount}
               />
-              <label className="circle support-count" htmlFor="count-5">
+              <label className='circle support-count' htmlFor='count-5'>
                 5
               </label>
             </div>
           </div>
-          <div className="support-button-wrapper">
+          <div className='support-button-wrapper'>
             <SupportButton onClick={onSubmitSupport} disabled={!!!amount}>
-              <img src={IconLogoToss} alt="toss" /> 토스로 후원하기
+              <img src={IconLogoToss} alt='toss' /> 토스로 후원하기
             </SupportButton>
           </div>
         </div>
