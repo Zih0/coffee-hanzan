@@ -1,11 +1,46 @@
-import React, { useContext, useLayoutEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import styled from "styled-components";
-import Button from "../components/common/Button";
-import NicknameInput from "../components/common/Input/NicknameInput";
-import { Mobile, PC } from "../styles/MediaQuery";
-import { useState } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import React, { useContext, useLayoutEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import Button from '../components/common/Button';
+import NicknameInput from '../components/common/Input/NicknameInput';
+import { useState } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+
+function Home() {
+  const [nickname, setNickname] = useState('');
+  const { user, isLoggedIn } = useContext(AuthContext);
+  const history = useHistory();
+  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+    setNickname(value);
+  };
+
+  useLayoutEffect(() => {
+    if (!isLoggedIn) return;
+    if (!user.nickname) history.push('/setting');
+    else history.push(`/${user.nickname}`);
+  }, [isLoggedIn, history, user.nickname]);
+
+  return (
+    <Container>
+      <div className='home-text'>
+        Paypal, Stripe
+        <br />
+        한국에서 사용하기 불편하잖아요
+        <br />
+        커피한잔으로 후원을 받아보세요
+      </div>
+      <div className='home-start'>
+        <NicknameInput value={nickname} onChange={onChangeNickname} />
+        <Link to='/signup'>
+          <StyledButton>시작하기</StyledButton>
+        </Link>
+      </div>
+    </Container>
+  );
+}
 
 const Container = styled.main`
   margin-top: 5rem;
@@ -13,6 +48,7 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+
   .home-text {
     width: 70%;
     line-height: 5rem;
@@ -47,47 +83,14 @@ const Container = styled.main`
   }
 `;
 
-function Home() {
-  const [nickname, setNickname] = useState("");
-  const { user, isLoggedIn } = useContext(AuthContext);
-  const history = useHistory();
-  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = e;
-    setNickname(value);
-  };
+const StyledButton = styled(Button)`
+  height: 100%;
+  width: 8rem;
+  font-size: 1.2rem;
 
-  useLayoutEffect(() => {
-    if (!isLoggedIn) return;
-    if (!user.nickname) history.push("/setting");
-    else history.push(`/${user.nickname}`);
-  }, [isLoggedIn, history, user.nickname]);
-
-  return (
-    <Container>
-      <div className="home-text">
-        Paypal, Stripe
-        <br />
-        한국에서 사용하기 불편하잖아요
-        <br />
-        커피한잔으로 후원을 받아보세요
-      </div>
-      <div className="home-start">
-        <NicknameInput value={nickname} onChange={onChangeNickname} />
-        <Link to="/signup">
-          <PC>
-            <Button height={5}>시작하기</Button>
-          </PC>
-          <Mobile>
-            <Button height={3} width={19}>
-              시작하기
-            </Button>
-          </Mobile>
-        </Link>
-      </div>
-    </Container>
-  );
-}
+  @media ${({ theme }) => theme.size.mobile} {
+    width: 100%;
+  }
+`;
 
 export default Home;
