@@ -32,8 +32,6 @@ const checkDuplicateNickName = async (
   uid: string | undefined,
   nickname: string
 ) => {
-  nickname = nickname.toLowerCase();
-
   const exNickname = await dbService
     .collection('users')
     .where('creatorId', '!=', uid)
@@ -62,8 +60,6 @@ const updateUserNickname = async (
   uid: string | undefined,
   nickname: string
 ) => {
-  nickname = nickname.toLowerCase();
-
   const docRef = await getUserDocument(uid);
 
   docRef.forEach((doc) => {
