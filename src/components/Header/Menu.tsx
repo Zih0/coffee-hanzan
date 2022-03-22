@@ -62,7 +62,6 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   position: relative;
-  margin-top: 12px;
 
   .menu-button {
     background-color: ${({ theme }) => theme.color.white};
