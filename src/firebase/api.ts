@@ -25,6 +25,10 @@ const getUserData = async (uid: string | undefined) => {
 };
 
 const setUserData = async (userObj: IUserObj) => {
+  userObj = Object.assign(userObj, {
+    nickname: userObj.nickname.toLowerCase(),
+    introduction: 'Buy me an iced americano.😃',
+  });
   await dbService.collection('users').add(userObj);
 };
 
@@ -32,6 +36,8 @@ const checkDuplicateNickName = async (
   uid: string | undefined,
   nickname: string
 ) => {
+  nickname = nickname.toLowerCase();
+
   const exNickname = await dbService
     .collection('users')
     .where('creatorId', '!=', uid)
@@ -60,8 +66,9 @@ const updateUserNickname = async (
   uid: string | undefined,
   nickname: string
 ) => {
-  const docRef = await getUserDocument(uid);
+  nickname = nickname.toLowerCase();
 
+  const docRef = await getUserDocument(uid);
   docRef.forEach((doc) => {
     dbService.collection('users').doc(doc.id).update({
       nickname,
