@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import { AuthContext } from "../../contexts/AuthContext";
-import { API } from "../../firebase/api";
-import Button from "../common/Button";
-import { toast } from "react-toastify";
+import React, { useContext, useState } from 'react';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
+import { AuthContext } from '../../contexts/AuthContext';
+import { API } from '../../firebase/api';
+import Button from '../common/Button';
+import { toast } from 'react-toastify';
 
 const Form = styled.form`
   width: 50%;
@@ -41,7 +41,7 @@ const StyledButton = styled(Button)`
 
 function IntroduceForm() {
   const { user } = useContext(AuthContext);
-  const [introduction, setIntroduction] = useState(user.introduction ?? "");
+  const [introduction, setIntroduction] = useState(user.introduction ?? '');
   const [loading, setLoading] = useState(false);
 
   const onChangeIntroduction = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,7 +61,7 @@ function IntroduceForm() {
       await API.updateUserIntroduction(user.creatorId, introduction);
       setLoading(false);
 
-      toast.success("성공적으로 수정되었습니다.");
+      toast.success('성공적으로 수정되었습니다.');
     } catch (error: any) {
       console.log(error);
       setLoading(false);
@@ -71,17 +71,17 @@ function IntroduceForm() {
   return (
     <Form onSubmit={onSubmitIntroduction}>
       <div>
-        <p className="profile-form-label">자기소개</p>
+        <p className='profile-form-label'>자기소개</p>
         <div>
           <textarea
-            className="profile-form-textarea"
-            placeholder="자기소개를 입력해주세요."
+            className='profile-form-textarea'
+            placeholder='자기소개를 입력해주세요.'
             value={introduction}
             onChange={onChangeIntroduction}
           />
-          <StyledButton size="sm" type="submit">
+          <StyledButton type='submit'>
             {!loading ? (
-              "자기소개 수정하기"
+              '자기소개 수정하기'
             ) : (
               <FontAwesomeIcon icon={faSpinner} spin={true} />
             )}

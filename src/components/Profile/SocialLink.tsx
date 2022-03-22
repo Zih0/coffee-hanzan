@@ -1,10 +1,10 @@
-import React from "react";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import useModal from "../../hooks/useModal";
-import Button from "../common/Button";
-import SocialLinkModal from "../Modal/SocialLinkModal";
+import React from 'react';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
+import useModal from '../../hooks/useModal';
+import Button from '../common/Button';
+import SocialLinkModal from '../Modal/SocialLinkModal';
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -20,7 +20,7 @@ function SocialLink() {
 
   return (
     <>
-      <StyledButton size="sm" onClick={openModal}>
+      <StyledButton onClick={openModal}>
         <FontAwesomeIcon icon={faLink} />
         소셜 정보 연결
       </StyledButton>

@@ -1,19 +1,19 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from 'react';
+import styled from 'styled-components';
 import {
   faFacebook,
   faGithub,
   faInstagram,
   faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Input from "../common/Input";
-import Button from "../common/Button";
-import { theme } from "../../styles/theme";
-import { AuthContext } from "../../contexts/AuthContext";
-import { API } from "../../firebase/api";
-import { toast } from "react-toastify";
+} from '@fortawesome/free-brands-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Input from '../common/Input';
+import Button from '../common/Button';
+import { theme } from '../../styles/theme';
+import { AuthContext } from '../../contexts/AuthContext';
+import { API } from '../../firebase/api';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
   width: 25rem;
@@ -54,21 +54,21 @@ interface ISocialLinkProps {
 
 function SocialLinkModal({ onClose }: ISocialLinkProps) {
   const { user, setUser } = useContext(AuthContext);
-  const [github, setGithub] = useState(user.socialData?.github ?? "");
-  const [twitter, setTwitter] = useState(user.socialData?.twitter ?? "");
-  const [facebook, setFacebook] = useState(user.socialData?.facebook ?? "");
-  const [instagram, setInstagram] = useState(user.socialData?.instagram ?? "");
-  const [blog, setBlog] = useState(user.socialData?.blog ?? "");
+  const [github, setGithub] = useState(user.socialData?.github ?? '');
+  const [twitter, setTwitter] = useState(user.socialData?.twitter ?? '');
+  const [facebook, setFacebook] = useState(user.socialData?.facebook ?? '');
+  const [instagram, setInstagram] = useState(user.socialData?.instagram ?? '');
+  const [blog, setBlog] = useState(user.socialData?.blog ?? '');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       currentTarget: { name, value },
     } = e;
-    if (name === "github") setGithub(value);
-    else if (name === "twitter") setTwitter(value);
-    else if (name === "facebook") setFacebook(value);
-    else if (name === "instagram") setInstagram(value);
-    else if (name === "blog") setBlog(value);
+    if (name === 'github') setGithub(value);
+    else if (name === 'twitter') setTwitter(value);
+    else if (name === 'facebook') setFacebook(value);
+    else if (name === 'instagram') setInstagram(value);
+    else if (name === 'blog') setBlog(value);
   };
 
   const onSaveSocial = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -97,69 +97,62 @@ function SocialLinkModal({ onClose }: ISocialLinkProps) {
     );
     setUser(updatedUserData);
 
-    toast.success("소셜 정보가 업데이트되었습니다.");
+    toast.success('소셜 정보가 업데이트되었습니다.');
     onClose();
   };
 
   return (
     <Container>
-      <div className="social-input-wrapper">
-        <FontAwesomeIcon className="social-icon" icon={faGithub} />
+      <div className='social-input-wrapper'>
+        <FontAwesomeIcon className='social-icon' icon={faGithub} />
         <StyledInput
-          placeholder="Github 계정을 입력하세요."
-          name="github"
+          placeholder='Github 계정을 입력하세요.'
+          name='github'
           value={github}
           onChange={onChange}
         />
       </div>
-      <div className="social-input-wrapper">
-        <FontAwesomeIcon className="social-icon" icon={faTwitter} />
+      <div className='social-input-wrapper'>
+        <FontAwesomeIcon className='social-icon' icon={faTwitter} />
         <StyledInput
-          placeholder="Twitter 계정을 입력하세요."
-          name="twitter"
+          placeholder='Twitter 계정을 입력하세요.'
+          name='twitter'
           value={twitter}
           onChange={onChange}
         />
       </div>
-      <div className="social-input-wrapper">
-        <FontAwesomeIcon className="social-icon" icon={faFacebook} />
+      <div className='social-input-wrapper'>
+        <FontAwesomeIcon className='social-icon' icon={faFacebook} />
         <StyledInput
-          placeholder="Facebook 계정을 입력하세요."
-          name="facebook"
+          placeholder='Facebook 계정을 입력하세요.'
+          name='facebook'
           value={facebook}
           onChange={onChange}
         />
       </div>
-      <div className="social-input-wrapper">
-        <FontAwesomeIcon className="social-icon" icon={faInstagram} />
+      <div className='social-input-wrapper'>
+        <FontAwesomeIcon className='social-icon' icon={faInstagram} />
         <StyledInput
-          placeholder="Instagram 계정을 입력하세요."
-          name="instagram"
+          placeholder='Instagram 계정을 입력하세요.'
+          name='instagram'
           value={instagram}
           onChange={onChange}
         />
       </div>
-      <div className="social-input-wrapper">
-        <FontAwesomeIcon className="social-icon" icon={faEdit} />
+      <div className='social-input-wrapper'>
+        <FontAwesomeIcon className='social-icon' icon={faEdit} />
         <StyledInput
-          placeholder="블로그 주소를 입력하세요."
-          name="blog"
+          placeholder='블로그 주소를 입력하세요.'
+          name='blog'
           value={blog}
           onChange={onChange}
         />
       </div>
-      <div className="social-button-wrapper">
-        <Button
-          color="black"
-          background={theme.color.gray}
-          size="sm"
-          onClick={onClose}
-        >
+      <div className='social-button-wrapper'>
+        <Button color='black' background={theme.color.gray} onClick={onClose}>
           취소
         </Button>
-        <Button size="sm" onClick={onSaveSocial}>
-          저장
-        </Button>
+        <Button onClick={onSaveSocial}>저장</Button>
       </div>
     </Container>
   );

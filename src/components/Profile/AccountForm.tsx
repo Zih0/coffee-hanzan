@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import { AuthContext } from "../../contexts/AuthContext";
-import { API } from "../../firebase/api";
-import { bankList } from "../../utils/constants";
-import { decrypt, encrypt } from "../../utils/crypto";
-import { isValidAccountLength, isValidNumber } from "../../utils/validation";
-import Button from "../common/Button";
-import Input from "../common/Input";
-import Select from "../common/Select";
-import { toast } from "react-toastify";
+import React, { useContext, useState } from 'react';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
+import { AuthContext } from '../../contexts/AuthContext';
+import { API } from '../../firebase/api';
+import { bankList } from '../../utils/constants';
+import { decrypt, encrypt } from '../../utils/crypto';
+import { isValidAccountLength, isValidNumber } from '../../utils/validation';
+import Button from '../common/Button';
+import Input from '../common/Input';
+import Select from '../common/Select';
+import { toast } from 'react-toastify';
 
 const Form = styled.form`
   width: 50%;
@@ -62,10 +62,10 @@ const StyledButton = styled(Button)`
 
 function AccountForm() {
   const { user, setUser } = useContext(AuthContext);
-  const [bank, setBank] = useState(decrypt(user.bank as string) ?? "");
-  const [account, setAccount] = useState(decrypt(user.account as string) ?? "");
+  const [bank, setBank] = useState(decrypt(user.bank as string) ?? '');
+  const [account, setAccount] = useState(decrypt(user.account as string) ?? '');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const onInputBank = (e: React.FormEvent<HTMLSelectElement>) => {
     const {
@@ -80,7 +80,7 @@ function AccountForm() {
       currentTarget: { value },
     } = e;
 
-    setError("");
+    setError('');
     setAccount(value);
   };
 
@@ -88,11 +88,11 @@ function AccountForm() {
     e.preventDefault();
 
     if (!isValidNumber(account)) {
-      setError("계좌번호에 숫자만 입력해주세요.");
+      setError('계좌번호에 숫자만 입력해주세요.');
       return;
     }
     if (!isValidAccountLength(account)) {
-      setError("계좌번호를 다시 확인해주세요.");
+      setError('계좌번호를 다시 확인해주세요.');
       return;
     }
     setLoading(true);
@@ -111,15 +111,15 @@ function AccountForm() {
       }
     );
     setUser(updatedUserData);
-    toast.success("성공적으로 수정되었습니다.");
+    toast.success('성공적으로 수정되었습니다.');
   };
 
   return (
     <Form onSubmit={onSubmitAccount}>
-      <div className="profile-input-wrapper">
-        <p className="profile-form-label">은행</p>
+      <div className='profile-input-wrapper'>
+        <p className='profile-form-label'>은행</p>
         <Select
-          className="profile-form-input"
+          className='profile-form-input'
           value={bank}
           onInput={onInputBank}
         >
@@ -130,22 +130,22 @@ function AccountForm() {
           ))}
         </Select>
       </div>
-      <div className="profile-input-wrapper">
-        <p className="profile-form-label margin-top-2">계좌번호</p>
+      <div className='profile-input-wrapper'>
+        <p className='profile-form-label margin-top-2'>계좌번호</p>
         <StyledInput
-          className="profile-form-input"
-          placeholder="계좌번호를 입력해주세요"
+          className='profile-form-input'
+          placeholder='계좌번호를 입력해주세요'
           value={account}
           onChange={onChangeAccount}
         />
-        <StyledButton size="sm" type="submit">
+        <StyledButton type='submit'>
           {!loading ? (
-            "계좌번호 수정하기"
+            '계좌번호 수정하기'
           ) : (
             <FontAwesomeIcon icon={faSpinner} spin={true} />
           )}
         </StyledButton>
-        {error && <span className="account-error">{error}</span>}
+        {error && <span className='account-error'>{error}</span>}
       </div>
     </Form>
   );
