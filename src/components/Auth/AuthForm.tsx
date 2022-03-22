@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import { authService } from "../../firebase/fbase";
-import useModal from "../../hooks/useModal";
-import Input from "../common/Input";
-import LoginModal from "../Modal/LoginModal";
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { AuthContext } from '../../contexts/AuthContext';
+import { authService } from '../../firebase/fbase';
+import useModal from '../../hooks/useModal';
+import Input from '../common/Input';
+import LoginModal from '../Modal/LoginModal';
 
 const Container = styled.main`
   display: flex;
@@ -59,19 +60,20 @@ const Form = styled.form`
 `;
 
 function AuthForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const history = useHistory();
   const { openModal, ModalPortal } = useModal();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const onChange = (event: any) => {
     const {
       target: { name, value },
     } = event;
-    if (name === "email") {
+    if (name === 'email') {
       setEmail(value);
-    } else if (name === "password") {
+    } else if (name === 'password') {
       setPassword(value);
     }
   };
@@ -80,7 +82,8 @@ function AuthForm() {
     e.preventDefault();
     try {
       await authService.createUserWithEmailAndPassword(email, password);
-      history.push("/setting");
+      setIsLoggedIn(true);
+      history.push('/setting');
     } catch (error: any) {
       setError(error.message);
     }
@@ -90,34 +93,34 @@ function AuthForm() {
     <>
       <Container>
         <Form onSubmit={onSubmit}>
-          <h2 className="auth-header">회원가입</h2>
+          <h2 className='auth-header'>회원가입</h2>
           <Input
-            type="text"
-            name="email"
-            placeholder="Email"
+            type='text'
+            name='email'
+            placeholder='Email'
             required
             value={email}
             onChange={onChange}
-            className="auth-input"
+            className='auth-input'
           />
           <Input
-            type="password"
-            name="password"
-            placeholder="Password"
+            type='password'
+            name='password'
+            placeholder='Password'
             value={password}
             onChange={onChange}
-            className="auth-input"
+            className='auth-input'
           />
           <Input
-            type="submit"
-            value="회원가입"
-            className="auth-input auth-submit"
+            type='submit'
+            value='회원가입'
+            className='auth-input auth-submit'
           />
-          {error && <span className="auth-error">{error}</span>}
+          {error && <span className='auth-error'>{error}</span>}
         </Form>
-        <span className="auth-login">
+        <span className='auth-login'>
           계정이 이미 있으신가요?
-          <span className="highlight" onClick={openModal}>
+          <span className='highlight' onClick={openModal}>
             로그인
           </span>
         </span>
