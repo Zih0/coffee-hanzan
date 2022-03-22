@@ -1,16 +1,16 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import Button from "../components/common/Button";
-import Input from "../components/common/Input";
-import Select from "../components/common/Select";
-import { AuthContext } from "../contexts/AuthContext";
-import { API } from "../firebase/api";
-import { bankList } from "../utils/constants";
-import { isValidAccountLength, isValidNumber } from "../utils/validation";
-import { encrypt } from "../utils/crypto";
+import React, { useContext, useLayoutEffect, useState } from 'react';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import Button from '../components/common/Button';
+import Input from '../components/common/Input';
+import Select from '../components/common/Select';
+import { AuthContext } from '../contexts/AuthContext';
+import { API } from '../firebase/api';
+import { bankList } from '../utils/constants';
+import { isValidAccountLength, isValidNumber } from '../utils/validation';
+import { encrypt } from '../utils/crypto';
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -68,11 +68,11 @@ const StyledButton = styled(Button)`
 `;
 
 function Payment() {
-  const [selectedBank, setSelectedBank] = useState("NH농협");
-  const [account, setAccount] = useState("");
-  const [error, setError] = useState("");
+  const [selectedBank, setSelectedBank] = useState('NH농협');
+  const [account, setAccount] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const history = useHistory();
 
   const onInputBank = (e: React.FormEvent<HTMLSelectElement>) => {
@@ -88,7 +88,7 @@ function Payment() {
       currentTarget: { value },
     } = e;
 
-    setError("");
+    setError('');
     setAccount(value);
   };
 
@@ -96,11 +96,11 @@ function Payment() {
     e.preventDefault();
 
     if (!isValidNumber(account)) {
-      setError("계좌번호에 숫자만 입력해주세요.");
+      setError('계좌번호에 숫자만 입력해주세요.');
       return;
     }
     if (!isValidAccountLength(account)) {
-      setError("계좌번호를 다시 확인해주세요.");
+      setError('계좌번호를 다시 확인해주세요.');
       return;
     }
     setLoading(true);
@@ -109,45 +109,54 @@ function Payment() {
     const encryptedAccount = encrypt(account);
 
     API.setAccountData(user.creatorId, encryptedBank, encryptedAccount);
+
+    const updatedUserData = Object.assign(
+      { ...user },
+      {
+        bank: encryptedBank,
+        account: encryptedAccount,
+      }
+    );
+    setUser(updatedUserData);
     setLoading(false);
-    history.push("/profile");
+    history.push('/profile');
   };
 
   useLayoutEffect(() => {
-    if (user.account) history.push("/");
+    if (user.account) history.push('/');
   }, []);
 
   return (
     <Container>
       <Form onSubmit={onSubmitAccount}>
-        <h2 className="payment-header">계좌 등록</h2>
-        <label className="payment-label" htmlFor="bank">
+        <h2 className='payment-header'>계좌 등록</h2>
+        <label className='payment-label' htmlFor='bank'>
           은행
         </label>
-        <StyledSelect id="bank" value={selectedBank} onInput={onInputBank}>
+        <StyledSelect id='bank' value={selectedBank} onInput={onInputBank}>
           {bankList.map((bankName) => (
             <option value={bankName} key={bankName}>
               {bankName}
             </option>
           ))}
         </StyledSelect>
-        <label className="payment-label" htmlFor="account">
+        <label className='payment-label' htmlFor='account'>
           계좌번호
         </label>
 
         <StyledInput
-          id="account"
-          type="text"
-          name="Account"
-          placeholder="계좌번호를 입력해주세요"
+          id='account'
+          type='text'
+          name='Account'
+          placeholder='계좌번호를 입력해주세요'
           required
           value={account}
           onChange={onChangeAccount}
         />
-        <span className="account-rule">숫자만 입력해주세요('-' 제외)</span>
-        {error && <span className="account-error">{error}</span>}
-        <StyledButton type="submit">
-          {!loading ? "등록" : <FontAwesomeIcon icon={faSpinner} spin={true} />}
+        <span className='account-rule'>숫자만 입력해주세요('-' 제외)</span>
+        {error && <span className='account-error'>{error}</span>}
+        <StyledButton type='submit'>
+          {!loading ? '등록' : <FontAwesomeIcon icon={faSpinner} spin={true} />}
         </StyledButton>
       </Form>
     </Container>
