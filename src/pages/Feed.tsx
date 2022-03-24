@@ -1,3 +1,4 @@
+import { IUser } from '@utils/types';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -10,7 +11,6 @@ import Footer from '@components/Footer';
 
 import { API } from '@firebase/api';
 
-import { IUser } from '../utils/types';
 
 const Container = styled.main`
     display: flex;
@@ -27,6 +27,7 @@ const Container = styled.main`
         gap: 24px;
         justify-content: space-between;
         margin-bottom: 100px;
+
         > div {
             flex: 1;
         }

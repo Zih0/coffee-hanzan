@@ -1,17 +1,21 @@
+import { ImgDefaultProfile } from '@assets/images';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useModal from '@hooks/useModal';
+import { compressImage } from '@utils/imageUtil';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { ImgDefaultProfile } from '../../assets/images';
-import { AuthContext } from '../../contexts/AuthContext';
-import { API } from '../../firebase/api';
-import useModal from '../../hooks/useModal';
-import { compressImage } from '../../utils/imageUtil';
+import Button from '@components/common/Button';
+
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 import ImageUploadModal from '../Modal/ImageUploadModal';
-import Button from '../common/Button';
 import SocialLink from './SocialLink';
+
 
 const Container = styled.div<{ cover: string }>`
     width: 100%;
@@ -31,6 +35,7 @@ const Container = styled.div<{ cover: string }>`
             background-color: ${({ theme }) => theme.color.gray};
             background-size: cover;
         }
+
         .cover-add-button {
             position: absolute;
             top: 1rem;

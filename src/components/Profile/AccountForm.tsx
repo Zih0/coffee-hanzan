@@ -1,17 +1,20 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { bankList } from '@utils/constants';
+import { decrypt, encrypt } from '@utils/crypto';
+import { isValidAccountLength, isValidNumber } from '@utils/validation';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import { API } from '../../firebase/api';
-import { bankList } from '../../utils/constants';
-import { decrypt, encrypt } from '../../utils/crypto';
-import { isValidAccountLength, isValidNumber } from '../../utils/validation';
-import Button from '../common/Button';
-import Input from '../common/Input';
-import Select from '../common/Select';
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
+import Select from '@components/common/Select';
+
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 
 const Form = styled.form`
     width: 50%;

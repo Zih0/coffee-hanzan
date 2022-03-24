@@ -1,18 +1,15 @@
-import React, {
-    useCallback,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { AuthContext } from '../../../contexts/AuthContext';
-import { API } from '../../../firebase/api';
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 import Button from '../Button';
+
 
 interface IImageCropProps {
     image: string;

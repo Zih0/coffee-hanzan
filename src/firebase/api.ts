@@ -1,5 +1,4 @@
-import { IUser } from '../utils/types';
-import { authService, dbService, storageService } from './fbase';
+import { authService, dbService, storageService } from '@firebase/fbase';
 
 interface IUserObj {
     nickname: string;

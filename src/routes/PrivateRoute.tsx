@@ -1,6 +1,6 @@
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-import { useIsLoggedIn } from '../contexts/AuthContext';
+import { useIsLoggedIn } from '@contexts/AuthContext';
 
 function PrivateRoute({ component: Component, ...rest }: RouteProps) {
     const isLoggedIn = useIsLoggedIn();

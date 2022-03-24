@@ -6,15 +6,18 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { theme } from '@styles/theme';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import { API } from '../../firebase/api';
-import { theme } from '../../styles/theme';
-import Button from '../common/Button';
-import Input from '../common/Input';
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
+
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 
 const Container = styled.div`
     width: 25rem;

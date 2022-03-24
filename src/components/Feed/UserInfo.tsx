@@ -5,10 +5,11 @@ import {
     faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { ISocial } from '@utils/types';
 import styled from 'styled-components';
 
-import { ISocial } from '../../utils/types';
 import SocialIcon from './SocialIcon';
+
 
 const Container = styled.div`
     width: 100%;

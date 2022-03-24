@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,12 +15,14 @@ const StyledButton = styled.button<IButtonProps>`
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    color: #fff;
+    color: ${({ theme }) => theme.color.white};
     font-size: 0.8rem;
     font-weight: 300;
     cursor: pointer;
+
     background-color: ${(props) => props.background || 'black'};
     color: ${(props) => props.color || 'white'};
+
     &:hover {
         font-weight: 500;
     }

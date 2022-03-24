@@ -1,17 +1,20 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { bankList } from '@utils/constants';
+import { encrypt } from '@utils/crypto';
+import { isValidAccountLength, isValidNumber } from '@utils/validation';
 import React, { useContext, useLayoutEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Button from '../components/common/Button';
-import Input from '../components/common/Input';
-import Select from '../components/common/Select';
-import { AuthContext } from '../contexts/AuthContext';
-import { API } from '../firebase/api';
-import { bankList } from '../utils/constants';
-import { encrypt } from '../utils/crypto';
-import { isValidAccountLength, isValidNumber } from '../utils/validation';
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
+import Select from '@components/common/Select';
+
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 
 const Container = styled.div`
     margin-top: 5rem;

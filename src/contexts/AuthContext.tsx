@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import { API } from '../firebase/api';
-import { authService } from '../firebase/fbase';
+import { API } from '@firebase/api';
+import { authService } from '@firebase/fbase';
+
 
 interface IAuth {
     user: IUser;
@@ -29,19 +30,23 @@ interface IUser {
     introduction?: string;
     socialData?: ISocial;
 }
+
 interface IAuthProvider {
     children: React.ReactNode;
 }
+
 export const AuthContext = React.createContext<IAuth>({
     user: {
         creatorId: '',
     },
-    setUser: () => {},
+    setUser: () => {
+    },
     isLoggedIn: false,
-    setIsLoggedIn: () => {},
+    setIsLoggedIn: () => {
+    },
 });
 
-const AuthProvider = ({ children }: IAuthProvider) => {
+const AuthProvider = ({children}: IAuthProvider) => {
     const [user, setUser] = useState<IUser>({
         creatorId: '',
         createdAt: 0,
@@ -64,7 +69,7 @@ const AuthProvider = ({ children }: IAuthProvider) => {
             if (auth) {
                 const fbUser = await API.getUserData(auth.uid);
                 if (fbUser) setUser(fbUser);
-                else setUser({ creatorId: auth.uid });
+                else setUser({creatorId: auth.uid});
 
                 setIsLoggedIn(true);
             }
@@ -84,8 +89,8 @@ const AuthProvider = ({ children }: IAuthProvider) => {
 };
 
 const useIsLoggedIn = () => {
-    const { isLoggedIn } = useContext(AuthContext);
+    const {isLoggedIn} = useContext(AuthContext);
     return isLoggedIn;
 };
 
-export { AuthProvider, useIsLoggedIn };
+export {AuthProvider, useIsLoggedIn};

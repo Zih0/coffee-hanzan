@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
-import { AuthContext } from '../../contexts/AuthContext';
-import { API } from '../../firebase/api';
 
 const Container = styled.div<{ cover: string | undefined }>`
     width: 100%;
@@ -22,6 +19,7 @@ const Container = styled.div<{ cover: string | undefined }>`
             background-color: ${({ theme }) => theme.color.gray};
             background-size: cover;
         }
+
         .cover-add-button {
             position: absolute;
             top: 1rem;

@@ -1,14 +1,17 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { isValidEmpty, isValidEn, isValidLength } from '@utils/validation';
 import React, { useContext, useLayoutEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Button from '../components/common/Button';
-import NicknameInput from '../components/common/Input/NicknameInput';
-import { AuthContext } from '../contexts/AuthContext';
-import { API } from '../firebase/api';
-import { isValidEmpty, isValidEn, isValidLength } from '../utils/validation';
+import Button from '@components/common/Button';
+import NicknameInput from '@components/common/Input/NicknameInput';
+
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 
 const Container = styled.div`
     margin-top: 5rem;
@@ -16,6 +19,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+
     .setting-header {
         font-size: 2rem;
         font-weight: 800;

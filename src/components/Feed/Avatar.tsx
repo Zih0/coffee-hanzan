@@ -1,8 +1,9 @@
+import { ImgDefaultProfile } from '@assets/images';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { ImgDefaultProfile } from '../../assets/images';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '@contexts/AuthContext';
+
 
 const Container = styled.div`
     width: 100%;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AuthForm from '../components/Auth/AuthForm';
-import AuthSNS from '../components/Auth/AuthSNS';
+import AuthForm from '@components/Auth/AuthForm';
+import AuthSNS from '@components/Auth/AuthSNS';
 
 const Container = styled.div`
     display: flex;
@@ -16,8 +16,8 @@ const Container = styled.div`
 function SignUp() {
     return (
         <Container>
-            <AuthForm />
-            <AuthSNS />
+            <AuthForm/>
+            <AuthSNS/>
         </Container>
     );
 }

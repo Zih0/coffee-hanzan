@@ -2,8 +2,10 @@ import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-import { Providers, authService } from '../../firebase/fbase';
-import Button from '../common/Button';
+import Button from '@components/common/Button';
+
+import { Providers, authService } from '@firebase/fbase';
+
 
 interface IAuthSNSProps {
     direction?: 'row' | 'column';
@@ -19,6 +21,7 @@ const Container = styled.div<IAuthSNSProps>`
         gap: 0.5rem;
         font-size: 0.7rem;
         align-items: center;
+
         svg {
             font-size: 1.3rem;
         }

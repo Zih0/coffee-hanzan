@@ -4,8 +4,10 @@ import React, { useCallback, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import { API } from '../../firebase/api';
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 
 function Menu() {
     const { setUser, setIsLoggedIn } = useContext(AuthContext);

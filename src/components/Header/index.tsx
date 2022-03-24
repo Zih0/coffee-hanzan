@@ -1,13 +1,16 @@
+import { IconLogo } from '@assets/icons';
+import useModal from '@hooks/useModal';
+import { Mobile, PC } from '@styles/MediaQuery';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { IconLogo } from '../../assets/icons';
-import { useIsLoggedIn } from '../../contexts/AuthContext';
-import useModal from '../../hooks/useModal';
-import { Mobile, PC } from '../../styles/MediaQuery';
+import Button from '@components/common/Button';
+
+import { useIsLoggedIn } from '@contexts/AuthContext';
+
 import LoginModal from '../Modal/LoginModal';
-import Button from '../common/Button';
 import Menu from './Menu';
+
 
 function Header() {
     const isLoggedIn = useIsLoggedIn();
@@ -75,6 +78,7 @@ const Container = styled.header`
     .header-logo {
         display: flex;
         align-items: center;
+
         svg {
             height: 3rem;
             width: auto;
@@ -99,6 +103,7 @@ const Container = styled.header`
             transition: all 0.3s;
             border-bottom: 1px solid transparent;
             cursor: pointer;
+
             &:hover {
                 border-bottom: 1px solid ${({ theme }) => theme.color.black};
             }

@@ -1,7 +1,6 @@
+import { IconLogoCenter } from '@assets/icons';
+import { decrypt } from '@utils/crypto';
 import QRCode from 'qrcode.react';
-
-import { IconLogoCenter } from '../../../assets/icons';
-import { decrypt } from '../../../utils/crypto';
 
 interface IQR {
     bank: string;

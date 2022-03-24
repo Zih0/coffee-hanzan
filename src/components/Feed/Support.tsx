@@ -1,12 +1,14 @@
+import { IconLogoToss } from '@assets/icons';
+import useModal from '@hooks/useModal';
+import { COFFEE_PRICE } from '@utils/constants';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { IconLogoToss } from '../../assets/icons';
-import useModal from '../../hooks/useModal';
-import { COFFEE_PRICE } from '../../utils/constants';
+import Button from '@components/common/Button';
+
 import SupportModal from '../Modal/SupportModal';
-import Button from '../common/Button';
+
 
 const Container = styled.div`
     width: 100%;
@@ -97,6 +99,7 @@ const SupportButton = styled(Button)`
         color: ${({ theme }) => theme.color.white};
     }
 `;
+
 function Support() {
     const [amount, setAmount] = useState(0);
     const { openModal, ModalPortal } = useModal();

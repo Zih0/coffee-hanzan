@@ -1,7 +1,6 @@
+import { useBottomSheet } from '@hooks/useBottomSheet';
 import React from 'react';
 import styled from 'styled-components';
-
-import { useBottomSheet } from '../../hooks/useBottomSheet';
 
 function BottomSheet() {
     const { sheetRef } = useBottomSheet();

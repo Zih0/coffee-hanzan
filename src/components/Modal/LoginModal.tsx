@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { authService } from '../../firebase/fbase';
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
+
+import { authService } from '@firebase/fbase';
+
 import AuthSNS from '../Auth/AuthSNS';
-import Button from '../common/Button';
-import Input from '../common/Input';
+
 
 const Container = styled.div`
     width: 25rem;

@@ -1,15 +1,17 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import Header from '../components/Header';
+import Header from '@components/Header';
+
 import PrivateRoute from './PrivateRoute';
 
-const SignUp = lazy(() => import('../pages/SignUp'));
-const Home = lazy(() => import('../pages/Home'));
-const Setting = lazy(() => import('../pages/Setting'));
-const Payment = lazy(() => import('../pages/Payment'));
-const Feed = lazy(() => import('../pages/Feed'));
-const Profile = lazy(() => import('../pages/Profile'));
+
+const SignUp = lazy(() => import('@pages/SignUp'));
+const Home = lazy(() => import('@pages/Home'));
+const Setting = lazy(() => import('@pages/Setting'));
+const Payment = lazy(() => import('@pages/Payment'));
+const Feed = lazy(() => import('@pages/Feed'));
+const Profile = lazy(() => import('@pages/Profile'));
 
 function AppRouter() {
     return (

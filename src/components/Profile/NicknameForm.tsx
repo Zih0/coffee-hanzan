@@ -1,14 +1,17 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { isValidEmpty, isValidEn, isValidLength } from '@utils/validation';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import { API } from '../../firebase/api';
-import { isValidEmpty, isValidEn, isValidLength } from '../../utils/validation';
-import Button from '../common/Button';
-import Input from '../common/Input';
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
+
+import { AuthContext } from '@contexts/AuthContext';
+
+import { API } from '@firebase/api';
+
 
 const Form = styled.form`
     width: 50%;
