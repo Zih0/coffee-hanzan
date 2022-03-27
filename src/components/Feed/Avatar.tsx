@@ -4,6 +4,29 @@ import styled from 'styled-components';
 
 import { AuthContext } from '@contexts/AuthContext';
 
+interface IAvatarProps {
+    avatarImgUrl: string | undefined;
+}
+
+function Avatar({ avatarImgUrl }: IAvatarProps) {
+    const { user } = useContext(AuthContext);
+
+    return (
+        <Container>
+            <div className="profile-image-container">
+                <div className="profile-image-wrapper">
+                    <img
+                        src={avatarImgUrl ?? ImgDefaultProfile}
+                        alt="avatar"
+                        className="profile-image"
+                    />
+                </div>
+            </div>
+            <p className="profile-name">{user.nickname}</p>
+        </Container>
+    );
+}
+
 const Container = styled.div`
     width: 100%;
     display: flex;
@@ -44,28 +67,5 @@ const Container = styled.div`
         }
     }
 `;
-
-interface IAvatarProps {
-    avatarImgUrl: string | undefined;
-}
-
-function Avatar({ avatarImgUrl }: IAvatarProps) {
-    const { user } = useContext(AuthContext);
-
-    return (
-        <Container>
-            <div className="profile-image-container">
-                <div className="profile-image-wrapper">
-                    <img
-                        src={avatarImgUrl ?? ImgDefaultProfile}
-                        alt="avatar"
-                        className="profile-image"
-                    />
-                </div>
-            </div>
-            <p className="profile-name">{user.nickname}</p>
-        </Container>
-    );
-}
 
 export default Avatar;

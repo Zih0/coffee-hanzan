@@ -4,7 +4,6 @@ import { Mobile, PC } from '@styles/MediaQuery';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import LoginModal from '@components/Modal/CustomModal/LoginModal';
 import Button from '@components/common/Button';
 
 import { useIsLoggedIn } from '@contexts/AuthContext';
@@ -13,45 +12,47 @@ import Menu from './Menu';
 
 function Header() {
     const isLoggedIn = useIsLoggedIn();
-    const { openModal, ModalPortal } = useModal();
+    const { openModal } = useModal();
+
+    const onOpenLoginModal = () => {
+        openModal({
+            key: 'loginModal',
+        });
+    };
 
     return (
-        <>
-            <Container>
-                <div className="header-wrapper">
-                    <Link to="/">
-                        <div className="header-logo">
-                            <IconLogo />
-                        </div>
-                    </Link>
-                    <div className="header-auth">
-                        {isLoggedIn ? (
-                            <Menu />
-                        ) : (
-                            <>
-                                <p className="header-login" onClick={openModal}>
-                                    로그인
-                                </p>
-
-                                <Link to="signup">
-                                    <PC>
-                                        <Button>회원가입</Button>
-                                    </PC>
-                                    <Mobile>
-                                        <Button>회원가입</Button>
-                                    </Mobile>
-                                </Link>
-                            </>
-                        )}
+        <Container>
+            <div className="header-wrapper">
+                <Link to="/">
+                    <div className="header-logo">
+                        <IconLogo />
                     </div>
+                </Link>
+                <div className="header-auth">
+                    {isLoggedIn ? (
+                        <Menu />
+                    ) : (
+                        <>
+                            <p
+                                className="header-login"
+                                onClick={onOpenLoginModal}
+                            >
+                                로그인
+                            </p>
+
+                            <Link to="signup">
+                                <PC>
+                                    <Button>회원가입</Button>
+                                </PC>
+                                <Mobile>
+                                    <Button>회원가입</Button>
+                                </Mobile>
+                            </Link>
+                        </>
+                    )}
                 </div>
-            </Container>
-            {!isLoggedIn && (
-                <ModalPortal>
-                    <LoginModal />
-                </ModalPortal>
-            )}
-        </>
+            </div>
+        </Container>
     );
 }
 

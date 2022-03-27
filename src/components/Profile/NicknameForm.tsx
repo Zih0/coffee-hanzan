@@ -12,50 +12,6 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-const Form = styled.form`
-    width: 50%;
-    padding: 2rem;
-    border: 1px solid ${({ theme }) => theme.color.gray};
-    border-radius: 8px;
-
-    @media ${({ theme }) => theme.size.mobile} {
-        width: 100%;
-    }
-
-    .profile-input-wrapper {
-        display: block;
-
-        position: relative;
-
-        .nickname-error {
-            position: absolute;
-            bottom: -1.5rem;
-            left: 0;
-            color: tomato;
-        }
-    }
-
-    .profile-form-label {
-        font-size: 1rem;
-        font-weight: 700;
-        text-align: left;
-        margin-bottom: 0.5rem;
-    }
-
-    .profile-nickname-wrapper {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .profile-form-input {
-        width: 100%;
-    }
-`;
-
-const StyledInput = styled(Input)`
-    padding: 1rem;
-`;
-
 function NicknameForm() {
     const { user, setUser } = useContext(AuthContext);
     const [nickname, setNickname] = useState(user.nickname ?? '');
@@ -125,7 +81,7 @@ function NicknameForm() {
                     />
                     <Button>
                         {!loading ? (
-                            '수정'
+                            '수정하기'
                         ) : (
                             <FontAwesomeIcon icon={faSpinner} spin={true} />
                         )}
@@ -136,5 +92,49 @@ function NicknameForm() {
         </Form>
     );
 }
+
+const Form = styled.form`
+    width: 50%;
+    padding: 2rem;
+    border: 1px solid ${({ theme }) => theme.color.gray};
+    border-radius: 8px;
+
+    @media ${({ theme }) => theme.size.mobile} {
+        width: 100%;
+    }
+
+    .profile-input-wrapper {
+        display: block;
+
+        position: relative;
+
+        .nickname-error {
+            position: absolute;
+            bottom: -1.5rem;
+            left: 0;
+            color: tomato;
+        }
+    }
+
+    .profile-form-label {
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .profile-nickname-wrapper {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .profile-form-input {
+        width: 100%;
+    }
+`;
+
+const StyledInput = styled(Input)`
+    padding: 1rem;
+`;
 
 export default NicknameForm;

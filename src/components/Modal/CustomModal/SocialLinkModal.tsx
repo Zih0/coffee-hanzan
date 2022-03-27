@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useModal from '@hooks/useModal';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
@@ -49,11 +50,8 @@ const StyledInput = styled(Input)`
     width: 100%;
 `;
 
-interface ISocialLinkProps {
-    onClose: () => void;
-}
-
-function SocialLinkModal({ onClose }: ISocialLinkProps) {
+function SocialLinkModal() {
+    const { closeCurrentModal } = useModal();
     const { user, setUser } = useContext(AuthContext);
     const [github, setGithub] = useState(user.socialData?.github ?? '');
     const [twitter, setTwitter] = useState(user.socialData?.twitter ?? '');
@@ -101,7 +99,8 @@ function SocialLinkModal({ onClose }: ISocialLinkProps) {
         setUser(updatedUserData);
 
         toast.success('소셜 정보가 업데이트되었습니다.');
-        onClose();
+
+        closeCurrentModal();
     };
 
     return (
@@ -155,7 +154,7 @@ function SocialLinkModal({ onClose }: ISocialLinkProps) {
                 <Button
                     color="black"
                     background={theme.color.gray}
-                    onClick={onClose}
+                    onClick={closeCurrentModal}
                 >
                     취소
                 </Button>

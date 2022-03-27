@@ -10,23 +10,6 @@ interface IAuthSNSProps {
     direction?: 'row' | 'column';
 }
 
-const Container = styled.div<IAuthSNSProps>`
-    display: flex;
-    flex-direction: ${(props) => props.direction};
-    gap: 1rem;
-
-    .auth-btn {
-        display: flex;
-        gap: 0.5rem;
-        font-size: 0.7rem;
-        align-items: center;
-
-        svg {
-            font-size: 1.3rem;
-        }
-    }
-`;
-
 function AuthSNS({ direction = 'row' }: IAuthSNSProps) {
     const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         const {
@@ -56,5 +39,22 @@ function AuthSNS({ direction = 'row' }: IAuthSNSProps) {
         </Container>
     );
 }
+
+const Container = styled.div<IAuthSNSProps>`
+    display: flex;
+    flex-direction: ${(props) => props.direction};
+    gap: 1rem;
+
+    .auth-btn {
+        display: flex;
+        gap: 0.5rem;
+        font-size: 0.7rem;
+        align-items: center;
+
+        svg {
+            font-size: 1.3rem;
+        }
+    }
+`;
 
 export default AuthSNS;

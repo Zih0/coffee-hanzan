@@ -1,9 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { Dispatch, SetStateAction, useMemo, useState } from 'react';
 
 import { ModalKey } from '../components/Modal/modalManager';
 
 interface IModalContext {
     modalList: IModal[];
+    setModalList: Dispatch<SetStateAction<IModal[]>>;
 }
 
 interface IModalProvider {
@@ -17,6 +18,7 @@ export interface IModal {
 
 export const ModalContext = React.createContext<IModalContext>({
     modalList: [],
+    setModalList: () => {},
 });
 
 const ModalProvider = ({ children }: IModalProvider) => {

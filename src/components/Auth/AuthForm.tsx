@@ -3,12 +3,87 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import LoginModal from '@components/Modal/CustomModal/LoginModal';
 import Input from '@components/common/Input';
 
 import { AuthContext } from '@contexts/AuthContext';
 
 import { authService } from '@firebase/fbase';
+
+function AuthForm() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const history = useHistory();
+    const { openModal } = useModal();
+    const { setIsLoggedIn } = useContext(AuthContext);
+
+    const onChange = (event: any) => {
+        const {
+            target: { name, value },
+        } = event;
+        if (name === 'email') {
+            setEmail(value);
+        } else if (name === 'password') {
+            setPassword(value);
+        }
+    };
+
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            await authService.createUserWithEmailAndPassword(email, password);
+            setIsLoggedIn(true);
+            history.push('/setting');
+        } catch (error: any) {
+            setError(error.message);
+        }
+    };
+
+    const onOpenLoginModal = () => {
+        openModal({
+            key: 'loginModal',
+        });
+    };
+
+    return (
+        <>
+            <Container>
+                <Form onSubmit={onSubmit}>
+                    <h2 className="auth-header">회원가입</h2>
+                    <Input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        required
+                        value={email}
+                        onChange={onChange}
+                        className="auth-input"
+                    />
+                    <Input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={onChange}
+                        className="auth-input"
+                    />
+                    <Input
+                        type="submit"
+                        value="회원가입"
+                        className="auth-input auth-submit"
+                    />
+                    {error && <span className="auth-error">{error}</span>}
+                </Form>
+                <span className="auth-login">
+                    계정이 이미 있으신가요?
+                    <span className="highlight" onClick={onOpenLoginModal}>
+                        로그인
+                    </span>
+                </span>
+            </Container>
+        </>
+    );
+}
 
 const Container = styled.main`
     display: flex;
@@ -61,78 +136,5 @@ const Form = styled.form`
         font-size: 12px;
     }
 `;
-
-function AuthForm() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const history = useHistory();
-    const { openModal, ModalPortal } = useModal();
-    const { setIsLoggedIn } = useContext(AuthContext);
-
-    const onChange = (event: any) => {
-        const {
-            target: { name, value },
-        } = event;
-        if (name === 'email') {
-            setEmail(value);
-        } else if (name === 'password') {
-            setPassword(value);
-        }
-    };
-
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            await authService.createUserWithEmailAndPassword(email, password);
-            setIsLoggedIn(true);
-            history.push('/setting');
-        } catch (error: any) {
-            setError(error.message);
-        }
-    };
-
-    return (
-        <>
-            <Container>
-                <Form onSubmit={onSubmit}>
-                    <h2 className="auth-header">회원가입</h2>
-                    <Input
-                        type="text"
-                        name="email"
-                        placeholder="Email"
-                        required
-                        value={email}
-                        onChange={onChange}
-                        className="auth-input"
-                    />
-                    <Input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={onChange}
-                        className="auth-input"
-                    />
-                    <Input
-                        type="submit"
-                        value="회원가입"
-                        className="auth-input auth-submit"
-                    />
-                    {error && <span className="auth-error">{error}</span>}
-                </Form>
-                <span className="auth-login">
-                    계정이 이미 있으신가요?
-                    <span className="highlight" onClick={openModal}>
-                        로그인
-                    </span>
-                </span>
-            </Container>
-            <ModalPortal>
-                <LoginModal />
-            </ModalPortal>
-        </>
-    );
-}
 
 export default AuthForm;

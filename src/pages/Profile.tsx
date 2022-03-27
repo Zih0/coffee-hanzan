@@ -7,22 +7,6 @@ import TopSection from '@components/Profile/TopSection';
 
 import { AuthContext } from '@contexts/AuthContext';
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-
-    .wrapper {
-        max-width: 960px;
-        width: 100%;
-        padding: 2rem 3rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-`;
-
 function Profile() {
     const { user } = useContext(AuthContext);
     const history = useHistory();
@@ -40,5 +24,21 @@ function Profile() {
         </Container>
     );
 }
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    .wrapper {
+        max-width: 960px;
+        width: 100%;
+        padding: 2rem 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+`;
 
 export default Profile;

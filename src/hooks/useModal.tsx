@@ -1,73 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import { useContext, useEffect } from 'react';
 
-const Container = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    animation: 0.5s ${({ theme }) => theme.animation.fadein};
-    transition: all 0.5s;
+import { IModal, ModalContext } from '@contexts/ModalContext';
 
-    .modal-background {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.75);
-        z-index: 10;
-    }
-`;
+interface IUseModal {
+    openModal: ({ key, props }: IModal) => void;
+    closeCurrentModal: () => void;
+}
 
-const useModal = () => {
-    const [modalOpened, setModalOpened] = useState(false);
+function useModal(): IUseModal {
+    const { modalList, setModalList } = useContext(ModalContext);
 
-    const openModal = () => {
-        setModalOpened(true);
-    };
-    const closeModal = () => {
-        setModalOpened(false);
+    useEffect(() => {}, [modalList]);
+
+    const addModal = ({ key, props }: IModal) => {
+        setModalList((prev) => [...prev, { key, props }]);
     };
 
-    interface IModalProps {
-        children: React.ReactNode;
-    }
+    const closeCurrentModal = () => {
+        const newModalList = [...modalList];
+        newModalList.pop();
+        setModalList(newModalList);
+    };
 
-    function ModalPortal({ children }: IModalProps) {
-        const ref = useRef<Element | null>();
-        const [mounted, setMounted] = useState(false);
-
-        useEffect(() => {
-            setMounted(true);
-            if (document) {
-                const modalDom = document.querySelector('#root-modal');
-                ref.current = modalDom;
-            }
-        }, []);
-
-        if (ref.current && mounted && modalOpened) {
-            return createPortal(
-                <Container>
-                    <div
-                        className="modal-background"
-                        onClick={closeModal}
-                    ></div>
-                    {children}
-                </Container>,
-                ref.current,
-            );
-        }
-        return null;
-    }
+    const openModal = ({ key, props }: IModal) => {
+        addModal({ key, props });
+    };
 
     return {
         openModal,
-        closeModal,
-        ModalPortal,
+        closeCurrentModal,
     };
-};
+}
+
 export default useModal;

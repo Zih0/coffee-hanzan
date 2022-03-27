@@ -1,3 +1,4 @@
+import useModal from '@hooks/useModal';
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
@@ -11,6 +12,7 @@ import { authService } from '@firebase/fbase';
 
 function LoginModal() {
     const { setIsLoggedIn } = useContext(AuthContext);
+    const { closeCurrentModal } = useModal();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -38,6 +40,8 @@ function LoginModal() {
         } catch (error: any) {
             setError(error.message);
         }
+
+        closeCurrentModal();
     };
 
     return (

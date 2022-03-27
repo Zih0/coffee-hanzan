@@ -15,54 +15,6 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-const Form = styled.form`
-    width: 50%;
-    padding: 2rem;
-    border: 1px solid ${({ theme }) => theme.color.gray};
-    border-radius: 8px;
-
-    @media ${({ theme }) => theme.size.mobile} {
-        width: 100%;
-    }
-
-    .profile-input-wrapper {
-        display: block;
-
-        position: relative;
-
-        .account-error {
-            position: absolute;
-            bottom: -1.5rem;
-            left: 0;
-            color: tomato;
-        }
-    }
-
-    .profile-form-label {
-        font-size: 1rem;
-        font-weight: 700;
-        text-align: left;
-        margin-bottom: 0.5rem;
-    }
-
-    .profile-form-input {
-        width: 100%;
-    }
-
-    .margin-top-2 {
-        margin-top: 2rem;
-    }
-`;
-
-const StyledInput = styled(Input)`
-    padding: 1rem;
-`;
-
-const StyledButton = styled(Button)`
-    width: 100%;
-    margin-top: 1rem;
-`;
-
 function AccountForm() {
     const { user, setUser } = useContext(AuthContext);
     const [bank, setBank] = useState(decrypt(user.bank as string) ?? '');
@@ -149,7 +101,7 @@ function AccountForm() {
                 />
                 <StyledButton type="submit">
                     {!loading ? (
-                        '계좌번호 수정하기'
+                        '수정하기'
                     ) : (
                         <FontAwesomeIcon icon={faSpinner} spin={true} />
                     )}
@@ -159,5 +111,53 @@ function AccountForm() {
         </Form>
     );
 }
+
+const Form = styled.form`
+    width: 50%;
+    padding: 2rem;
+    border: 1px solid ${({ theme }) => theme.color.gray};
+    border-radius: 8px;
+
+    @media ${({ theme }) => theme.size.mobile} {
+        width: 100%;
+    }
+
+    .profile-input-wrapper {
+        display: block;
+
+        position: relative;
+
+        .account-error {
+            position: absolute;
+            bottom: -1.5rem;
+            left: 0;
+            color: tomato;
+        }
+    }
+
+    .profile-form-label {
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .profile-form-input {
+        width: 100%;
+    }
+
+    .margin-top-2 {
+        margin-top: 2rem;
+    }
+`;
+
+const StyledInput = styled(Input)`
+    padding: 1rem;
+`;
+
+const StyledButton = styled(Button)`
+    width: 100%;
+    margin-top: 1rem;
+`;
 
 export default AccountForm;

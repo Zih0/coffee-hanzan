@@ -15,10 +15,14 @@ const Container = styled.div`
     padding: 12px;
 
     .info-wrapper {
-        width: 100%;
         border-radius: 14px;
         padding: 16px;
         box-shadow: 1px 0 4px rgb(0 2 4 / 6%), 0 7px 18px rgb(1 1 1 / 5%);
+    }
+
+    .info-title {
+        font-size: 20px;
+        font-weight: 800;
     }
 
     .info-introduction {
@@ -52,6 +56,7 @@ function UserInfo({ introduction, socialData }: IUserInfoProps) {
     return (
         <Container>
             <div className="info-wrapper">
+                <p className="info-title">자기소개</p>
                 <p className="info-introduction">{introduction}</p>
                 <div className="info-social">
                     {socialData?.github && (

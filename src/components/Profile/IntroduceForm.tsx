@@ -10,33 +10,6 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-const Form = styled.form`
-    width: 50%;
-    padding: 2rem;
-    border: 1px solid ${({ theme }) => theme.color.gray};
-    border-radius: 8px;
-
-    @media ${({ theme }) => theme.size.mobile} {
-        width: 100%;
-    }
-
-    .profile-form-label {
-        font-size: 1rem;
-        font-weight: 700;
-        text-align: left;
-        margin-bottom: 0.5rem;
-    }
-
-    .profile-form-textarea {
-        width: 100%;
-        height: 5rem;
-        padding: 0.5rem;
-        background-color: #f4f4f4;
-        border: 1px solid #bfbfbf;
-        border-radius: 8px;
-    }
-`;
-
 const StyledButton = styled(Button)`
     width: 100%;
     margin-top: 1rem;
@@ -88,7 +61,7 @@ function IntroduceForm() {
                     />
                     <StyledButton type="submit">
                         {!loading ? (
-                            '자기소개 수정하기'
+                            '수정하기'
                         ) : (
                             <FontAwesomeIcon icon={faSpinner} spin={true} />
                         )}
@@ -98,5 +71,32 @@ function IntroduceForm() {
         </Form>
     );
 }
+
+const Form = styled.form`
+    width: 50%;
+    padding: 2rem;
+    border: 1px solid ${({ theme }) => theme.color.gray};
+    border-radius: 8px;
+
+    @media ${({ theme }) => theme.size.mobile} {
+        width: 100%;
+    }
+
+    .profile-form-label {
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .profile-form-textarea {
+        width: 100%;
+        height: 5rem;
+        padding: 1rem;
+        background-color: #f4f4f4;
+        border: 1px solid #bfbfbf;
+        border-radius: 8px;
+    }
+`;
 
 export default IntroduceForm;

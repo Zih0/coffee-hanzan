@@ -17,17 +17,20 @@ const StyledButton = styled(Button)`
 `;
 
 function SocialLink() {
-    const { openModal, closeModal, ModalPortal } = useModal();
+    const { openModal } = useModal();
+
+    const onOpenSocialLinkModal = () => {
+        openModal({
+            key: 'socialLinkModal',
+        });
+    };
 
     return (
         <>
-            <StyledButton onClick={openModal}>
+            <StyledButton onClick={onOpenSocialLinkModal}>
                 <FontAwesomeIcon icon={faLink} />
                 소셜 정보 연결
             </StyledButton>
-            <ModalPortal>
-                <SocialLinkModal onClose={closeModal} />
-            </ModalPortal>
         </>
     );
 }

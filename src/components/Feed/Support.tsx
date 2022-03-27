@@ -5,8 +5,102 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import SupportModal from '@components/Modal/CustomModal/SupportModal';
 import Button from '@components/common/Button';
+
+function Support() {
+    const [amount, setAmount] = useState(0);
+    const { openModal } = useModal();
+
+    const onChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {
+            target: { value },
+        } = e;
+        const count = parseInt(value);
+        setAmount(count * COFFEE_PRICE);
+    };
+
+    const onOpenSupportModal = () => {
+        openModal({
+            key: 'supportModal',
+            props: {
+                amount,
+            },
+        });
+    };
+
+    const onSubmitSupport = () => {
+        if (amount === 0) {
+            toast.error('개수를 지정해주세요.');
+            return;
+        }
+
+        onOpenSupportModal();
+    };
+
+    return (
+        <>
+            <Container>
+                <div className="support-wrapper">
+                    <p className="support-title">커피 후원하기</p>
+                    <div className="support-coffee-wrapper">
+                        <div className="circle">☕️</div>
+                        <span className="x-icon">x</span>
+                        <div className="support-count-wrapper">
+                            <input
+                                id="count-1"
+                                type="radio"
+                                value="1"
+                                name="count"
+                                onChange={onChangeAmount}
+                            />
+                            <label
+                                className="circle support-count"
+                                htmlFor="count-1"
+                            >
+                                1
+                            </label>
+                            <input
+                                id="count-3"
+                                type="radio"
+                                value="3"
+                                name="count"
+                                onChange={onChangeAmount}
+                            />
+                            <label
+                                className="circle support-count"
+                                htmlFor="count-3"
+                            >
+                                3
+                            </label>
+                            <input
+                                id="count-5"
+                                type="radio"
+                                value="5"
+                                name="count"
+                                onChange={onChangeAmount}
+                            />
+                            <label
+                                className="circle support-count"
+                                htmlFor="count-5"
+                            >
+                                5
+                            </label>
+                        </div>
+                    </div>
+                    <div className="support-button-wrapper">
+                        <SupportButton
+                            onClick={onSubmitSupport}
+                            disabled={!!!amount}
+                        >
+                            <img src={IconLogoToss} alt="toss" /> 토스로
+                            후원하기
+                        </SupportButton>
+                    </div>
+                </div>
+            </Container>
+        </>
+    );
+}
 
 const Container = styled.div`
     width: 100%;
@@ -84,7 +178,7 @@ const SupportButton = styled(Button)`
     background-color: #0064ff;
     color: ${({ theme }) => theme.color.white};
     font-size: 16px;
-    padding: 0.4rem 1.5rem;
+    padding: 0.4rem 2.3rem;
     transition: 0.3s all;
 
     img {
@@ -97,94 +191,5 @@ const SupportButton = styled(Button)`
         color: ${({ theme }) => theme.color.white};
     }
 `;
-
-function Support() {
-    const [amount, setAmount] = useState(0);
-    const { openModal, ModalPortal } = useModal();
-
-    const onChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {
-            target: { value },
-        } = e;
-        const count = parseInt(value);
-        setAmount(count * COFFEE_PRICE);
-    };
-
-    const onSubmitSupport = () => {
-        if (amount === 0) {
-            toast.error('개수를 지정해주세요.');
-            return;
-        }
-
-        openModal();
-    };
-
-    return (
-        <>
-            <Container>
-                <div className="support-wrapper">
-                    <p className="support-title">커피 후원하기</p>
-                    <div className="support-coffee-wrapper">
-                        <div className="circle">☕️</div>
-                        <span className="x-icon">x</span>
-                        <div className="support-count-wrapper">
-                            <input
-                                id="count-1"
-                                type="radio"
-                                value="1"
-                                name="count"
-                                onChange={onChangeAmount}
-                            />
-                            <label
-                                className="circle support-count"
-                                htmlFor="count-1"
-                            >
-                                1
-                            </label>
-                            <input
-                                id="count-3"
-                                type="radio"
-                                value="3"
-                                name="count"
-                                onChange={onChangeAmount}
-                            />
-                            <label
-                                className="circle support-count"
-                                htmlFor="count-3"
-                            >
-                                3
-                            </label>
-                            <input
-                                id="count-5"
-                                type="radio"
-                                value="5"
-                                name="count"
-                                onChange={onChangeAmount}
-                            />
-                            <label
-                                className="circle support-count"
-                                htmlFor="count-5"
-                            >
-                                5
-                            </label>
-                        </div>
-                    </div>
-                    <div className="support-button-wrapper">
-                        <SupportButton
-                            onClick={onSubmitSupport}
-                            disabled={!!!amount}
-                        >
-                            <img src={IconLogoToss} alt="toss" /> 토스로
-                            후원하기
-                        </SupportButton>
-                    </div>
-                </div>
-            </Container>
-            <ModalPortal>
-                <SupportModal amount={amount} />
-            </ModalPortal>
-        </>
-    );
-}
 
 export default Support;

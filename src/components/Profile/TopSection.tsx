@@ -13,8 +13,88 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-import ImageUploadModal from '../Modal/ImageUploadModal';
 import SocialLink from './SocialLink';
+
+function TopSection() {
+    const { user } = useContext(AuthContext);
+    const [avatarImage, setAvatarImage] = useState(
+        user.avatarImgUrl ?? ImgDefaultProfile,
+    );
+    const [coverImage, setCoverImage] = useState(user.coverImgUrl ?? '');
+    const { openModal } = useModal();
+
+    const onOpenImageUploadModal = () => {
+        openModal({
+            key: 'imageUploadModal',
+        });
+    };
+
+    const onChangeAvatarImage = async (
+        e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        if (e.target.files !== null) {
+            const file = e.target.files[0];
+
+            setAvatarImage(URL.createObjectURL(file));
+            await changeAvatar(file);
+            toast.success('프로필 사진이 변경되었습니다.');
+        }
+    };
+
+    useEffect(() => {
+        setCoverImage(user.coverImgUrl ?? '');
+    }, [user.coverImgUrl]);
+
+    const changeAvatar = async (file: File) => {
+        const compressedImage = await compressImage(file);
+        const imageUrl = await API.uploadUserPhoto(compressedImage);
+        await API.setUserPhoto(user.creatorId, imageUrl);
+    };
+
+    return (
+        <Container cover={coverImage}>
+            <div className="cover-wrapper">
+                <div className="cover-image">
+                    <div className="cover-add-button">
+                        <StyledButton
+                            background={'#fff'}
+                            color={'black'}
+                            onClick={onOpenImageUploadModal}
+                        >
+                            <FontAwesomeIcon icon={faCamera} />
+                            cover
+                        </StyledButton>
+                    </div>
+                </div>
+            </div>
+            <div className="profile-image-container">
+                <div className="profile-image-wrapper">
+                    <img src={avatarImage} alt="" className="profile-image" />
+                    <label
+                        className="profile-image-label"
+                        htmlFor="image-uploader"
+                    >
+                        <FontAwesomeIcon
+                            className="add-pic-camera"
+                            icon={faCamera}
+                        />
+                    </label>
+                    <input
+                        id="image-uploader"
+                        className="profile-image-input"
+                        type="file"
+                        accept="image/*"
+                        onChange={onChangeAvatarImage}
+                    />
+                </div>
+            </div>
+
+            <div className="social-link-wrapper">
+                <SocialLink />
+            </div>
+        </Container>
+    );
+}
 
 const Container = styled.div<{ cover: string }>`
     width: 100%;
@@ -55,6 +135,7 @@ const Container = styled.div<{ cover: string }>`
         border-radius: 50%;
         position: relative;
         border: 2px solid ${({ theme }) => theme.color.white};
+        background-color: ${({ theme }) => theme.color.white};
     }
 
     .profile-image {
@@ -113,84 +194,5 @@ const StyledButton = styled(Button)`
     opacity: 0.8;
     gap: 0.2rem;
 `;
-
-function TopSection() {
-    const { user } = useContext(AuthContext);
-    const [avatarImage, setAvatarImage] = useState(
-        user.avatarImgUrl ?? ImgDefaultProfile,
-    );
-    const [coverImage, setCoverImage] = useState(user.coverImgUrl ?? '');
-    const { openModal, closeModal, ModalPortal } = useModal();
-
-    const onChangeAvatarImage = async (
-        e: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        if (e.target.files !== null) {
-            const file = e.target.files[0];
-
-            setAvatarImage(URL.createObjectURL(file));
-            await changeAvatar(file);
-            toast.success('프로필 사진이 변경되었습니다.');
-        }
-    };
-
-    useEffect(() => {
-        setCoverImage(user.coverImgUrl ?? '');
-    }, [user.coverImgUrl]);
-
-    const changeAvatar = async (file: File) => {
-        const compressedImage = await compressImage(file);
-        const imageUrl = await API.uploadUserPhoto(compressedImage);
-        await API.setUserPhoto(user.creatorId, imageUrl);
-    };
-
-    return (
-        <Container cover={coverImage}>
-            <div className="cover-wrapper">
-                <div className="cover-image">
-                    <div className="cover-add-button">
-                        <StyledButton
-                            background={'#fff'}
-                            color={'black'}
-                            onClick={openModal}
-                        >
-                            <FontAwesomeIcon icon={faCamera} />
-                            cover
-                        </StyledButton>
-                    </div>
-                </div>
-            </div>
-            <div className="profile-image-container">
-                <div className="profile-image-wrapper">
-                    <img src={avatarImage} alt="" className="profile-image" />
-                    <label
-                        className="profile-image-label"
-                        htmlFor="image-uploader"
-                    >
-                        <FontAwesomeIcon
-                            className="add-pic-camera"
-                            icon={faCamera}
-                        />
-                    </label>
-                    <input
-                        id="image-uploader"
-                        className="profile-image-input"
-                        type="file"
-                        accept="image/*"
-                        onChange={onChangeAvatarImage}
-                    />
-                </div>
-            </div>
-
-            <div className="social-link-wrapper">
-                <SocialLink />
-            </div>
-
-            <ModalPortal>
-                <ImageUploadModal closeModal={closeModal} />
-            </ModalPortal>
-        </Container>
-    );
-}
 
 export default TopSection;

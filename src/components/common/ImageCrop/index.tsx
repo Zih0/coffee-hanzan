@@ -1,3 +1,6 @@
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useModal from '@hooks/useModal';
 import React, { useCallback, useContext, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -12,12 +15,12 @@ import Button from '../Button';
 
 interface IImageCropProps {
     image: string;
-    closeModal: () => void;
 }
 
-function ImageCrop({ image, closeModal }: IImageCropProps) {
+function ImageCrop({ image }: IImageCropProps) {
+    const [loading, setLoading] = useState(false);
+    const { closeCurrentModal } = useModal();
     const { user, setUser } = useContext(AuthContext);
-
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const imgRef = useRef<HTMLImageElement | null>(null);
     const [crop, setCrop] = useState<Crop>({
@@ -40,6 +43,7 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
     const uploadCoverImage = async (blob: Blob | null) => {
         if (!blob) return;
 
+        setLoading(true);
         const url = await saveImage(blob);
         const updatedUserData = Object.assign(
             { ...user },
@@ -49,7 +53,10 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
         );
         await API.setUserCover(user.creatorId, url);
         setUser(updatedUserData);
-        closeModal();
+
+        setLoading(false);
+
+        closeCurrentModal();
         toast.success('커버 사진이 변경되었습니다.');
     };
 
@@ -110,15 +117,20 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
 
     return (
         <>
-            <ReactCrop
+            <StyledCrop
                 src={image}
                 crop={crop}
                 onImageLoaded={onLoad}
                 onChange={(newCrop) => setCrop(newCrop)}
                 onComplete={(crop) => setCompletedCrop(crop)}
             />
-
-            <Button onClick={onChangeCoverImage}>저장하기</Button>
+            <Button onClick={onChangeCoverImage}>
+                {!loading ? (
+                    '저장하기'
+                ) : (
+                    <FontAwesomeIcon icon={faSpinner} spin={true} />
+                )}
+            </Button>
             <Canvas ref={canvasRef}></Canvas>
         </>
     );
@@ -127,6 +139,11 @@ function ImageCrop({ image, closeModal }: IImageCropProps) {
 const Canvas = styled.canvas`
     width: 0;
     height: 0;
+`;
+
+const StyledCrop = styled(ReactCrop)`
+    max-height: 400px;
+    overflow-y: auto;
 `;
 
 export default ImageCrop;
