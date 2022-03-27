@@ -1,43 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
+import AuthSNS from '@components/Auth/AuthSNS';
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 
+import { AuthContext } from '@contexts/AuthContext';
+
 import { authService } from '@firebase/fbase';
 
-import AuthSNS from '../Auth/AuthSNS';
-
-const Container = styled.div`
-    width: 25rem;
-    height: 30rem;
-    padding: 3rem;
-    background-color: #fff;
-    z-index: 11;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    border-radius: 16px;
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
-    .auth-header {
-        font-size: 2rem;
-        font-weight: 800;
-    }
-
-    .auth-error {
-        color: tomato;
-        text-align: center;
-        font-size: 12px;
-    }
-`;
-
 function LoginModal() {
+    const { setIsLoggedIn } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -56,10 +29,12 @@ function LoginModal() {
         setPassword(value);
     };
 
-    const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmitSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         try {
             await authService.signInWithEmailAndPassword(email, password);
+            setIsLoggedIn(true);
         } catch (error: any) {
             setError(error.message);
         }
@@ -67,7 +42,7 @@ function LoginModal() {
 
     return (
         <Container>
-            <Form onSubmit={onSubmitSignUp}>
+            <Form onSubmit={onSubmitSignIn}>
                 <h2 className="auth-header">로그인</h2>
                 <Input
                     type="email"
@@ -93,5 +68,33 @@ function LoginModal() {
         </Container>
     );
 }
+
+const Container = styled.div`
+    width: 25rem;
+    padding: 3rem;
+    background-color: #fff;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-radius: 16px;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .auth-header {
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .auth-error {
+        color: tomato;
+        text-align: center;
+        font-size: 12px;
+    }
+`;
 
 export default LoginModal;

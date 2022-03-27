@@ -9,7 +9,6 @@ import Button from '@components/common/Button';
 
 import SupportModal from '../Modal/SupportModal';
 
-
 const Container = styled.div`
     width: 100%;
     padding: 12px;

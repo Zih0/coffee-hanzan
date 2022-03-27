@@ -15,7 +15,6 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-
 const Form = styled.form`
     width: 50%;
     padding: 2rem;

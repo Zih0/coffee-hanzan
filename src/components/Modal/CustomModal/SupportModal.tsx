@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
-import QR from '@components/common/QR/QR';
-
-import { AuthContext } from '@contexts/AuthContext';
+import { AuthContext } from '../../../contexts/AuthContext';
+import QR from '../../common/QR/QR';
 
 const Container = styled.div`
     padding: 3rem;
@@ -19,7 +18,6 @@ const Container = styled.div`
         font-size: 12px;
         text-align: center;
     }
-
     .support-desc {
         margin-top: 4px;
         font-size: 10px;

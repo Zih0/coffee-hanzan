@@ -15,7 +15,6 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-
 const Container = styled.div`
     margin-top: 5rem;
     display: flex;

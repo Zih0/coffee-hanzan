@@ -11,7 +11,6 @@ import { useIsLoggedIn } from '@contexts/AuthContext';
 import LoginModal from '../Modal/LoginModal';
 import Menu from './Menu';
 
-
 function Header() {
     const isLoggedIn = useIsLoggedIn();
     const { openModal, ModalPortal } = useModal();

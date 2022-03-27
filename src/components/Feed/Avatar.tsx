@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { AuthContext } from '@contexts/AuthContext';
 
-
 const Container = styled.div`
     width: 100%;
     display: flex;

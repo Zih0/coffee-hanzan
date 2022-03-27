@@ -6,17 +6,15 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { theme } from '@styles/theme';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import Button from '@components/common/Button';
-import Input from '@components/common/Input';
-
-import { AuthContext } from '@contexts/AuthContext';
-
-import { API } from '@firebase/api';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { API } from '../../../firebase/api';
+import { theme } from '../../../styles/theme';
+import Button from '../../common/Button';
+import Input from '../../common/Input';
 
 const Container = styled.div`
     width: 25rem;
@@ -65,10 +63,10 @@ function SocialLinkModal({ onClose }: ISocialLinkProps) {
     );
     const [blog, setBlog] = useState(user.socialData?.blog ?? '');
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {
             currentTarget: { name, value },
-        } = e;
+        } = event;
         if (name === 'github') setGithub(value);
         else if (name === 'twitter') setTwitter(value);
         else if (name === 'facebook') setFacebook(value);
@@ -76,8 +74,8 @@ function SocialLinkModal({ onClose }: ISocialLinkProps) {
         else if (name === 'blog') setBlog(value);
     };
 
-    const onSaveSocial = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const onSaveSocial = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
 
         const trimmedGithub = github.trim();
         const trimmedTwitter = twitter.trim();

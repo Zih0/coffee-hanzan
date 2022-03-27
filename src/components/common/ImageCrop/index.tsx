@@ -10,7 +10,6 @@ import { API } from '@firebase/api';
 
 import Button from '../Button';
 
-
 interface IImageCropProps {
     image: string;
     closeModal: () => void;

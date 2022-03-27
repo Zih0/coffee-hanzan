@@ -8,7 +8,6 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-
 function Menu() {
     const { setUser, setIsLoggedIn } = useContext(AuthContext);
     const [openDropdown, setOpenDropdown] = useState(false);

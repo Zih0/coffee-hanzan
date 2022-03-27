@@ -9,14 +9,13 @@ import AppRouter from './routes/Router';
 import GlobalStyles from './styles/GlobalStyles';
 import { theme } from './styles/theme';
 
-
 function App() {
     return (
         <AuthProvider>
             <ThemeProvider theme={theme}>
-                <GlobalStyles/>
-                <AppRouter/>
-                <div id="root-modal"/>
+                <GlobalStyles />
+                <AppRouter />
+                <div id="root-modal" />
                 <ToastContainer
                     hideProgressBar
                     autoClose={2000}

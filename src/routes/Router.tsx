@@ -5,7 +5,6 @@ import Header from '@components/Header';
 
 import PrivateRoute from './PrivateRoute';
 
-
 const SignUp = lazy(() => import('@pages/SignUp'));
 const Home = lazy(() => import('@pages/Home'));
 const Setting = lazy(() => import('@pages/Setting'));

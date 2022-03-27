@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import AuthForm from '@components/Auth/AuthForm';
 import AuthSNS from '@components/Auth/AuthSNS';
+
+import { AuthContext } from '../contexts/AuthContext';
 
 const Container = styled.div`
     display: flex;
@@ -14,10 +17,17 @@ const Container = styled.div`
 `;
 
 function SignUp() {
+    const { isLoggedIn } = useContext(AuthContext);
+    const history = useHistory();
+
+    useLayoutEffect(() => {
+        if (isLoggedIn) history.push('/');
+    }, []);
+
     return (
         <Container>
-            <AuthForm/>
-            <AuthSNS/>
+            <AuthForm />
+            <AuthSNS />
         </Container>
     );
 }

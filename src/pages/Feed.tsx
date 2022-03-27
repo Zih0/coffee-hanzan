@@ -11,7 +11,6 @@ import Footer from '@components/Footer';
 
 import { API } from '@firebase/api';
 
-
 const Container = styled.main`
     display: flex;
     flex-direction: column;

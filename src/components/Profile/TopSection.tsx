@@ -16,7 +16,6 @@ import { API } from '@firebase/api';
 import ImageUploadModal from '../Modal/ImageUploadModal';
 import SocialLink from './SocialLink';
 
-
 const Container = styled.div<{ cover: string }>`
     width: 100%;
     margin: 0 auto;

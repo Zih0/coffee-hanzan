@@ -6,7 +6,6 @@ import Button from '@components/common/Button';
 
 import { Providers, authService } from '@firebase/fbase';
 
-
 interface IAuthSNSProps {
     direction?: 'row' | 'column';
 }
