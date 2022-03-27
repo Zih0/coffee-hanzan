@@ -4,11 +4,11 @@ import { Mobile, PC } from '@styles/MediaQuery';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import LoginModal from '@components/Modal/CustomModal/LoginModal';
 import Button from '@components/common/Button';
 
 import { useIsLoggedIn } from '@contexts/AuthContext';
 
-import LoginModal from '../Modal/LoginModal';
 import Menu from './Menu';
 
 function Header() {

@@ -5,9 +5,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
+import SupportModal from '@components/Modal/CustomModal/SupportModal';
 import Button from '@components/common/Button';
-
-import SupportModal from '../Modal/SupportModal';
 
 const Container = styled.div`
     width: 100%;
