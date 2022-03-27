@@ -4,7 +4,7 @@ import useModal from '@hooks/useModal';
 import React from 'react';
 import styled from 'styled-components';
 
-import SocialLinkModal from '@components/Modal/SocialLinkModal';
+import SocialLinkModal from '@components/Modal/CustomModal/SocialLinkModal';
 import Button from '@components/common/Button';
 
 const StyledButton = styled(Button)`

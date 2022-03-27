@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import LoginModal from '@components/Modal/LoginModal';
+import LoginModal from '@components/Modal/CustomModal/LoginModal';
 import Input from '@components/common/Input';
 
 import { AuthContext } from '@contexts/AuthContext';
