@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -20,9 +20,9 @@ function SignUp() {
     const { isLoggedIn } = useContext(AuthContext);
     const history = useHistory();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (isLoggedIn) history.push('/');
-    }, []);
+    }, [isLoggedIn]);
 
     return (
         <Container>
