@@ -1,5 +1,6 @@
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useModal from '@hooks/useModal';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';
@@ -11,6 +12,8 @@ interface IAuthSNSProps {
 }
 
 function AuthSNS({ direction = 'row' }: IAuthSNSProps) {
+    const { closeCurrentModal } = useModal();
+
     const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         const {
             currentTarget: { name },
@@ -20,6 +23,7 @@ function AuthSNS({ direction = 'row' }: IAuthSNSProps) {
         } else if (name === 'github') {
             await authService.signInWithPopup(Providers.github);
         }
+        closeCurrentModal();
     };
 
     return (

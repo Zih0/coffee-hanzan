@@ -14,7 +14,7 @@ function AuthForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const history = useHistory();
-    const { openModal } = useModal();
+    const { openModal, closeCurrentModal } = useModal();
     const { setIsLoggedIn } = useContext(AuthContext);
 
     const onChange = (event: any) => {
@@ -33,6 +33,8 @@ function AuthForm() {
         try {
             await authService.createUserWithEmailAndPassword(email, password);
             setIsLoggedIn(true);
+
+            closeCurrentModal();
             history.push('/setting');
         } catch (error: any) {
             setError(error.message);
