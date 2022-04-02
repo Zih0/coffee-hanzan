@@ -4,6 +4,12 @@ const color = {
     gray: '#a9a9a9',
     white: '#ffffff',
     black: '#000000',
+    black_900: '#111111',
+    black_800: '#222222',
+    black_700: '#333333',
+    violet: '#794bc4',
+    tomato: '#ff5f5f',
+    yellow: '#fcbf47',
 };
 
 const size = {
