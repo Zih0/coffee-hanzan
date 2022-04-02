@@ -1,13 +1,19 @@
-import ImageUploadModal from './CustomModal/ImageUploadModal';
-import LoginModal from './CustomModal/LoginModal';
-import SocialLinkModal from './CustomModal/SocialLinkModal';
-import SupportModal from './CustomModal/SupportModal';
+import { lazy } from 'react';
+
+const ButtonFactoryModal = lazy(
+    () => import('./CustomModal/ButtonFactoryModal'),
+);
+const ImageUploadModal = lazy(() => import('./CustomModal/ImageUploadModal'));
+const LoginModal = lazy(() => import('./CustomModal/LoginModal'));
+const SocialLinkModal = lazy(() => import('./CustomModal/SocialLinkModal'));
+const SupportModal = lazy(() => import('./CustomModal/SupportModal'));
 
 export const modalsKey = [
     'imageUploadModal',
     'loginModal',
     'socialLinkModal',
     'supportModal',
+    'buttonFactoryModal',
 ] as const;
 
 export type ModalKey = typeof modalsKey[number];
@@ -21,4 +27,5 @@ export const modals: Modals = {
     loginModal: LoginModal,
     socialLinkModal: SocialLinkModal,
     supportModal: SupportModal,
+    buttonFactoryModal: ButtonFactoryModal,
 };

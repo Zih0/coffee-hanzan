@@ -1,8 +1,9 @@
 import useModal from '@hooks/useModal';
-import React, { useContext } from 'react';
+import React, { Suspense, useContext } from 'react';
 import styled from 'styled-components';
 
-import { ModalContext } from '../../contexts/ModalContext';
+import { ModalContext } from '@contexts/ModalContext';
+
 import { modals } from './modalManager';
 
 function Modal() {
@@ -10,7 +11,7 @@ function Modal() {
     const { closeCurrentModal } = useModal();
 
     return (
-        <>
+        <Suspense fallback={<></>}>
             {modalList.length > 0 && (
                 <Container>
                     <div
@@ -25,7 +26,7 @@ function Modal() {
                     </div>
                 </Container>
             )}
-        </>
+        </Suspense>
     );
 }
 
@@ -54,7 +55,7 @@ const Container = styled.div`
         border: none;
         z-index: 1001;
         position: absolute;
-
+        animation: ${({ theme }) => theme.animation.fadein} 0.5s;
         p {
             margin: 0;
         }
