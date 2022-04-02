@@ -10,43 +10,6 @@ import styled from 'styled-components';
 
 import SocialIcon from './SocialIcon';
 
-const Container = styled.div`
-    width: 100%;
-    padding: 12px;
-
-    .info-wrapper {
-        border-radius: 14px;
-        padding: 16px;
-        box-shadow: 1px 0 4px rgb(0 2 4 / 6%), 0 7px 18px rgb(1 1 1 / 5%);
-    }
-
-    .info-title {
-        font-size: 20px;
-        font-weight: 800;
-    }
-
-    .info-introduction {
-        margin-top: 12px;
-        line-height: 1.3;
-        white-space: pre-line;
-    }
-
-    .info-social {
-        margin-top: 24px;
-        display: flex;
-        gap: 12px;
-
-        svg {
-            width: 24px;
-            height: 24px;
-
-            &:hover {
-                color: ${({ theme }) => theme.color.gray};
-            }
-        }
-    }
-`;
-
 interface IUserInfoProps {
     introduction: string | undefined;
     socialData: ISocial | undefined;
@@ -98,5 +61,42 @@ function UserInfo({ introduction, socialData }: IUserInfoProps) {
         </Container>
     );
 }
+
+const Container = styled.div`
+    width: 100%;
+    padding: 12px;
+
+    .info-wrapper {
+        border-radius: 14px;
+        padding: 24px;
+        box-shadow: 1px 0 4px rgb(0 2 4 / 6%), 0 7px 18px rgb(1 1 1 / 5%);
+    }
+
+    .info-title {
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    .info-introduction {
+        margin-top: 12px;
+        line-height: 1.3;
+        white-space: pre-line;
+    }
+
+    .info-social {
+        margin-top: 24px;
+        display: flex;
+        gap: 12px;
+
+        svg {
+            width: 24px;
+            height: 24px;
+
+            &:hover {
+                color: ${({ theme }) => theme.color.gray};
+            }
+        }
+    }
+`;
 
 export default UserInfo;
