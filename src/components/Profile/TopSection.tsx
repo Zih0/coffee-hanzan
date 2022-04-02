@@ -13,7 +13,8 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-import SocialLink from './SocialLink';
+import LinkButton from './LinkButton';
+import SocialLinkButton from './SocialLinkButton';
 
 function TopSection() {
     const { user } = useContext(AuthContext);
@@ -41,15 +42,15 @@ function TopSection() {
         }
     };
 
-    useEffect(() => {
-        setCoverImage(user.coverImgUrl ?? '');
-    }, [user.coverImgUrl]);
-
     const changeAvatar = async (file: File) => {
         const compressedImage = await compressImage(file);
         const imageUrl = await API.uploadUserPhoto(compressedImage);
         await API.setUserPhoto(user.creatorId, imageUrl);
     };
+
+    useEffect(() => {
+        setCoverImage(user.coverImgUrl ?? '');
+    }, [user.coverImgUrl]);
 
     return (
         <Container cover={coverImage}>
@@ -89,8 +90,9 @@ function TopSection() {
                 </div>
             </div>
 
-            <div className="social-link-wrapper">
-                <SocialLink />
+            <div className="btn-wrapper">
+                <SocialLinkButton />
+                <LinkButton />
             </div>
         </Container>
     );
@@ -182,7 +184,7 @@ const Container = styled.div<{ cover: string }>`
         line-height: 1.3;
     }
 
-    .social-link-wrapper {
+    .btn-wrapper {
         width: 100%;
         margin-top: 12px;
         display: flex;
