@@ -3,21 +3,29 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     width: 100%;
-    height: 40px;
+    height: 80px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background-color: ${({ theme }) => theme.color.gray_100};
 
-    .contact-email {
+    .wrapper {
+        max-width: 1240px;
+        width: 92%;
+    }
+
+    .copyright {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 300;
     }
 `;
 
 function Footer() {
     return (
         <Container>
-            <span className="contact-email">커피한잔 | ziho@kakao.com</span>
+            <div className="wrapper">
+                <span className="copyright">2022 커피한잔</span>
+            </div>
         </Container>
     );
 }
