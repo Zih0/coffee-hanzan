@@ -1,6 +1,7 @@
 import { DefaultTheme, keyframes } from 'styled-components';
 
 const color = {
+    gray_100: '#f1f5f5',
     gray: '#a9a9a9',
     white: '#ffffff',
     black: '#000000',
