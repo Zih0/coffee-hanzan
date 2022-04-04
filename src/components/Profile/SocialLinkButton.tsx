@@ -17,7 +17,7 @@ function SocialLinkButton() {
     return (
         <StyledButton onClick={onOpenSocialLinkModal}>
             <FontAwesomeIcon icon={faLink} />
-            소셜 정보 연결
+            소셜정보연결
         </StyledButton>
     );
 }
@@ -29,6 +29,9 @@ const StyledButton = styled(Button)`
     letter-spacing: -0.05em;
     background-color: ${({ theme }) => theme.color.white};
     color: ${({ theme }) => theme.color.black};
+    border: 1px solid ${({ theme }) => theme.color.black};
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
 `;
 
 export default SocialLinkButton;

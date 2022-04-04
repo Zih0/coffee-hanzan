@@ -13,8 +13,8 @@ import { AuthContext } from '@contexts/AuthContext';
 
 import { API } from '@firebase/api';
 
-import LinkButton from './LinkButton';
 import SocialLinkButton from './SocialLinkButton';
+import WidgetButton from './WidgetButton';
 
 function TopSection() {
     const { user } = useContext(AuthContext);
@@ -92,7 +92,7 @@ function TopSection() {
 
             <div className="btn-wrapper">
                 <SocialLinkButton />
-                <LinkButton />
+                <WidgetButton />
             </div>
         </Container>
     );
@@ -186,9 +186,10 @@ const Container = styled.div<{ cover: string }>`
 
     .btn-wrapper {
         width: 100%;
-        margin-top: 12px;
+        margin-top: 2rem;
         display: flex;
         justify-content: center;
+        gap: 1rem;
     }
 `;
 

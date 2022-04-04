@@ -6,19 +6,19 @@ import styled from 'styled-components';
 
 import Button from '@components/common/Button';
 
-function LinkButton() {
+function WidgetButton() {
     const { openModal } = useModal();
 
-    const onOpenButtonFactoryModal = () => {
+    const onOpenWidgetFactoryModal = () => {
         openModal({
-            key: 'buttonFactoryModal',
+            key: 'widgetFactoryModal',
         });
     };
 
     return (
-        <StyledButton onClick={onOpenButtonFactoryModal}>
+        <StyledButton onClick={onOpenWidgetFactoryModal}>
             <FontAwesomeIcon icon={faWrench} />
-            커스텀 버튼 만들기
+            위젯생성하기
         </StyledButton>
     );
 }
@@ -28,8 +28,10 @@ const StyledButton = styled(Button)`
     gap: 0.2rem;
     font-size: 0.9rem;
     letter-spacing: -0.05em;
-    background-color: ${({ theme }) => theme.color.white};
-    color: ${({ theme }) => theme.color.black};
+    background-color: ${({ theme }) => theme.color.black};
+    color: ${({ theme }) => theme.color.white};
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
 `;
 
-export default LinkButton;
+export default WidgetButton;

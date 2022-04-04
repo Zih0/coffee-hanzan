@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
-const ButtonFactoryModal = lazy(
-    () => import('./CustomModal/ButtonFactoryModal'),
+const WidgetFactoryModal = lazy(
+    () => import('./CustomModal/WidgetFactoryModal'),
 );
 const ImageUploadModal = lazy(() => import('./CustomModal/ImageUploadModal'));
 const LoginModal = lazy(() => import('./CustomModal/LoginModal'));
@@ -13,7 +13,7 @@ export const modalsKey = [
     'loginModal',
     'socialLinkModal',
     'supportModal',
-    'buttonFactoryModal',
+    'widgetFactoryModal',
 ] as const;
 
 export type ModalKey = typeof modalsKey[number];
@@ -27,5 +27,5 @@ export const modals: Modals = {
     loginModal: LoginModal,
     socialLinkModal: SocialLinkModal,
     supportModal: SupportModal,
-    buttonFactoryModal: ButtonFactoryModal,
+    widgetFactoryModal: WidgetFactoryModal,
 };
