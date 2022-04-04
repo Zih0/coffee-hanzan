@@ -103,7 +103,7 @@ const Container = styled.div`
         cursor: pointer;
 
         &:hover {
-            background-color: ${({ theme }) => theme.color.gray};
+            background-color: ${({ theme }) => theme.color.gray_100};
         }
 
         .menu-dropdown-item-text {
