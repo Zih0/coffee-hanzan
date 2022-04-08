@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from '@hooks/useModal';
 import { compressImage } from '@utils/imageUtil';
 import React, { useContext, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Flip, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from 'styled-components';
 
 import Modal from '@components/Modal';
@@ -20,12 +19,7 @@ function App() {
                     <GlobalStyles />
                     <AppRouter />
                     <Modal />
-                    <ToastContainer
-                        hideProgressBar
-                        autoClose={2000}
-                        theme="colored"
-                        transition={Flip}
-                    />
+                    <Toaster position="top-center" reverseOrder={false} />
                 </ThemeProvider>
             </AuthProvider>
         </ModalProvider>

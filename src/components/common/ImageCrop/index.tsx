@@ -2,9 +2,9 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from '@hooks/useModal';
 import React, { useCallback, useContext, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AuthContext } from '@contexts/AuthContext';

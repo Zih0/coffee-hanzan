@@ -4,7 +4,7 @@ import { bankList } from '@utils/constants';
 import { decrypt, encrypt } from '@utils/crypto';
 import { isValidAccountLength, isValidNumber } from '@utils/validation';
 import React, { useContext, useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';

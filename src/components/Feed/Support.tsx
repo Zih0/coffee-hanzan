@@ -2,7 +2,7 @@ import { IconLogoToss } from '@assets/icons';
 import useModal from '@hooks/useModal';
 import { COFFEE_PRICE } from '@utils/constants';
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';

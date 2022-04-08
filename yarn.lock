@@ -1931,6 +1931,11 @@ globrex@^0.1.2:
   resolved "https://registry.yarnpkg.com/globrex/-/globrex-0.1.2.tgz#dd5d9ec826232730cd6793a5e33a9302985e6098"
   integrity sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==
 
+goober@^2.1.1:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.1.8.tgz#e592c04d093cb38f77b38cfcb012b7811c85765e"
+  integrity sha512-S0C85gCzcfFCMSdjD/CxyQMt1rbf2qEg6hmDzxk2FfD7+7Ogk55m8ZFUMtqNaZM4VVX/qaU9AzSORG+Gf4ZpAQ==
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/has-flag/-/has-flag-3.0.0.tgz"
@@ -2418,6 +2423,13 @@ react-dropzone@^12.0.2:
     file-selector "^0.4.0"
     prop-types "^15.8.1"
 
+react-hot-toast@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.2.0.tgz#ab6f4caed4214b9534f94bb8cfaaf21b051e62b9"
+  integrity sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g==
+  dependencies:
+    goober "^2.1.1"
+
 react-image-crop@^9.1.1:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-9.1.1.tgz#b44aef24ee429a3bd0397f734d387da9fc16f575"
@@ -2478,13 +2490,6 @@ react-router@5.2.0:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
-
-react-toastify@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-8.2.0.tgz#ef7d56bdfdc6272ca6b228368ab564721c3a3244"
-  integrity sha512-Pg2Ju7NngAamarFvLwqrFomJ57u/Ay6i6zfLurt/qPynWkAkOthu6vxfqYpJCyNhHRhR4hu7+bySSeWWJu6PAg==
-  dependencies:
-    clsx "^1.1.1"
 
 react@^17.0.2:
   version "17.0.2"

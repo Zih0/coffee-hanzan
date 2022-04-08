@@ -1,7 +1,7 @@
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';
