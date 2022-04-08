@@ -2,6 +2,7 @@ import { theme } from '@styles/theme';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import CodeSection from '@components/WidgetFactory/CodeSection';
 import ColorPicker from '@components/WidgetFactory/ColorPicker';
 import Preview from '@components/WidgetFactory/Preview';
 import Button from '@components/common/Button';
@@ -32,6 +33,7 @@ function WidgetFactoryModal() {
         colorPickers[0].background,
     );
     const [text, setText] = useState('Buy me a Coffee');
+    const [generated, setGenerated] = useState(false);
 
     const onChangeColorPick = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {
@@ -52,31 +54,56 @@ function WidgetFactoryModal() {
         setText(value);
     };
 
+    const onClickGenerateButton = () => {
+        setGenerated(true);
+    };
+
+    const onBack = () => {
+        setGenerated(false);
+    };
+
     return (
         <Container>
             <div className="button-factory-wrapper">
-                <div className="button-preview-wrapper">
-                    <Preview
-                        selectedBackground={selectedBackground}
-                        selectedColor={selectedColor}
-                        text={text}
-                    />
-                </div>
-                <div className="button-color-picker-wrapper">
-                    <ColorPicker
-                        colorPickers={colorPickers}
-                        onChange={onChangeColorPick}
-                    />
-                </div>
+                {!generated ? (
+                    <>
+                        <div className="button-preview-wrapper">
+                            <Preview
+                                selectedBackground={selectedBackground}
+                                selectedColor={selectedColor}
+                                text={text}
+                            />
+                        </div>
+                        <div className="button-color-picker-wrapper">
+                            <ColorPicker
+                                colorPickers={colorPickers}
+                                onChange={onChangeColorPick}
+                            />
+                        </div>
+                    </>
+                ) : (
+                    <div className="button-preview-wrapper">
+                        <CodeSection
+                            selectedBackground={selectedBackground}
+                            selectedColor={selectedColor}
+                            text={text}
+                            onBack={onBack}
+                        />
+                    </div>
+                )}
             </div>
-            <div className="preview-input-wrapper">
-                <Input
-                    className="preview-input"
-                    value={text}
-                    onChange={onInputText}
-                />
-                <Button>버튼생성하기</Button>
-            </div>
+            {!generated && (
+                <div className="preview-input-wrapper">
+                    <Input
+                        className="preview-input"
+                        value={text}
+                        onChange={onInputText}
+                    />
+                    <Button onClick={onClickGenerateButton}>
+                        버튼생성하기
+                    </Button>
+                </div>
+            )}
         </Container>
     );
 }
