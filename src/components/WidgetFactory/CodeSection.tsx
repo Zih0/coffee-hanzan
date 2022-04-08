@@ -26,7 +26,7 @@ function CodeSection({
     const [isScript, setIsScript] = useState(false);
     const [isMount, setIsMount] = useState(false);
     const imgCode = `<a href='https://coffee-hanzan.com/${user.nickname}' target='_blank'><img height='56' style='border:0px;height:56px;' src='http://cdn.coffee-hanzan.com/default-btn.png' border='0' alt='커피한잔에서 커피 후원해주세요 :)' /></a>`;
-    const scriptCode = `<script type='text/javascript' src='http://cdn.coffee-hanzan.com/widget.min.js'></script><script type='text/javascript'>coffeeWidget.init('${text}', '${selectedBackground}','${selectedColor}', '${user.nickname}');coffeeWidget.draw();</script>`;
+    const scriptCode = `<script type='text/javascript' src='https://cdn.coffee-hanzan.com/widget.min.js'></script><script type='text/javascript'>coffeeWidget.init('${text}', '${selectedBackground}','${selectedColor}', '${user.nickname}');coffeeWidget.draw();</script>`;
 
     const onClickImgBtn = () => {
         setIsScript(false);

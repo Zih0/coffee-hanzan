@@ -1,4 +1,4 @@
-const coffeeWidget =
+var coffeeWidget =
     coffeeWidget ||
     (function () {
         let style = '';
