@@ -16,7 +16,7 @@ const StyledButton = styled(Button)`
 `;
 
 function IntroduceForm() {
-    const { user } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     const [introduction, setIntroduction] = useState(user.introduction ?? '');
     const [loading, setLoading] = useState(false);
 
@@ -39,6 +39,13 @@ function IntroduceForm() {
 
         try {
             await API.updateUserIntroduction(user.creatorId, introduction);
+
+            const updatedUserData = Object.assign(
+                { ...user },
+                { introduction },
+            );
+            setUser(updatedUserData);
+
             setLoading(false);
 
             toast.success('성공적으로 수정되었습니다.');
