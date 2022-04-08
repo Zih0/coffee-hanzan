@@ -52,6 +52,7 @@ const Container = styled.main`
     gap: 3rem;
 
     .home-text {
+        max-width: 960px;
         width: 70%;
         line-height: 5rem;
         font-size: 3rem;
