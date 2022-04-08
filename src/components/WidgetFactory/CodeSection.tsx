@@ -2,6 +2,7 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';
@@ -29,22 +30,20 @@ function CodeSection({
 
     const onClickImgBtn = () => {
         setIsScript(false);
-        copyTextToClipboard();
     };
 
     const onClickScriptBtn = () => {
         setIsScript(true);
-        copyTextToClipboard();
     };
 
     async function copyTextToClipboard() {
         const copyText = isScript ? scriptCode : imgCode;
 
-        if ('clipboard' in navigator) {
-            return await navigator.clipboard.writeText(copyText);
-        } else {
-            return document.execCommand('copy', true, copyText);
-        }
+        if ('clipboard' in navigator)
+            await navigator.clipboard.writeText(copyText);
+        else document.execCommand('copy', true, copyText);
+
+        toast.success('코드가 복사되었습니다.');
     }
 
     useEffect(() => {
