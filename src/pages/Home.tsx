@@ -32,7 +32,7 @@ function Home() {
                 <br />
                 한국에서 사용하기 불편하잖아요
                 <br />
-                커피한잔으로 후원을 받아보세요
+                <strong>커피한잔</strong>에서 후원을 받아보세요
             </div>
             <div className="home-start">
                 <NicknameInput value={nickname} onChange={onChangeNickname} />
@@ -57,6 +57,10 @@ const Container = styled.main`
         line-height: 5rem;
         font-size: 3rem;
         font-weight: 300;
+
+        strong {
+            font-weight: 600;
+        }
 
         @media ${({ theme }) => theme.size.mobile} {
             font-size: 1.2rem;
