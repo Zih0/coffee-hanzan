@@ -120,7 +120,7 @@ const Container = styled.div`
 
     .button-factory-wrapper {
         width: 100%;
-        height: 15rem;
+        min-height: 15rem;
         border-radius: 0.5rem;
         background-color: ${({ theme }) => theme.color.black_700};
         display: flex;
