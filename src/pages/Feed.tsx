@@ -42,7 +42,10 @@ function Feed() {
         <>
             <Container>
                 <Cover coverImgUrl={feedData?.coverImgUrl} />
-                <Avatar avatarImgUrl={feedData?.avatarImgUrl} />
+                <Avatar
+                    avatarImgUrl={feedData?.avatarImgUrl}
+                    nickname={feedData?.nickname ?? ''}
+                />
                 <div className="main-wrapper">
                     <UserInfo
                         introduction={feedData?.introduction}

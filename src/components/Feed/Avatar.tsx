@@ -2,15 +2,12 @@ import { ImgDefaultProfile } from '@assets/images';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { AuthContext } from '@contexts/AuthContext';
-
 interface IAvatarProps {
     avatarImgUrl: string | undefined;
+    nickname: string;
 }
 
-function Avatar({ avatarImgUrl }: IAvatarProps) {
-    const { user } = useContext(AuthContext);
-
+function Avatar({ avatarImgUrl, nickname }: IAvatarProps) {
     return (
         <Container>
             <div className="profile-image-container">
@@ -22,7 +19,7 @@ function Avatar({ avatarImgUrl }: IAvatarProps) {
                     />
                 </div>
             </div>
-            <p className="profile-name">{user.nickname}</p>
+            <p className="profile-name">{nickname}</p>
         </Container>
     );
 }
