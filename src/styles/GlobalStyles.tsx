@@ -8,10 +8,11 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+    
     * {
         box-sizing: border-box;
-        font-family: 'SUIT', sans-serif;
     }
+
     body {
         font-size: 14px;
         font-family: 'SUIT', sans-serif;
@@ -19,6 +20,13 @@ const GlobalStyles = createGlobalStyle`
             font-size: 12px;
         }
     }
+
+    #root {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
 
     input {
         -webkit-appearance: none;

@@ -11,33 +11,6 @@ import Footer from '@components/Footer';
 
 import { API } from '@firebase/api';
 
-const Container = styled.main`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-
-    .main-wrapper {
-        width: 100%;
-        margin-top: 60px;
-        max-width: 1024px;
-        display: flex;
-        gap: 24px;
-        justify-content: space-between;
-        margin-bottom: 100px;
-
-        > div {
-            flex: 1;
-        }
-
-        @media ${({ theme }) => theme.size.mobile} {
-            flex-direction: column;
-            gap: 16px;
-        }
-    }
-`;
-
 interface IParams {
     nickname: string;
 }
@@ -66,19 +39,49 @@ function Feed() {
     }, []);
 
     return (
-        <Container>
-            <Cover coverImgUrl={feedData?.coverImgUrl} />
-            <Avatar avatarImgUrl={feedData?.avatarImgUrl} />
-            <div className="main-wrapper">
-                <UserInfo
-                    introduction={feedData?.introduction}
-                    socialData={feedData?.socialData}
-                />
-                <Support />
-            </div>
+        <>
+            <Container>
+                <Cover coverImgUrl={feedData?.coverImgUrl} />
+                <Avatar avatarImgUrl={feedData?.avatarImgUrl} />
+                <div className="main-wrapper">
+                    <UserInfo
+                        introduction={feedData?.introduction}
+                        socialData={feedData?.socialData}
+                    />
+                    <Support />
+                </div>
+            </Container>
             <Footer />
-        </Container>
+        </>
     );
 }
+
+const Container = styled.main`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .main-wrapper {
+        width: 100%;
+        margin-top: 60px;
+        max-width: 1024px;
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        margin-bottom: 100px;
+
+        > div {
+            flex: 1;
+        }
+
+        @media ${({ theme }) => theme.size.mobile} {
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
+`;
 
 export default Feed;

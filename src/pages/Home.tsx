@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Footer from '@components/Footer';
 import Button from '@components/common/Button';
 import NicknameInput from '@components/common/Input/NicknameInput';
 
@@ -26,25 +27,32 @@ function Home() {
     }, [isLoggedIn, history, user.nickname]);
 
     return (
-        <Container>
-            <div className="home-text">
-                Paypal, Stripe
-                <br />
-                한국에서 사용하기 불편하잖아요
-                <br />
-                <strong>커피한잔</strong>에서 후원을 받아보세요
-            </div>
-            <div className="home-start">
-                <NicknameInput value={nickname} onChange={onChangeNickname} />
-                <Link to="/signup">
-                    <StyledButton>시작하기</StyledButton>
-                </Link>
-            </div>
-        </Container>
+        <>
+            <Container>
+                <div className="home-text">
+                    Paypal, Stripe
+                    <br />
+                    한국에서 사용하기 불편하잖아요
+                    <br />
+                    <strong>커피한잔</strong>에서 후원을 받아보세요
+                </div>
+                <div className="home-start">
+                    <NicknameInput
+                        value={nickname}
+                        onChange={onChangeNickname}
+                    />
+                    <Link to="/signup">
+                        <StyledButton>시작하기</StyledButton>
+                    </Link>
+                </div>
+            </Container>
+            <Footer />
+        </>
     );
 }
 
 const Container = styled.main`
+    flex: 1;
     margin-top: 5rem;
     display: flex;
     flex-direction: column;
