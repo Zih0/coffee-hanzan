@@ -23,7 +23,7 @@ function CodeSection({
     onBack,
 }: ICodeSectionProps) {
     const { user } = useContext(AuthContext);
-    const [isScript, setIsScript] = useState(false);
+    const [isScript, setIsScript] = useState(true);
     const [isMount, setIsMount] = useState(false);
     const imgCode = `<a href='https://coffee-hanzan.com/${user.nickname}' target='_blank'><img height='56' style='border:0px;height:56px;' src='http://cdn.coffee-hanzan.com/default-btn.png' border='0' alt='커피한잔에서 커피 후원해주세요 :)' /></a>`;
     const scriptCode = `<script type='text/javascript' src='https://cdn.coffee-hanzan.com/widget.min.js'></script><script type='text/javascript'>coffeeWidget.init('${text}', '${selectedBackground}','${selectedColor}', '${user.nickname}');coffeeWidget.draw();</script>`;
@@ -65,13 +65,13 @@ function CodeSection({
                 {isScript ? scriptCode : imgCode}
             </div>
             <div className="copy-btn-wrapper">
-                <Button onClick={onClickImgBtn}>
-                    <FontAwesomeIcon icon={faCopy} />
-                    이미지 코드 복사
-                </Button>
                 <Button onClick={onClickScriptBtn}>
                     <FontAwesomeIcon icon={faCopy} />
                     스크립트 코드 복사
+                </Button>
+                <Button onClick={onClickImgBtn}>
+                    <FontAwesomeIcon icon={faCopy} />
+                    이미지 코드 복사
                 </Button>
             </div>
         </Container>
