@@ -1,5 +1,6 @@
-import React, { Suspense, lazy } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import ReactGA from 'react-ga';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 import Header from '@components/Header';
 
@@ -13,8 +14,21 @@ const Feed = lazy(() => import('@pages/Feed'));
 const Profile = lazy(() => import('@pages/Profile'));
 
 function AppRouter() {
+    const location = useLocation();
+    const [connectedGA, setConnectedGA] = useState(false);
+
+    useEffect(() => {
+        ReactGA.initialize('G-NQ6BDLQ9J9');
+        setConnectedGA(true);
+    }, []);
+
+    useEffect(() => {
+        if (!connectedGA) return;
+        ReactGA.pageview(location.pathname + location.search);
+    }, [connectedGA, location]);
+
     return (
-        <Router>
+        <>
             <Header />
             <Suspense fallback={<></>}>
                 <Switch>
@@ -32,7 +46,7 @@ function AppRouter() {
                     <Route path="/:nickname" component={Feed} />
                 </Switch>
             </Suspense>
-        </Router>
+        </>
     );
 }
 

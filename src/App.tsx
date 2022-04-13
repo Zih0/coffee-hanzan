@@ -1,5 +1,6 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import Modal from '@components/Modal';
@@ -17,7 +18,9 @@ function App() {
             <AuthProvider>
                 <ThemeProvider theme={theme}>
                     <GlobalStyles />
-                    <AppRouter />
+                    <BrowserRouter>
+                        <AppRouter />
+                    </BrowserRouter>
                     <Modal />
                     <Toaster position="top-center" reverseOrder={false} />
                 </ThemeProvider>
