@@ -1,6 +1,7 @@
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useModal from '@hooks/useModal';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
@@ -25,6 +26,7 @@ function CodeSection({
     const { user } = useContext(AuthContext);
     const [isScript, setIsScript] = useState(true);
     const [isMount, setIsMount] = useState(false);
+    const { closeCurrentModal } = useModal();
     const imgCode = `<a href='https://coffee-hanzan.com/${user.nickname}' target='_blank'><img height='56' style='border:0px;height:56px;' src='http://cdn.coffee-hanzan.com/default-btn.png' border='0' alt='커피한잔에서 커피 후원해주세요 :)' /></a>`;
     const scriptCode = `<script type='text/javascript' src='https://cdn.coffee-hanzan.com/widget.min.js'></script><script type='text/javascript'>coffeeWidget.init('${text}', '${selectedBackground}','${selectedColor}', '${user.nickname}');coffeeWidget.draw();</script>`;
 
@@ -44,6 +46,7 @@ function CodeSection({
         else document.execCommand('copy', true, copyText);
 
         toast.success('코드가 복사되었습니다.');
+        closeCurrentModal();
     }
 
     useEffect(() => {
