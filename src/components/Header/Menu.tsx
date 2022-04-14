@@ -87,6 +87,11 @@ const Container = styled.div`
         svg {
             width: 24px;
             height: 24px;
+            color: ${({ theme }) => theme.color.black};
+            }
+            path {
+                fill: ${({ theme }) => theme.color.black};
+            }
         }
     }
 
