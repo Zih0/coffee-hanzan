@@ -1,13 +1,19 @@
 import { IconLogoToss } from '@assets/icons';
 import useModal from '@hooks/useModal';
 import { COFFEE_PRICE } from '@utils/constants';
+import { isMobile } from '@utils/utils';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';
 
-function Support() {
+interface ISupportProps {
+    bank: string;
+    account: string;
+}
+
+function Support({ bank, account }: ISupportProps) {
     const [amount, setAmount] = useState(0);
     const { openModal } = useModal();
 
@@ -20,12 +26,21 @@ function Support() {
     };
 
     const onOpenSupportModal = () => {
-        openModal({
-            key: 'supportModal',
-            props: {
-                amount,
-            },
-        });
+        if (isMobile())
+            window.open(
+                `${import.meta.env.VITE_A}${bank}${
+                    import.meta.env.VITE_B
+                }${account}${import.meta.env.VITE_C}${amount}`,
+            );
+        else
+            openModal({
+                key: 'supportModal',
+                props: {
+                    amount,
+                    bank,
+                    account,
+                },
+            });
     };
 
     const onSubmitSupport = () => {

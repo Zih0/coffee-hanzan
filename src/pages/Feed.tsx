@@ -51,7 +51,10 @@ function Feed() {
                         introduction={feedData?.introduction}
                         socialData={feedData?.socialData}
                     />
-                    <Support />
+                    <Support
+                        bank={feedData?.bank as string}
+                        account={feedData?.account as string}
+                    />
                 </div>
             </Container>
             <Footer />

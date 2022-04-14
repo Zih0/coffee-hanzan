@@ -6,9 +6,11 @@ import QR from '../../common/QR/QR';
 
 interface ISupportModalProps {
     amount: number;
+    bank: string;
+    account: string;
 }
 
-function SupportModal({ amount }: ISupportModalProps) {
+function SupportModal({ amount, bank, account }: ISupportModalProps) {
     const { user } = useContext(AuthContext);
 
     return (
@@ -21,11 +23,7 @@ function SupportModal({ amount }: ISupportModalProps) {
                     토스가 설치되어있어야 정상작동됩니다.
                 </p>
             </div>
-            <QR
-                bank={user.bank as string}
-                account={user.account as string}
-                amount={amount}
-            />
+            <QR bank={bank} account={account} amount={amount} />
         </Container>
     );
 }
