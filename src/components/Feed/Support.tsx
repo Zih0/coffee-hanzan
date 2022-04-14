@@ -1,6 +1,7 @@
 import { IconLogoToss } from '@assets/icons';
 import useModal from '@hooks/useModal';
 import { COFFEE_PRICE } from '@utils/constants';
+import { decrypt } from '@utils/crypto';
 import { isMobile } from '@utils/utils';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -16,6 +17,8 @@ interface ISupportProps {
 function Support({ bank, account }: ISupportProps) {
     const [amount, setAmount] = useState(0);
     const { openModal } = useModal();
+    const decryptedBank = decrypt(bank);
+    const decryptedAccount = decrypt(account);
 
     const onChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {
@@ -28,9 +31,9 @@ function Support({ bank, account }: ISupportProps) {
     const onOpenSupportModal = () => {
         if (isMobile)
             window.open(
-                `${import.meta.env.VITE_A}${bank}${
+                `${import.meta.env.VITE_A}${decryptedBank}${
                     import.meta.env.VITE_B
-                }${account}${import.meta.env.VITE_C}${amount}`,
+                }${decryptedAccount}${import.meta.env.VITE_C}${amount}`,
             );
         else
             openModal({
