@@ -1,5 +1,6 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { isIos } from '@utils/utils';
 import React, { useCallback, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -21,6 +22,10 @@ function Menu() {
         setOpenDropdown(false);
     }, []);
 
+    const onMouseOut = useCallback(() => {
+        if (isIos) setOpenDropdown(false);
+    }, []);
+
     const onClickMypage = () => {
         history.push('/profile');
     };
@@ -39,6 +44,7 @@ function Menu() {
             <button
                 className="menu-button"
                 onBlur={onBlurDropdown}
+                onMouseOut={onMouseOut}
                 onClick={onToggleDropdown}
             >
                 <FontAwesomeIcon icon={faUser} />

@@ -26,7 +26,7 @@ function Support({ bank, account }: ISupportProps) {
     };
 
     const onOpenSupportModal = () => {
-        if (isMobile())
+        if (isMobile)
             window.open(
                 `${import.meta.env.VITE_A}${bank}${
                     import.meta.env.VITE_B
