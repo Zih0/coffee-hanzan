@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
     display: flex;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     border-radius: 4px;
     border: 2px solid ${({ theme }) => theme.color.gray};
     flex-wrap: wrap;
@@ -17,9 +17,7 @@ const Container = styled.div`
     input {
         width: 10rem;
         border: none;
-        height: 2rem;
         font-size: 2rem;
-        margin-bottom: 0.5rem;
     }
 
     @media ${({ theme }) => theme.size.mobile} {
@@ -30,8 +28,6 @@ const Container = styled.div`
         input {
             width: 5rem;
             font-size: 1rem;
-            height: 1rem;
-            margin-bottom: 0.25rem;
         }
     }
 `;
