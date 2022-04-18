@@ -10,18 +10,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn install && yarn build
-      env:
-        VITE_A: '${{ secrets.VITE_A }}'
-        VITE_B: '${{ secrets.VITE_B }}'
-        VITE_C: '${{ secrets.VITE_C }}'
-        VITE_CRYPTO_KEY: '${{ secrets.VITE_CRYPTO_KEY }}'
-        VITE_FIREBASE_API_KEY: '${{ secrets.VITE_FIREBASE_API_KEY }}'
-        VITE_FIREBASE_AUTH_DOMAIN: '${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}'
-        VITE_FIREBASE_PROJECT_ID: '${{ secrets.VITE_FIREBASE_PROJECT_ID }}'
-        VITE_FIREBASE_BUCKET: '${{ secrets.VITE_FIREBASE_BUCKET }}'
-        VITE_FIREBASE_SENDER_ID: '${{ secrets.VITE_FIREBASE_SENDER_ID }}'
-        VITE_FIREBASE_APP_ID: '${{ secrets.VITE_FIREBASE_APP_ID }}'
-        VITE_FIREBASE_MEASUREMENT_ID: '${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}'
+      - env:
+          VITE_A: '${{ secrets.VITE_A }}'
+          VITE_B: '${{ secrets.VITE_B }}'
+          VITE_C: '${{ secrets.VITE_C }}'
+          VITE_CRYPTO_KEY: '${{ secrets.VITE_CRYPTO_KEY }}'
+          VITE_FIREBASE_API_KEY: '${{ secrets.VITE_FIREBASE_API_KEY }}'
+          VITE_FIREBASE_AUTH_DOMAIN: '${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}'
+          VITE_FIREBASE_PROJECT_ID: '${{ secrets.VITE_FIREBASE_PROJECT_ID }}'
+          VITE_FIREBASE_BUCKET: '${{ secrets.VITE_FIREBASE_BUCKET }}'
+          VITE_FIREBASE_SENDER_ID: '${{ secrets.VITE_FIREBASE_SENDER_ID }}'
+          VITE_FIREBASE_APP_ID: '${{ secrets.VITE_FIREBASE_APP_ID }}'
+          VITE_FIREBASE_MEASUREMENT_ID: '${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
           with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
