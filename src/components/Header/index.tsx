@@ -1,17 +1,20 @@
 import { IconLogo } from '@assets/icons';
 import useModal from '@hooks/useModal';
 import { Mobile, PC } from '@styles/MediaQuery';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';
 
-import { useIsLoggedIn } from '@contexts/AuthContext';
+import { AuthContext, useIsLoggedIn } from '@contexts/AuthContext';
 
 import Menu from './Menu';
 
 function Header() {
+    const history = useHistory();
     const isLoggedIn = useIsLoggedIn();
+    const { user } = useContext(AuthContext);
     const { openModal } = useModal();
 
     const onOpenLoginModal = () => {
@@ -20,14 +23,17 @@ function Header() {
         });
     };
 
+    const onClickLogo = () => {
+        if (isLoggedIn) history.push(`/${user.nickname}`);
+        else history.push('/');
+    };
+
     return (
         <Container>
             <div className="header-wrapper">
-                <Link to="/">
-                    <div className="header-logo">
-                        <IconLogo />
-                    </div>
-                </Link>
+                <div className="header-logo" onClick={onClickLogo}>
+                    <IconLogo />
+                </div>
                 <div className="header-auth">
                     {isLoggedIn ? (
                         <Menu />
@@ -78,6 +84,7 @@ const Container = styled.header`
     .header-logo {
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         svg {
             height: 3rem;
