@@ -1,5 +1,5 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
-import ReactGA from 'react-ga';
+import * as gtag from '@utils/gtag';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
 import Header from '@components/Header';
@@ -15,17 +15,10 @@ const Profile = lazy(() => import('@pages/Profile'));
 
 function AppRouter() {
     const location = useLocation();
-    const [connectedGA, setConnectedGA] = useState(false);
 
     useEffect(() => {
-        ReactGA.initialize('G-NQ6BDLQ9J9');
-        setConnectedGA(true);
-    }, []);
-
-    useEffect(() => {
-        if (!connectedGA) return;
-        ReactGA.pageview(location.pathname + location.search);
-    }, [connectedGA, location]);
+        gtag.pageview(location.pathname);
+    }, [location.pathname]);
 
     return (
         <>
