@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -20,6 +21,7 @@ const Container = styled.div`
     .footer-text {
         font-size: 12px;
         font-weight: 300;
+        cursor: pointer;
     }
 
     .contact-wrapper {
@@ -35,8 +37,18 @@ function Footer() {
             <div className="wrapper">
                 <span className="footer-text">2022 커피한잔</span>
                 <div className="contact-wrapper">
-                    <span className="footer-text">about</span>|
-                    <div className="footer-text">feedback</div>
+                    <Link className="footer-text" to="/ziho">
+                        about
+                    </Link>
+                    |
+                    <a
+                        className="footer-text"
+                        href="https://forms.gle/6i7K8MZ2qZVh4nXw8"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        feedback
+                    </a>
                 </div>
             </div>
         </Container>
