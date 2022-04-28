@@ -4,7 +4,7 @@ interface IGtagEvent {
     action: string;
     category: string;
     label: string;
-    value: string;
+    value?: number;
 }
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
@@ -19,6 +19,6 @@ export const event = ({ action, category, label, value }: IGtagEvent) => {
     window.gtag('event', action, {
         event_category: category,
         event_label: label,
-        value: value,
+        value: value ?? null,
     });
 };
