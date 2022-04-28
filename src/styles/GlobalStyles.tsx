@@ -28,12 +28,13 @@ const GlobalStyles = createGlobalStyle`
     }
 
 
-    input {
+    input,select {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        
       }
+
+     
     
     input, textarea {
       &:focus {
