@@ -1,6 +1,6 @@
 {
-    "short_name": "One Coffee",
-    "name": "원커피 - 커피 한잔의 후원",
+    "short_name": "coffee-hanzan",
+    "name": "커피한잔 - 커피 한잔의 후원",
     "icons": [
         {
             "src": "favicon.ico",
