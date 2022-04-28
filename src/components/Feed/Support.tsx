@@ -2,6 +2,7 @@ import { IconLogoToss } from '@assets/icons';
 import useModal from '@hooks/useModal';
 import { COFFEE_PRICE } from '@utils/constants';
 import { decrypt } from '@utils/crypto';
+import * as gtag from '@utils/gtag';
 import { isMobile } from '@utils/utils';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -12,9 +13,10 @@ import Button from '@components/common/Button';
 interface ISupportProps {
     bank: string;
     account: string;
+    nickname: string;
 }
 
-function Support({ bank, account }: ISupportProps) {
+function Support({ bank, account, nickname }: ISupportProps) {
     const [amount, setAmount] = useState(0);
     const { openModal } = useModal();
     const decryptedBank = decrypt(bank);
@@ -29,6 +31,13 @@ function Support({ bank, account }: ISupportProps) {
     };
 
     const onOpenSupportModal = () => {
+        gtag.event({
+            action: 'click_support_button',
+            category: 'click',
+            label: nickname,
+            value: amount,
+        });
+
         if (isMobile)
             window.open(
                 `${import.meta.env.VITE_A}${decryptedBank}${

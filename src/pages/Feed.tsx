@@ -54,6 +54,7 @@ function Feed() {
                     <Support
                         bank={feedData?.bank as string}
                         account={feedData?.account as string}
+                        nickname={feedData?.nickname ?? ''}
                     />
                 </div>
             </Container>
