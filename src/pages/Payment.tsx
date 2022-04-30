@@ -122,11 +122,11 @@ function Payment() {
         );
         setUser(updatedUserData);
         setLoading(false);
-        history.push('/profile');
+        history.replace('/profile');
     };
 
     useLayoutEffect(() => {
-        if (user.account) history.push('/');
+        if (user.account) history.replace('/');
     }, []);
 
     return (

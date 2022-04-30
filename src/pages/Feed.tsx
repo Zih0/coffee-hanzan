@@ -28,7 +28,7 @@ function Feed() {
 
     const handleFeedData = (res: any) => {
         if (!res) {
-            history.push('/');
+            history.replace('/');
             return;
         }
         setFeedData(res);

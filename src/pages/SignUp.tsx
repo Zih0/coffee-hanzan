@@ -12,7 +12,7 @@ function SignUp() {
     const history = useHistory();
 
     useEffect(() => {
-        if (isLoggedIn) history.push('/');
+        if (isLoggedIn) history.replace('/');
     }, [isLoggedIn]);
 
     return (

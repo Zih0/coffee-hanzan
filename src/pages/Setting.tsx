@@ -50,8 +50,8 @@ function Setting() {
     const history = useHistory();
 
     useLayoutEffect(() => {
-        if (user.nickname) history.push('/');
-        if (!isLoggedIn) history.push('/');
+        if (user.nickname) history.replace('/');
+        if (!isLoggedIn) history.replace('/');
     }, []);
 
     const onApplyClick = async () => {

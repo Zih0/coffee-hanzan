@@ -12,7 +12,7 @@ function Profile() {
     const history = useHistory();
 
     useLayoutEffect(() => {
-        if (!user.nickname) history.push('/setting');
+        if (!user.nickname) history.replace('/setting');
     }, []);
 
     return (
