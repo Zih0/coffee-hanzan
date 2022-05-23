@@ -1,7 +1,12 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isIos } from '@utils/utils';
-import React, { useCallback, useContext, useState } from 'react';
+import React, {
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,46 +17,50 @@ import { API } from '@firebase/api';
 function Menu() {
     const { setUser, setIsLoggedIn } = useContext(AuthContext);
     const [openDropdown, setOpenDropdown] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
     const history = useHistory();
 
     const onToggleDropdown = useCallback(() => {
         setOpenDropdown((prev) => !prev);
     }, []);
 
-    const onBlurDropdown = useCallback(() => {
-        setOpenDropdown(false);
-    }, []);
-
-    const onMouseOut = useCallback(() => {
-        if (isIos) setOpenDropdown(false);
-    }, []);
-
     const onClickMypage = () => {
         history.push('/profile');
     };
 
-    const onClickLogout = () => {
+    const onClickLogout = useCallback(() => {
         API.logout();
         setIsLoggedIn(false);
         setUser({
             creatorId: '',
             createdAt: 0,
         });
-    };
+    }, []);
+
+    useEffect(() => {
+        const clickOutside = (e: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(e.target as Node)
+            ) {
+                setOpenDropdown(false);
+            }
+        };
+        document.addEventListener('mousedown', clickOutside);
+        return () => {
+            document.removeEventListener('mousedown', clickOutside);
+        };
+    }, [dropdownRef]);
 
     return (
-        <Container>
-            <button
-                className="menu-button"
-                onBlur={onBlurDropdown}
-                onMouseOut={onMouseOut}
-                onClick={onToggleDropdown}
-            >
+        <Container ref={dropdownRef}>
+            <button className="menu-button" onClick={onToggleDropdown}>
                 <FontAwesomeIcon icon={faUser} />
             </button>
 
             {openDropdown && (
-                <ul className="menu-dropdown">
+                <Items>
                     <li
                         className="menu-dropdown-item"
                         onMouseDown={onClickMypage}
@@ -64,7 +73,7 @@ function Menu() {
                     >
                         <p className="menu-dropdown-item-text">로그아웃</p>
                     </li>
-                </ul>
+                </Items>
             )}
         </Container>
     );
@@ -88,24 +97,23 @@ const Container = styled.div`
             width: 24px;
             height: 24px;
             color: ${({ theme }) => theme.color.black};
-            }
-            path {
-                fill: ${({ theme }) => theme.color.black};
-            }
+        }
+        path {
+            fill: ${({ theme }) => theme.color.black};
         }
     }
+`;
 
-    .menu-dropdown {
-        overflow: hidden;
-        position: absolute;
-        top: 28px;
-        right: 0;
-        width: 160px;
-        background-color: ${({ theme }) => theme.color.white};
-        border: 1px solid ${({ theme }) => theme.color.gray};
-        box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
-        z-index: 10;
-    }
+const Items = styled.ul`
+    overflow: hidden;
+    position: absolute;
+    top: 28px;
+    right: 0;
+    width: 160px;
+    background-color: ${({ theme }) => theme.color.white};
+    border: 1px solid ${({ theme }) => theme.color.gray};
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
+    z-index: 10;
 
     .menu-dropdown-item {
         list-style: none;
