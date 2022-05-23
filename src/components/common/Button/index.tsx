@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { ColorType } from '@type/colorType';
+
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    color?: 'white' | 'black';
-    background?: string;
+    color?: ColorType;
+    background?: ColorType;
     children: React.ReactNode;
 }
 
-const StyledButton = styled.button<IButtonProps>`
+const StyledButton = styled.button<Pick<IButtonProps, 'color' | 'background'>>`
     min-width: 6rem;
     border: 1px solid transparent;
     padding: 1rem 1.3rem;
@@ -20,8 +22,10 @@ const StyledButton = styled.button<IButtonProps>`
     font-weight: 300;
     cursor: pointer;
 
-    background-color: ${(props) => props.background || 'black'};
-    color: ${(props) => props.color || 'white'};
+    background-color: ${({ theme, background }) =>
+        background ? theme.color[background] : theme.color.black};
+    color: ${({ theme, color }) =>
+        color ? theme.color[color] : theme.color.white};
 
     &:hover {
         font-weight: 500;

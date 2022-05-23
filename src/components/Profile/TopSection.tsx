@@ -2,7 +2,6 @@ import { ImgDefaultProfile } from '@assets/images';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from '@hooks/useModal';
-import { compressImage } from '@utils/imageUtil';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
@@ -10,6 +9,8 @@ import styled from 'styled-components';
 import Button from '@components/common/Button';
 
 import { AuthContext } from '@contexts/AuthContext';
+
+import { compressImage } from '@utils/imageUtil';
 
 import { API } from '@firebase/api';
 
@@ -58,8 +59,8 @@ function TopSection() {
                 <div className="cover-image">
                     <div className="cover-add-button">
                         <StyledButton
-                            background={'#fff'}
-                            color={'black'}
+                            background="white"
+                            color="black"
                             onClick={onOpenImageUploadModal}
                         >
                             <FontAwesomeIcon icon={faCamera} />

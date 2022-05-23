@@ -1,3 +1,4 @@
+import { AUHT_PROVIDER } from '@constants';
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useModal from '@hooks/useModal';
@@ -18,11 +19,12 @@ function AuthSNS({ direction = 'row' }: IAuthSNSProps) {
         const {
             currentTarget: { name },
         } = e;
-        if (name === 'google') {
+        if (name === AUHT_PROVIDER.GOOGLE) {
             await authService.signInWithPopup(Providers.google);
-        } else if (name === 'github') {
+        } else if (name === AUHT_PROVIDER.GITHUB) {
             await authService.signInWithPopup(Providers.github);
         }
+
         closeCurrentModal();
     };
 

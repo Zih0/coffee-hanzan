@@ -9,3 +9,8 @@ export const bankList = [
 ];
 
 export const COFFEE_PRICE = 3000;
+
+export const AUHT_PROVIDER = {
+    GITHUB: 'github',
+    GOOGLE: 'google',
+};
