@@ -13,42 +13,8 @@ import styled from 'styled-components';
 
 import { AuthContext } from '../../../contexts/AuthContext';
 import { API } from '../../../firebase/api';
-import { theme } from '../../../styles/theme';
 import Button from '../../common/Button';
 import Input from '../../common/Input';
-
-const Container = styled.div`
-    width: 25rem;
-    height: 33rem;
-    padding: 3rem;
-    background-color: #fff;
-    z-index: 11;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    border-radius: 16px;
-
-    .social-input-wrapper {
-        width: 100%;
-        display: flex;
-        align-items: center;
-    }
-
-    .social-icon {
-        width: 2rem;
-        height: auto;
-        margin-right: 1rem;
-    }
-
-    .social-button-wrapper {
-        display: flex;
-        justify-content: space-between;
-    }
-`;
-
-const StyledInput = styled(Input)`
-    width: 100%;
-`;
 
 function SocialLinkModal() {
     const { closeCurrentModal } = useModal();
@@ -153,7 +119,7 @@ function SocialLinkModal() {
             <div className="social-button-wrapper">
                 <Button
                     color="black"
-                    background={theme.color.gray}
+                    background="gray"
                     onClick={closeCurrentModal}
                 >
                     취소
@@ -165,3 +131,36 @@ function SocialLinkModal() {
 }
 
 export default SocialLinkModal;
+
+const Container = styled.div`
+    width: 25rem;
+    height: 33rem;
+    padding: 3rem;
+    background-color: #fff;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-radius: 16px;
+
+    .social-input-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .social-icon {
+        width: 2rem;
+        height: auto;
+        margin-right: 1rem;
+    }
+
+    .social-button-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+`;
+
+const StyledInput = styled(Input)`
+    width: 100%;
+`;

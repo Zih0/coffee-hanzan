@@ -22,6 +22,7 @@ function Home() {
 
     useLayoutEffect(() => {
         if (!isLoggedIn) return;
+
         if (!user.nickname) history.push('/setting');
         else history.push(`/${user.nickname}`);
     }, [isLoggedIn, history, user.nickname]);
