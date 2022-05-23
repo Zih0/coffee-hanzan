@@ -12,8 +12,9 @@
             "@firebase/*": ["src/firebase/*"],
             "@assets/*": ["src/assets/*"],
             "@api/*": ["src/utils/api/*"],
-            "@constants/*": ["src/utils/constants/*"],
-            "@utils/*": ["src/utils/*"]
+            "@constants": ["src/utils/constants.ts"],
+            "@utils/*": ["src/utils/*"],
+            "@type/*": ["src/types/*"]
         }
     }
 }
