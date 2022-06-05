@@ -11,6 +11,8 @@ import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
+import { isValidStartWithHttp } from '@utils/validation';
+
 import { AuthContext } from '../../../contexts/AuthContext';
 import { API } from '../../../firebase/api';
 import Button from '../../common/Button';
@@ -31,28 +33,45 @@ function SocialLinkModal() {
         const {
             currentTarget: { name, value },
         } = event;
-        if (name === 'github') setGithub(value);
-        else if (name === 'twitter') setTwitter(value);
-        else if (name === 'facebook') setFacebook(value);
-        else if (name === 'instagram') setInstagram(value);
-        else if (name === 'blog') setBlog(value);
+
+        const trimmedValue = value.trim();
+        if (name === 'github') setGithub(trimmedValue);
+        else if (name === 'twitter') setTwitter(trimmedValue);
+        else if (name === 'facebook') setFacebook(trimmedValue);
+        else if (name === 'instagram') setInstagram(trimmedValue);
+        else if (name === 'blog') setBlog(trimmedValue);
+    };
+
+    const validateSocialAccount = () => {
+        if (
+            isValidStartWithHttp(github) ||
+            isValidStartWithHttp(twitter) ||
+            isValidStartWithHttp(facebook) ||
+            isValidStartWithHttp(instagram)
+        ) {
+            toast.error('url 주소가 아닌 SNS 계정 아이디를 입력해주세요.');
+            return false;
+        }
+
+        if (blog && !isValidStartWithHttp(blog)) {
+            toast.error('블로그 url 주소를 입력해주세요.');
+            return false;
+        }
+
+        return true;
     };
 
     const onSaveSocial = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
-        const trimmedGithub = github.trim();
-        const trimmedTwitter = twitter.trim();
-        const trimmeFacebook = facebook.trim();
-        const trimmeInstagram = instagram.trim();
-        const trimmedBlog = blog.trim();
+        if (!validateSocialAccount()) return;
 
         const newSocialLinkData = {
-            github: trimmedGithub,
-            twitter: trimmedTwitter,
-            facebook: trimmeFacebook,
-            instagram: trimmeInstagram,
-            blog: trimmedBlog,
+            github,
+            twitter,
+            facebook,
+            instagram,
+            blog,
         };
 
         await API.updateUserSocialData(user.creatorId, newSocialLinkData);
