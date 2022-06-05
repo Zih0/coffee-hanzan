@@ -21,3 +21,9 @@ export const isValidNumber = (account: string) => {
 export const isValidAccountLength = (account: string) => {
     return account.trim().length > 10;
 };
+
+export const isValidStartWithHttp = (socialAccount: string) => {
+    const regHttp = /^https?:\/\//;
+
+    return regHttp.test(socialAccount.trim());
+};
