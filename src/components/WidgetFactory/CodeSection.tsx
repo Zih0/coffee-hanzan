@@ -32,10 +32,12 @@ function CodeSection({
 
     const onClickImgBtn = () => {
         setIsScript(false);
+        copyTextToClipboard();
     };
 
     const onClickScriptBtn = () => {
         setIsScript(true);
+        copyTextToClipboard();
     };
 
     async function copyTextToClipboard() {
@@ -48,14 +50,6 @@ function CodeSection({
         toast.success('코드가 복사되었습니다.');
         closeCurrentModal();
     }
-
-    useEffect(() => {
-        if (isMount) copyTextToClipboard();
-    }, [isScript]);
-
-    useEffect(() => {
-        setIsMount(true);
-    }, []);
 
     return (
         <Container>
